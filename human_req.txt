@@ -1,0 +1,65 @@
+# Human Requirements - App Launch Checklist
+# ==========================================
+# Complete these steps manually before App Store submission
+
+## 1. RevenueCat Setup (revenuecat.com)
+   □ Create RevenueCat account
+   □ Create new project for your app
+   □ Get iOS API key (appl_xxxxxxxxx)
+   □ Create entitlement named "premium"
+   □ Create offering named "default"
+   □ Add products to offering
+
+## 2. App Store Connect (appstoreconnect.apple.com)
+   □ Create new app
+   □ Create subscription products:
+     - weekly_premium: $2.99/week
+     - monthly_premium: $4.99/month
+     - annual_premium: $39.99/year (with 7-day free trial)
+   □ Link products to RevenueCat
+   □ Set up RevenueCat webhook:
+     URL: https://your-api-domain/api/webhooks/revenuecat
+     Auth: Bearer your-webhook-secret
+
+## 3. Environment Variables
+   □ Backend (.env):
+     REVENUECAT_WEBHOOK_AUTH=Bearer your-webhook-secret
+
+   □ Mobile (.env):
+     EXPO_PUBLIC_REVENUECAT_KEY=appl_your_ios_key
+     EXPO_PUBLIC_API_URL=https://your-api-domain/api
+
+## 4. Apple Developer Account
+   □ Enable "In-App Purchase" capability
+   □ Create App ID with IAP enabled
+   □ Create provisioning profile
+   □ Set up Sign in with Apple
+
+## 5. Privacy & Compliance
+   □ Create privacy policy page (use a service or host yourself)
+   □ Add privacy policy URL to App Store Connect
+   □ Complete App Privacy questionnaire (Nutrition Labels)
+   □ If using AI: Disclose "We share data with [AI Provider] for [Purpose]"
+
+## 6. App Store Submission
+   □ Screenshots: 6.9" iPhone (1242x2688) - MANDATORY
+   □ Screenshots: 13" iPad (2048x2732) - MANDATORY
+   □ App Preview video (optional but recommended)
+   □ Demo account credentials in Review Notes
+   □ Test on physical device before submission
+
+## 7. Expo Build & Submit
+   □ Install EAS CLI: npm install -g eas-cli
+   □ Login: eas login
+   □ Configure: eas build:configure
+   □ Build: eas build --platform ios --profile production
+   □ Submit: eas submit --platform ios
+
+## 8. Post-Launch
+   □ Monitor RevenueCat dashboard for subscriptions
+   □ Monitor Coolify logs for errors
+   □ Set up crash reporting (Sentry recommended)
+   □ Respond to App Store reviews
+
+# Note: RevenueCat API key in .env makes subscriptions work automatically.
+# Backend webhook handles subscription events (purchase, renewal, cancel, expire).
