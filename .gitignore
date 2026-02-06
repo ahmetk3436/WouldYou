@@ -3,9 +3,18 @@
 .env.local
 .env.*.local
 
+# Generated files
+CLAUDE.md
+**/CLAUDE.md
+human_req.txt
+
 # Generated projects (separate repos)
 EcoMonitor-AI/
 fully-autonomous-mobile-system/
+AuraSnap/
+Feelsy/
+Mewify/
+VibeCheck/
 
 # Go
 backend/tmp/
@@ -34,3 +43,4 @@ Thumbs.db
 
 # Logs
 *.log
+logs/
