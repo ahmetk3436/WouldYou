@@ -2,6 +2,7 @@ import axios, {
   AxiosError,
   InternalAxiosRequestConfig,
 } from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   getAccessToken,
   getRefreshToken,
@@ -18,12 +19,18 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Request interceptor: attach access token
+// Request interceptor: attach access token or guest device ID
 api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const token = await getAccessToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      // Check for guest device ID
+      const guestDeviceId = await AsyncStorage.getItem('wouldyou_guest_device_id');
+      if (guestDeviceId) {
+        config.headers.Authorization = `Guest ${guestDeviceId}`;
+      }
     }
     return config;
   },

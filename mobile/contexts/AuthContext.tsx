@@ -18,13 +18,31 @@ import type { User, AuthResponse } from '../types/auth';
 
 const GUEST_USAGE_KEY = 'wouldyou_guest_usage';
 const GUEST_MODE_KEY = 'wouldyou_guest_mode';
+const GUEST_DEVICE_KEY = 'wouldyou_guest_device_id';
 const MAX_FREE_USES = 3;
+
+function generateDeviceId(): string {
+  const chars = 'abcdef0123456789';
+  let result = '';
+  for (let i = 0; i < 32; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  // Format as UUID-like string
+  return [
+    result.slice(0, 8),
+    result.slice(8, 12),
+    result.slice(12, 16),
+    result.slice(16, 20),
+    result.slice(20, 32),
+  ].join('-');
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   isGuest: boolean;
   guestUsageCount: number;
+  guestDeviceId: string;
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
@@ -43,6 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isGuest, setIsGuest] = useState(false);
   const [guestUsageCount, setGuestUsageCount] = useState(0);
+  const [guestDeviceId, setGuestDeviceId] = useState('');
 
   const isAuthenticated = user !== null;
 
@@ -50,12 +69,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const restore = async () => {
       try {
+        // Load guest device ID if exists
+        const storedDeviceId = await AsyncStorage.getItem(GUEST_DEVICE_KEY);
+        if (storedDeviceId) {
+          setGuestDeviceId(storedDeviceId);
+        }
+
         // Check guest mode
         const guestMode = await AsyncStorage.getItem(GUEST_MODE_KEY);
         if (guestMode === 'true') {
           setIsGuest(true);
           const usage = await AsyncStorage.getItem(GUEST_USAGE_KEY);
           setGuestUsageCount(usage ? parseInt(usage, 10) : 0);
+          if (!storedDeviceId) {
+            const newId = generateDeviceId();
+            await AsyncStorage.setItem(GUEST_DEVICE_KEY, newId);
+            setGuestDeviceId(newId);
+          }
         }
 
         const token = await getAccessToken();
@@ -77,6 +107,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const continueAsGuest = useCallback(async () => {
+    let deviceId = await AsyncStorage.getItem(GUEST_DEVICE_KEY);
+    if (!deviceId) {
+      deviceId = generateDeviceId();
+      await AsyncStorage.setItem(GUEST_DEVICE_KEY, deviceId);
+    }
+    setGuestDeviceId(deviceId);
     await AsyncStorage.setItem(GUEST_MODE_KEY, 'true');
     await AsyncStorage.setItem(GUEST_USAGE_KEY, '0');
     setIsGuest(true);
@@ -196,6 +232,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isLoading,
         isGuest,
         guestUsageCount,
+        guestDeviceId,
         user,
         login,
         register,

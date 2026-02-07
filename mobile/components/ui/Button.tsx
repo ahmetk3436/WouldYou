@@ -15,16 +15,16 @@ interface ButtonProps extends PressableProps {
 }
 
 const variantStyles = {
-  primary: 'bg-primary-600 active:bg-primary-700',
-  secondary: 'bg-gray-600 active:bg-gray-700',
-  outline: 'border-2 border-primary-600 bg-transparent active:bg-primary-50',
+  primary: 'bg-orange-600 active:bg-orange-700',
+  secondary: 'bg-gray-700 active:bg-gray-600',
+  outline: 'border-2 border-orange-600 bg-transparent active:bg-orange-900/30',
   destructive: 'bg-red-600 active:bg-red-700',
 };
 
 const variantTextStyles = {
   primary: 'text-white',
   secondary: 'text-white',
-  outline: 'text-primary-600',
+  outline: 'text-orange-500',
   destructive: 'text-white',
 };
 
@@ -63,7 +63,7 @@ export default function Button({
     >
       {isLoading ? (
         <ActivityIndicator
-          color={variant === 'outline' ? '#2563eb' : '#ffffff'}
+          color={variant === 'outline' ? '#ea580c' : '#ffffff'}
         />
       ) : (
         <Text

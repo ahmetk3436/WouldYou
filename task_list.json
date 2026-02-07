@@ -8,7 +8,10 @@
       "priority": 10,
       "depends_on": [],
       "test_command": "cd backend && go build ./...",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:34:36Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     },
     {
       "id": "enhance_002",
@@ -18,27 +21,38 @@
       "priority": 10,
       "depends_on": [],
       "test_command": "cd backend && go build ./...",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:34:40Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     },
     {
       "id": "enhance_003",
       "title": "Build 3-screen onboarding flow with animations",
-      "description": "The app has no onboarding. Users land directly on login. We need a 3-screen onboarding that only shows on first launch.\n\nFile: mobile/app/onboarding.tsx (create new)\n- Import: View, Text, Pressable, Dimensions, ScrollView, Image from react-native; useRouter from expo-router; AsyncStorage from @react-native-async-storage/async-storage (already available via expo); Ionicons from @expo/vector-icons; hapticSelection, hapticSuccess from lib/haptics.\n- State: currentPage (number, 0-2).\n- Use a horizontal ScrollView with pagingEnabled and showsHorizontalScrollIndicator={false}, width = screen width.\n- Page 1 (Welcome): className='flex-1 items-center justify-center px-8 bg-white'. Large Ionicons 'help-circle' (size 120, color #ea580c). Text 'Would You Rather?' className='text-4xl font-bold text-orange-900 mt-8 text-center'. Subtitle 'The ultimate dilemma game that reveals who you really are' className='text-lg text-gray-500 mt-4 text-center'.\n- Page 2 (Features): className='flex-1 items-center justify-center px--8 bg-white'. Three feature rows each with icon + text: (1) 'calendar-outline' + 'Daily Challenges' + 'New dilemma every day', (2) 'stats-chart-outline' + 'See How Others Think' + 'Compare your choices with the world', (3) 'flame-outline' + 'Build Your Streak' + 'Vote daily to climb the leaderboard'. Each row: className='flex-row items-center mb-6 w-full', icon in orange-100 rounded-2xl p-4, text in ml-4.\n- Page 3 (CTA): className='flex-1 items-center justify-center px-8 bg-white'. Ionicons 'rocket-outline' (size 100, orange-600). Text 'Ready to Choose?' className='text-3xl font-bold text-orange-900 mt-8'. Two buttons: (a) 'Start Playing' className='w-full bg-orange-600 py-4 rounded-2xl mt-8' → sets AsyncStorage 'onboarding_complete' = 'true', hapticSuccess(), router.replace('/(auth)/login'). (b) 'I already have an account' className='mt-4' text-only → same storage set + router.replace('/(auth)/login').\n- Dot indicators at bottom: 3 dots, active = bg-orange-600 w-3 h-3 rounded-full, inactive = bg-gray-300 w-2 h-2.\n- On scroll end, update currentPage via onMomentumScrollEnd event.\n\nFile: mobile/app/index.tsx\n- Before checking auth, check AsyncStorage.getItem('onboarding_complete'). If null, router.replace('/onboarding'). Otherwise proceed with existing auth check logic.\n\nFile: mobile/app/_layout.tsx\n- Ensure the Stack includes the onboarding route (it should auto-discover via file-based routing, but verify headerShown: false applies).\n\nTest: TypeScript compilation must pass with no errors.",
+      "description": "The app has no onboarding. Users land directly on login. We need a 3-screen onboarding that only shows on first launch.\n\nFile: mobile/app/onboarding.tsx (create new)\n- Import: View, Text, Pressable, Dimensions, ScrollView, Image from react-native; useRouter from expo-router; AsyncStorage from @react-native-async-storage/async-storage (already available via expo); Ionicons from @expo/vector-icons; hapticSelection, hapticSuccess from lib/haptics.\n- State: currentPage (number, 0-2).\n- Use a horizontal ScrollView with pagingEnabled and showsHorizontalScrollIndicator={false}, width = screen width.\n- Page 1 (Welcome): className='flex-1 items-center justify-center px-8 bg-white'. Large Ionicons 'help-circle' (size 120, color #ea580c). Text 'Would You Rather?' className='text-4xl font-bold text-orange-900 mt-8 text-center'. Subtitle 'The ultimate dilemma game that reveals who you really are' className='text-lg text-gray-500 mt-4 text-center'.\n- Page 2 (Features): className='flex-1 items-center justify-center px--8 bg-white'. Three feature rows each with icon + text: (1) 'calendar-outline' + 'Daily Challenges' + 'New dilemma every day', (2) 'stats-chart-outline' + 'See How Others Think' + 'Compare your choices with the world', (3) 'flame-outline' + 'Build Your Streak' + 'Vote daily to climb the leaderboard'. Each row: className='flex-row items-center mb-6 w-full', icon in orange-100 rounded-2xl p-4, text in ml-4.\n- Page 3 (CTA): className='flex-1 items-center justify-center px-8 bg-white'. Ionicons 'rocket-outline' (size 100, orange-600). Text 'Ready to Choose?' className='text-3xl font-bold text-orange-900 mt-8'. Two buttons: (a) 'Start Playing' className='w-full bg-orange-600 py-4 rounded-2xl mt-8' \u2192 sets AsyncStorage 'onboarding_complete' = 'true', hapticSuccess(), router.replace('/(auth)/login'). (b) 'I already have an account' className='mt-4' text-only \u2192 same storage set + router.replace('/(auth)/login').\n- Dot indicators at bottom: 3 dots, active = bg-orange-600 w-3 h-3 rounded-full, inactive = bg-gray-300 w-2 h-2.\n- On scroll end, update currentPage via onMomentumScrollEnd event.\n\nFile: mobile/app/index.tsx\n- Before checking auth, check AsyncStorage.getItem('onboarding_complete'). If null, router.replace('/onboarding'). Otherwise proceed with existing auth check logic.\n\nFile: mobile/app/_layout.tsx\n- Ensure the Stack includes the onboarding route (it should auto-discover via file-based routing, but verify headerShown: false applies).\n\nTest: TypeScript compilation must pass with no errors.",
       "status": "pending",
       "priority": 8,
       "depends_on": [],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:34:48Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     },
     {
       "id": "enhance_004",
       "title": "Implement guest mode in mobile with usage counter",
-      "description": "Wire up the guest mode from enhance_002 on the mobile side. Users should be able to play 3 times per day without logging in.\n\nFile: mobile/contexts/AuthContext.tsx\n- Add state: isGuest (boolean, default false), guestUsesLeft (number, default 3).\n- Add method enterGuestMode(): sets isGuest = true, loads guest count from AsyncStorage key 'guest_votes_<today_date>', calculates remaining = 3 - count, sets guestUsesLeft.\n- Add method recordGuestUse(): increments AsyncStorage counter for today, decrements guestUsesLeft. If guestUsesLeft <= 0, show prompt to register.\n- Add guestDeviceId: generate a UUID once via crypto.randomUUID() or expo-crypto, store in AsyncStorage 'guest_device_id', reuse on subsequent launches.\n- Export isGuest, guestUsesLeft, enterGuestMode, recordGuestUse, guestDeviceId from context.\n\nFile: mobile/lib/api.ts\n- Modify request interceptor: if no access token but guestDeviceId exists in context/storage, set header 'Authorization: Guest <deviceId>' instead of Bearer token.\n\nFile: mobile/app/index.tsx\n- Update routing logic: check onboarding → if not done, go to onboarding. If done, check auth → if authenticated, go to protected. If not authenticated, go to protected as guest (enterGuestMode). This means guests land on the home tab directly.\n\nFile: mobile/app/(auth)/login.tsx\n- Add 'Skip for now' Pressable below the sign-in button: text-orange-600 font-semibold text-base. onPress: hapticSelection(), enterGuestMode(), router.replace('/(protected)/home').\n\nFile: mobile/app/(protected)/_layout.tsx\n- Modify the auth guard: allow access if isAuthenticated OR isGuest. Only redirect to login if neither.\n- For history and settings tabs: if isGuest, show a 'Sign up to unlock' overlay instead of the content. Use a View with className='flex-1 items-center justify-center bg-white' with lock icon and 'Create a free account to access your history' text + 'Sign Up' button that navigates to register.\n\nFile: mobile/app/(protected)/home.tsx\n- Before calling vote API: if isGuest, call recordGuestUse(). If guestUsesLeft <= 0, show Alert with title 'Free Limit Reached' message 'Create a free account for unlimited votes!' and buttons 'Sign Up' (navigate to register) and 'Maybe Later'.\n- Display guest uses remaining badge: if isGuest, show a small badge below the streak badge: className='bg-gray-100 px-3 py-1 rounded-full' text '{guestUsesLeft} free votes left today' text-gray-600 text-sm.\n\nTest: TypeScript must compile cleanly.",
+      "description": "Wire up the guest mode from enhance_002 on the mobile side. Users should be able to play 3 times per day without logging in.\n\nFile: mobile/contexts/AuthContext.tsx\n- Add state: isGuest (boolean, default false), guestUsesLeft (number, default 3).\n- Add method enterGuestMode(): sets isGuest = true, loads guest count from AsyncStorage key 'guest_votes_<today_date>', calculates remaining = 3 - count, sets guestUsesLeft.\n- Add method recordGuestUse(): increments AsyncStorage counter for today, decrements guestUsesLeft. If guestUsesLeft <= 0, show prompt to register.\n- Add guestDeviceId: generate a UUID once via crypto.randomUUID() or expo-crypto, store in AsyncStorage 'guest_device_id', reuse on subsequent launches.\n- Export isGuest, guestUsesLeft, enterGuestMode, recordGuestUse, guestDeviceId from context.\n\nFile: mobile/lib/api.ts\n- Modify request interceptor: if no access token but guestDeviceId exists in context/storage, set header 'Authorization: Guest <deviceId>' instead of Bearer token.\n\nFile: mobile/app/index.tsx\n- Update routing logic: check onboarding \u2192 if not done, go to onboarding. If done, check auth \u2192 if authenticated, go to protected. If not authenticated, go to protected as guest (enterGuestMode). This means guests land on the home tab directly.\n\nFile: mobile/app/(auth)/login.tsx\n- Add 'Skip for now' Pressable below the sign-in button: text-orange-600 font-semibold text-base. onPress: hapticSelection(), enterGuestMode(), router.replace('/(protected)/home').\n\nFile: mobile/app/(protected)/_layout.tsx\n- Modify the auth guard: allow access if isAuthenticated OR isGuest. Only redirect to login if neither.\n- For history and settings tabs: if isGuest, show a 'Sign up to unlock' overlay instead of the content. Use a View with className='flex-1 items-center justify-center bg-white' with lock icon and 'Create a free account to access your history' text + 'Sign Up' button that navigates to register.\n\nFile: mobile/app/(protected)/home.tsx\n- Before calling vote API: if isGuest, call recordGuestUse(). If guestUsesLeft <= 0, show Alert with title 'Free Limit Reached' message 'Create a free account for unlimited votes!' and buttons 'Sign Up' (navigate to register) and 'Maybe Later'.\n- Display guest uses remaining badge: if isGuest, show a small badge below the streak badge: className='bg-gray-100 px-3 py-1 rounded-full' text '{guestUsesLeft} free votes left today' text-gray-600 text-sm.\n\nTest: TypeScript must compile cleanly.",
       "status": "pending",
       "priority": 8,
-      "depends_on": ["enhance_002", "enhance_003"],
+      "depends_on": [
+        "enhance_002",
+        "enhance_003"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_005",
@@ -46,9 +60,13 @@
       "description": "The current home screen is functional but lacks App Store-quality polish. It needs gradient accents, better card design, micro-animations, and visual hierarchy improvements.\n\nFile: mobile/app/(protected)/home.tsx\n- Complete redesign of the JSX tree while keeping all existing state and API logic intact.\n\nHeader Section:\n- Replace plain text header with a gradient-like effect using layered Views: outer View className='bg-orange-600 pt-16 pb-8 px-6 rounded-b-3xl'. Inner: Text 'Would You Rather?' className='text-3xl font-bold text-white text-center'. Below: View className='flex-row items-center justify-center mt-3 gap-4'. Streak badge: View className='bg-white/20 px-4 py-2 rounded-full flex-row items-center gap-2', Ionicons 'flame' color white size 18, Text '{stats.current_streak} day streak' className='text-white font-semibold text-sm'. Total votes badge: similar style with 'checkmark-circle' icon.\n\nChallenge Card (before voting):\n- Outer: View className='mx-6 mt-6 bg-white rounded-3xl shadow-lg p-6 border border-orange-100'.\n- Category pill: View className='self-start bg-orange-100 px-4 py-1.5 rounded-full mb-6'. Text className='text-orange-700 font-semibold text-xs uppercase tracking-wider'.\n- Option A button: Pressable className='w-full bg-blue-500 py-5 rounded-2xl mb-4 active:opacity-80 active:scale-[0.98]'. Text className='text-white text-center font-bold text-lg px-4'. Add Ionicons 'hand-left-outline' before text.\n- VS divider: View className='flex-row items-center my-2'. Two View flex-1 h-px bg-orange-200. Center: View className='bg-orange-100 w-10 h-10 rounded-full items-center justify-center mx-3'. Text 'VS' className='text-orange-600 font-bold text-xs'.\n- Option B button: same as A but bg-red-500 with 'hand-right-outline' icon.\n\nResults Section (after voting):\n- Outer: View className='mx-6 mt-6 bg-white rounded-3xl shadow-lg p-6 border border-orange-100'.\n- 'Results are in!' Text className='text-center text-orange-900 font-bold text-xl mb-6'.\n- Option A result: View className='mb-4'. Row with option text + percentage. Progress bar: View className='h-3 bg-gray-100 rounded-full overflow-hidden mt-2'. Inner View with dynamic width (percent_a%), className='h-full bg-blue-500 rounded-full'. If user chose A, add checkmark badge: View className='absolute -right-2 -top-2 bg-blue-500 w-6 h-6 rounded-full items-center justify-center', Ionicons 'checkmark' white size 14.\n- Option B result: same pattern with bg-red-500.\n- Total votes footer: View className='flex-row items-center justify-center mt-6 pt-4 border-t border-gray-100'. Ionicons 'people-outline' + Text '{total_votes} people voted'.\n- Share button: Pressable className='mt-4 bg-orange-600 py-4 rounded-2xl flex-row items-center justify-center gap-2 active:opacity-80'. Ionicons 'share-outline' white + Text 'Share Your Choice' className='text-white font-bold text-base'.\n\nStats Footer:\n- View className='flex-row justify-around mx-6 mt-6 mb-8'.\n- Three stat cards: View className='items-center bg-white rounded-2xl p-4 shadow-sm flex-1 mx-1.5'. Number text-2xl font-bold text-orange-600. Label text-xs text-gray-500 mt-1.\n\nLoading State:\n- Full screen: View className='flex-1 items-center justify-center bg-orange-50'. ActivityIndicator size='large' color='#ea580c'. Text 'Loading today\\'s challenge...' className='mt-4 text-gray-500 text-base'.\n\nError State:\n- View className='flex-1 items-center justify-center px-8'. Ionicons 'cloud-offline-outline' size 64 color gray-300. Text 'Couldn\\'t load challenge' className='text-lg font-semibold text-gray-700 mt-4'. Retry Pressable with 'Try Again' text.\n\nTest: TypeScript compilation must pass.",
       "status": "pending",
       "priority": 7,
-      "depends_on": ["enhance_004"],
+      "depends_on": [
+        "enhance_004"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_006",
@@ -58,7 +76,10 @@
       "priority": 7,
       "depends_on": [],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:34:53Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     },
     {
       "id": "enhance_007",
@@ -68,7 +89,10 @@
       "priority": 7,
       "depends_on": [],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:34:59Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     },
     {
       "id": "enhance_008",
@@ -76,9 +100,13 @@
       "description": "Login and register screens need visual upgrades with app branding, gradient touches, and polished form design.\n\nFile: mobile/app/(auth)/login.tsx\n- Redesign while keeping all existing state and API logic.\n\nLayout: ScrollView className='flex-1 bg-white' with KeyboardAvoidingView behavior='padding'.\n\nBranding Header:\n- View className='items-center pt-20 pb-8'.\n- Icon container: View className='bg-orange-100 w-24 h-24 rounded-3xl items-center justify-center mb-6'. Ionicons 'help-circle' size 48 color='#ea580c'.\n- Text 'Welcome back' className='text-3xl font-bold text-orange-900'. Text 'Sign in to continue playing' className='text-gray-500 mt-2 text-base'.\n\nForm Section: View className='px-6'.\n- Error alert: if error, View className='bg-red-50 border border-red-200 rounded-2xl p-4 mb-4 flex-row items-center'. Ionicons 'alert-circle' color red-500 size 20. Text className='text-red-700 ml-3 flex-1 text-sm'.\n- Email Input: use existing Input component with label='Email address'.\n- Password Input: use existing Input component with label='Password', secureTextEntry.\n- Sign In Button: use existing Button component className='mt-2' variant='primary' size='lg' with full width. Change background to bg-orange-600 (modify Button or use a Pressable directly): Pressable className='w-full bg-orange-600 py-4 rounded-2xl items-center mt-2 active:opacity-80'. Text 'Sign In' className='text-white font-bold text-lg'. Show ActivityIndicator when loading.\n\nDivider: View className='flex-row items-center my-6 px-6'. View flex-1 h-px bg-gray-200. Text 'or' className='mx-4 text-gray-400 text-sm'. View flex-1 h-px bg-gray-200.\n\nApple Sign In: Keep existing AppleSignInButton with same props.\n\nSkip Option (NEW):\n- Pressable className='items-center py-4 mt-2' onPress: enterGuestMode() from AuthContext, router.replace('/(protected)/home'), hapticSelection().\n- Text 'Skip for now' className='text-orange-600 font-semibold text-base'.\n- Text 'Play 3 free rounds without an account' className='text-gray-400 text-xs mt-1'.\n\nFooter Link: View className='flex-row items-center justify-center mt-4 mb-8'. Text 'Don\\'t have an account?' className='text-gray-500'. Link to register: Text 'Sign up' className='text-orange-600 font-semibold ml-1'.\n\nFile: mobile/app/(auth)/register.tsx\n- Similar branding header with 'person-add' icon.\n- Title: 'Create account', subtitle: 'Join thousands of players'.\n- Same form pattern with email, password, confirm password.\n- Submit button with orange-600 bg.\n- Footer link back to login.\n- No skip option on register (only on login).\n\nTest: TypeScript must compile.",
       "status": "pending",
       "priority": 8,
-      "depends_on": ["enhance_004"],
+      "depends_on": [
+        "enhance_004"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_009",
@@ -86,29 +114,42 @@
       "description": "Replace the default Expo Router tab bar with a custom-styled tab bar that matches the orange theme and has better visual presence.\n\nFile: mobile/app/(protected)/_layout.tsx\n- Replace the current Tabs component with a custom tab bar implementation.\n\nApproach: Use Tabs from expo-router but with tabBar prop pointing to a custom component.\n\nCreate custom tab bar inline or as a component:\n- Function CustomTabBar({ state, descriptors, navigation }) that renders a custom bar.\n- Outer: View className='flex-row bg-white border-t border-orange-100 pb-8 pt-3 px-4' (pb-8 for safe area on notched iPhones, adjust with useSafeAreaInsets from react-native-safe-area-context).\n- For each route (filter out paywall which has href: null): Pressable className='flex-1 items-center'.\n  - Icon: Ionicons with route-specific icon. If focused: color #ea580c (orange-600), else #9ca3af (gray-400). Size 24.\n  - Label: Text className={cn('text-xs mt-1 font-medium', focused ? 'text-orange-600' : 'text-gray-400')}.\n  - Active indicator: if focused, View className='absolute -top-3 w-12 h-1 bg-orange-600 rounded-full' as a top bar indicator.\n- onPress: hapticSelection() + navigation.navigate(route.name).\n- onLongPress: hapticMedium().\n\nTab configuration:\n- home: icon 'help-circle-outline' / 'help-circle', label 'Play'\n- history: icon 'time-outline' / 'time', label 'History'\n- settings: icon 'settings-outline' / 'settings', label 'Settings'\n- paywall: excluded (href: null, not rendered in tab bar)\n\nPass the custom tab bar: <Tabs tabBar={(props) => <CustomTabBar {...props} />} screenOptions={{ headerShown: false }}>.\n\nKeep the existing screen definitions inside <Tabs>.\n\nImport useSafeAreaInsets from react-native-safe-area-context. Use insets.bottom for paddingBottom instead of hardcoded pb-8.\n\nGuard logic: keep the existing redirect for unauthenticated non-guest users.\n\nTest: TypeScript must compile.",
       "status": "pending",
       "priority": 7,
-      "depends_on": ["enhance_004"],
+      "depends_on": [
+        "enhance_004"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_010",
       "title": "Add share card generation for challenge results",
-      "description": "The current share uses plain text via Share.share(). We need shareable visual cards that look great when posted to Instagram Stories or iMessage.\n\nFile: mobile/app/(protected)/home.tsx\n- Enhance the handleShare function. Keep the existing Share.share() as the mechanism but improve the share content significantly.\n\nNew share message format:\n```\n🤔 Would You Rather...\n\nA: {option_a}\nB: {option_b}\n\nI chose {chosen_option}! ({percentage}% agree with me)\n\n🔥 {stats.current_streak} day streak\n\nPlay now: https://wouldyou.app\n```\n\n- Add share prompt after every vote result. After showing results for 2 seconds (use setTimeout), animate in a share prompt: View className='mx-6 mt-4 bg-orange-50 border border-orange-200 rounded-2xl p-4 flex-row items-center'. Ionicons 'share-social' color orange-600 size 24. View className='flex-1 ml-3': Text 'Share your choice!' className='font-semibold text-orange-900'. Text 'Let your friends know where you stand' className='text-orange-600 text-xs mt-0.5'. Pressable className='bg-orange-600 px-4 py-2 rounded-xl ml-3': Text 'Share' className='text-white font-semibold text-sm'.\n\n- State: showSharePrompt (boolean, default false). Set to true via setTimeout 2000ms after result is set. Reset to false on new challenge load.\n\n- Also add share button to history cards: In history.tsx, add a small share Pressable in each card footer: Ionicons 'share-outline' size 18 color gray-400. onPress: share the specific historical challenge with same format.\n\nFile: mobile/app/(protected)/history.tsx\n- Import Share from react-native.\n- Add handleShareChallenge(item: ChallengeResult) function that constructs the share message and calls Share.share().\n- Add share icon button in each history card footer, next to the vote count.\n\nHaptics: hapticSuccess() when share sheet opens.\n\nTest: TypeScript must compile.",
+      "description": "The current share uses plain text via Share.share(). We need shareable visual cards that look great when posted to Instagram Stories or iMessage.\n\nFile: mobile/app/(protected)/home.tsx\n- Enhance the handleShare function. Keep the existing Share.share() as the mechanism but improve the share content significantly.\n\nNew share message format:\n```\n\ud83e\udd14 Would You Rather...\n\nA: {option_a}\nB: {option_b}\n\nI chose {chosen_option}! ({percentage}% agree with me)\n\n\ud83d\udd25 {stats.current_streak} day streak\n\nPlay now: https://wouldyou.app\n```\n\n- Add share prompt after every vote result. After showing results for 2 seconds (use setTimeout), animate in a share prompt: View className='mx-6 mt-4 bg-orange-50 border border-orange-200 rounded-2xl p-4 flex-row items-center'. Ionicons 'share-social' color orange-600 size 24. View className='flex-1 ml-3': Text 'Share your choice!' className='font-semibold text-orange-900'. Text 'Let your friends know where you stand' className='text-orange-600 text-xs mt-0.5'. Pressable className='bg-orange-600 px-4 py-2 rounded-xl ml-3': Text 'Share' className='text-white font-semibold text-sm'.\n\n- State: showSharePrompt (boolean, default false). Set to true via setTimeout 2000ms after result is set. Reset to false on new challenge load.\n\n- Also add share button to history cards: In history.tsx, add a small share Pressable in each card footer: Ionicons 'share-outline' size 18 color gray-400. onPress: share the specific historical challenge with same format.\n\nFile: mobile/app/(protected)/history.tsx\n- Import Share from react-native.\n- Add handleShareChallenge(item: ChallengeResult) function that constructs the share message and calls Share.share().\n- Add share icon button in each history card footer, next to the vote count.\n\nHaptics: hapticSuccess() when share sheet opens.\n\nTest: TypeScript must compile.",
       "status": "pending",
       "priority": 6,
-      "depends_on": ["enhance_005", "enhance_006"],
+      "depends_on": [
+        "enhance_005",
+        "enhance_006"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_011",
       "title": "Implement daily streak system with visual rewards",
-      "description": "The backend has streak tracking but the mobile side only displays a number. We need visual streak rewards, streak-break warnings, and gamification.\n\nFile: mobile/app/(protected)/home.tsx\n- Enhance the streak display section with milestone badges and visual feedback.\n\nStreak Milestones (display based on current_streak):\n- 3 days: Bronze badge (🥉 or Ionicons 'medal-outline' color #CD7F32)\n- 7 days: Silver badge (🥈 or color #C0C0C0)\n- 14 days: Gold badge (🥇 or color #FFD700)\n- 21 days: Diamond badge (💎 or Ionicons 'diamond' color #60A5FA)\n- 30 days: Fire badge (🔥 or Ionicons 'flame' color #EF4444)\n- 50 days: Crown badge (👑 or Ionicons 'trophy' color #F59E0B)\n\nStreak display redesign:\n- Replace simple streak badge with a richer component.\n- View className='mx-6 mt-4 bg-white rounded-2xl shadow-sm p-4 border border-orange-100'.\n- Row: View className='flex-row items-center justify-between'.\n  - Left: Ionicons 'flame' color orange-600 size 28 + View ml-3: Text '{current_streak}' className='text-2xl font-bold text-orange-900'. Text 'day streak' className='text-gray-500 text-xs'.\n  - Right: Current milestone badge icon + Text of milestone name className='text-xs font-semibold' with corresponding color.\n- Progress to next milestone: View className='mt-3'. Text 'Next: {next_milestone_name} in {days_to_next} days' className='text-xs text-gray-400 mb-1'. Progress bar: View className='h-2 bg-gray-100 rounded-full'. Inner View with dynamic width percentage, className='h-full bg-orange-500 rounded-full'.\n\nStreak break warning:\n- In loadChallenge function, after fetching stats: if stats.current_streak > 0 and the user hasn't voted today (result is null), show a subtle banner: View className='mx-6 mt-2 bg-yellow-50 border border-yellow-200 rounded-xl p-3 flex-row items-center'. Ionicons 'warning-outline' color yellow-600. Text 'Don\\'t lose your {current_streak}-day streak! Vote now!' className='text-yellow-700 text-sm ml-2 flex-1'.\n\nHelper function getStreakMilestone(streak: number):\n- Returns { name: string, icon: string, color: string, threshold: number, nextThreshold: number }.\n- Logic: find the highest threshold <= streak from the milestones array.\n\nFile: mobile/types/challenge.ts\n- No changes needed, ChallengeStats already has current_streak, longest_streak, total_votes.\n\nTest: TypeScript must compile.",
+      "description": "The backend has streak tracking but the mobile side only displays a number. We need visual streak rewards, streak-break warnings, and gamification.\n\nFile: mobile/app/(protected)/home.tsx\n- Enhance the streak display section with milestone badges and visual feedback.\n\nStreak Milestones (display based on current_streak):\n- 3 days: Bronze badge (\ud83e\udd49 or Ionicons 'medal-outline' color #CD7F32)\n- 7 days: Silver badge (\ud83e\udd48 or color #C0C0C0)\n- 14 days: Gold badge (\ud83e\udd47 or color #FFD700)\n- 21 days: Diamond badge (\ud83d\udc8e or Ionicons 'diamond' color #60A5FA)\n- 30 days: Fire badge (\ud83d\udd25 or Ionicons 'flame' color #EF4444)\n- 50 days: Crown badge (\ud83d\udc51 or Ionicons 'trophy' color #F59E0B)\n\nStreak display redesign:\n- Replace simple streak badge with a richer component.\n- View className='mx-6 mt-4 bg-white rounded-2xl shadow-sm p-4 border border-orange-100'.\n- Row: View className='flex-row items-center justify-between'.\n  - Left: Ionicons 'flame' color orange-600 size 28 + View ml-3: Text '{current_streak}' className='text-2xl font-bold text-orange-900'. Text 'day streak' className='text-gray-500 text-xs'.\n  - Right: Current milestone badge icon + Text of milestone name className='text-xs font-semibold' with corresponding color.\n- Progress to next milestone: View className='mt-3'. Text 'Next: {next_milestone_name} in {days_to_next} days' className='text-xs text-gray-400 mb-1'. Progress bar: View className='h-2 bg-gray-100 rounded-full'. Inner View with dynamic width percentage, className='h-full bg-orange-500 rounded-full'.\n\nStreak break warning:\n- In loadChallenge function, after fetching stats: if stats.current_streak > 0 and the user hasn't voted today (result is null), show a subtle banner: View className='mx-6 mt-2 bg-yellow-50 border border-yellow-200 rounded-xl p-3 flex-row items-center'. Ionicons 'warning-outline' color yellow-600. Text 'Don\\'t lose your {current_streak}-day streak! Vote now!' className='text-yellow-700 text-sm ml-2 flex-1'.\n\nHelper function getStreakMilestone(streak: number):\n- Returns { name: string, icon: string, color: string, threshold: number, nextThreshold: number }.\n- Logic: find the highest threshold <= streak from the milestones array.\n\nFile: mobile/types/challenge.ts\n- No changes needed, ChallengeStats already has current_streak, longest_streak, total_votes.\n\nTest: TypeScript must compile.",
       "status": "pending",
       "priority": 6,
-      "depends_on": ["enhance_005"],
+      "depends_on": [
+        "enhance_005"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_012",
@@ -116,9 +157,14 @@
       "description": "Users should be able to browse challenges by category beyond just the daily challenge. This adds an explore/browse feature using the new category endpoints from enhance_001.\n\nFile: mobile/app/(protected)/explore.tsx (create new)\n- New screen accessible from home screen via a 'More Challenges' button (not a tab).\n\nImports: View, Text, Pressable, FlatList, ActivityIndicator, ScrollView from react-native; useRouter from expo-router; Ionicons from @expo/vector-icons; api from lib/api; hapticSelection from lib/haptics; cn from lib/cn. Import Challenge, ChallengeResult from types/challenge.\n\nState: selectedCategory (string | null), challenges (ChallengeResult[]), loading (boolean), votingId (string | null).\n\nCategories array: [{id: 'life', label: 'Life', icon: 'heart-outline', color: 'bg-red-100 text-red-600'}, {id: 'deep', label: 'Deep', icon: 'moon-outline', color: 'bg-purple-100 text-purple-600'}, {id: 'superpower', label: 'Superpowers', icon: 'flash-outline', color: 'bg-yellow-100 text-yellow-600'}, {id: 'funny', label: 'Funny', icon: 'happy-outline', color: 'bg-green-100 text-green-600'}, {id: 'love', label: 'Love', icon: 'heart-half-outline', color: 'bg-pink-100 text-pink-600'}, {id: 'tech', label: 'Tech', icon: 'laptop-outline', color: 'bg-blue-100 text-blue-600'}].\n\nHeader: View className='bg-orange-600 pt-16 pb-6 px-6'. Row: Pressable onPress router.back() with Ionicons 'arrow-back' white. Text 'Explore' className='text-3xl font-bold text-white ml-3'.\n\nCategory selector: horizontal ScrollView className='px-4 mt-4' horizontal showsHorizontalScrollIndicator={false}. Map categories to Pressable pills: className={cn('px-4 py-2 rounded-full mr-2 flex-row items-center gap-1.5', selected ? 'bg-orange-600' : 'bg-white border border-gray-200')}. Ionicons icon, Text label with matching colors.\n\nChallenge list: FlatList of challenges. Each card similar to home screen challenge card but compact: View className='mx-4 mb-4 bg-white rounded-2xl shadow-sm p-5 border border-gray-100'. Category badge + two option buttons (blue/red) + OR divider. If already voted, show results inline (percentages + progress bars). handleVote calls POST /challenges/vote and refreshes.\n\nEmpty state: if selectedCategory but no challenges: 'No challenges in this category yet' with return icon.\nLoading state: ActivityIndicator centered.\n\nFile: mobile/app/(protected)/home.tsx\n- Add a 'Explore More' button below the stats footer: Pressable className='mx-6 mb-8 border-2 border-orange-200 py-4 rounded-2xl flex-row items-center justify-center gap-2' onPress: router.push('/(protected)/explore'). Ionicons 'compass-outline' orange-600. Text 'Explore More Challenges' className='text-orange-600 font-semibold text-base'.\n\nFile: mobile/app/(protected)/_layout.tsx\n- Add explore as a hidden screen (like paywall): <Tabs.Screen name='explore' options={{ href: null }} />.\n\nTest: TypeScript must compile.",
       "status": "pending",
       "priority": 6,
-      "depends_on": ["enhance_001", "enhance_005"],
+      "depends_on": [
+        "enhance_001",
+        "enhance_005"
+      ],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": ""
     },
     {
       "id": "enhance_013",
@@ -128,17 +174,23 @@
       "priority": 6,
       "depends_on": [],
       "test_command": "cd mobile && npx tsc --noEmit",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:35:03Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     },
     {
       "id": "enhance_014",
       "title": "Fix admin role security and Apple token verification",
-      "description": "Two critical security issues: (1) admin endpoints have no role check — any authenticated user can moderate, (2) Apple identity token is decoded but not cryptographically verified.\n\nFile: backend/internal/models/user.go\n- Add Role field to User model: Role string `json:\"role\" gorm:\"default:'user'\"`. Allowed values: 'user', 'admin'.\n\nFile: backend/internal/middleware/auth.go\n- Add AdminOnly middleware function. It should run after JWTProtected. It reads userID from Locals, queries the database for the user, checks user.Role == 'admin'. If not, returns 403 Forbidden with message 'Admin access required'. The middleware needs a *gorm.DB parameter: func AdminOnly(db *gorm.DB) fiber.Handler.\n\nFile: backend/internal/routes/routes.go\n- Apply AdminOnly middleware to the admin group: admin := api.Group('/admin', middleware.JWTProtected(cfg.JWTSecret), middleware.AdminOnly(db)). Pass db to SetupRoutes or restructure to make it available.\n- Update SetupRoutes signature to accept db *gorm.DB parameter alongside cfg.\n\nFile: backend/cmd/server/main.go\n- Pass db to routes.SetupRoutes(app, cfg, db) call.\n\nFile: backend/internal/services/auth_service.go\n- Add proper Apple identity token verification. The AppleSignIn method currently decodes the JWT payload with base64 without verifying the signature (lines 145-150).\n- Add function verifyAppleToken(identityToken string) (*AppleTokenClaims, error):\n  1. Parse the JWT header to get the 'kid' (key ID).\n  2. Fetch Apple's public keys from https://appleid.apple.com/auth/keys (cache for 24h using sync.Once or a simple global with TTL).\n  3. Find the matching key by kid.\n  4. Verify the JWT signature using the RSA public key.\n  5. Verify claims: iss == 'https://appleid.apple.com', aud == app bundle ID (add APPLE_BUNDLE_ID to config), exp > now.\n  6. Return parsed claims (sub, email).\n- Replace the current base64 decode with verifyAppleToken call.\n- Define AppleTokenClaims struct: Sub string, Email string, EmailVerified bool.\n\nFile: backend/internal/config/config.go\n- Add AppleBundleID string field, loaded from APPLE_BUNDLE_ID env var.\n\nNote: For the Apple key fetch, use net/http + encoding/json. For JWT verification, use the existing golang-jwt library (already imported for JWT auth). Parse the JWK to *rsa.PublicKey using crypto/rsa and math/big for the modulus/exponent.\n\nTest: go build must pass.",
+      "description": "Two critical security issues: (1) admin endpoints have no role check \u2014 any authenticated user can moderate, (2) Apple identity token is decoded but not cryptographically verified.\n\nFile: backend/internal/models/user.go\n- Add Role field to User model: Role string `json:\"role\" gorm:\"default:'user'\"`. Allowed values: 'user', 'admin'.\n\nFile: backend/internal/middleware/auth.go\n- Add AdminOnly middleware function. It should run after JWTProtected. It reads userID from Locals, queries the database for the user, checks user.Role == 'admin'. If not, returns 403 Forbidden with message 'Admin access required'. The middleware needs a *gorm.DB parameter: func AdminOnly(db *gorm.DB) fiber.Handler.\n\nFile: backend/internal/routes/routes.go\n- Apply AdminOnly middleware to the admin group: admin := api.Group('/admin', middleware.JWTProtected(cfg.JWTSecret), middleware.AdminOnly(db)). Pass db to SetupRoutes or restructure to make it available.\n- Update SetupRoutes signature to accept db *gorm.DB parameter alongside cfg.\n\nFile: backend/cmd/server/main.go\n- Pass db to routes.SetupRoutes(app, cfg, db) call.\n\nFile: backend/internal/services/auth_service.go\n- Add proper Apple identity token verification. The AppleSignIn method currently decodes the JWT payload with base64 without verifying the signature (lines 145-150).\n- Add function verifyAppleToken(identityToken string) (*AppleTokenClaims, error):\n  1. Parse the JWT header to get the 'kid' (key ID).\n  2. Fetch Apple's public keys from https://appleid.apple.com/auth/keys (cache for 24h using sync.Once or a simple global with TTL).\n  3. Find the matching key by kid.\n  4. Verify the JWT signature using the RSA public key.\n  5. Verify claims: iss == 'https://appleid.apple.com', aud == app bundle ID (add APPLE_BUNDLE_ID to config), exp > now.\n  6. Return parsed claims (sub, email).\n- Replace the current base64 decode with verifyAppleToken call.\n- Define AppleTokenClaims struct: Sub string, Email string, EmailVerified bool.\n\nFile: backend/internal/config/config.go\n- Add AppleBundleID string field, loaded from APPLE_BUNDLE_ID env var.\n\nNote: For the Apple key fetch, use net/http + encoding/json. For JWT verification, use the existing golang-jwt library (already imported for JWT auth). Parse the JWK to *rsa.PublicKey using crypto/rsa and math/big for the modulus/exponent.\n\nTest: go build must pass.",
       "status": "pending",
       "priority": 10,
       "depends_on": [],
       "test_command": "cd backend && go build ./...",
-      "auto_commit": true
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-07T14:34:44Z",
+      "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-4.7): failed after 2 retries: API returned 429: {\"error\":{\"code\":\"1302\",\"message\":\"Rate limit reached for requests\"}}"
     }
   ]
 }
