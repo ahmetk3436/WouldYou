@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, Pressable, Text, View } from 'react-native';
+import { Alert, Pressable, Text, View, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import api from '../../lib/api';
-import { hapticSuccess, hapticError } from '../../lib/haptics';
+import { hapticSuccess, hapticError, hapticSelection } from '../../lib/haptics';
 import Modal from './Modal';
 import Input from './Input';
 import Button from './Button';
@@ -12,18 +12,34 @@ interface ReportButtonProps {
   contentId: string;
 }
 
-// Report button (Apple Guideline 1.2 — every piece of UGC must have one)
+// Quick report categories (2025-2026 trend: chip selection)
+const REPORT_CATEGORIES = [
+  { id: 'harassment', label: 'Harassment', icon: 'person-outline' },
+  { id: 'spam', label: 'Spam', icon: 'megaphone-outline' },
+  { id: 'inappropriate', label: 'Inappropriate Content', icon: 'eye-off-outline' },
+  { id: 'misinformation', label: 'Misinformation', icon: 'warning-outline' },
+  { id: 'hate_speech', label: 'Hate Speech', icon: 'warning' },
+  { id: 'other', label: 'Other', icon: 'ellipsis-horizontal' },
+] as const;
+
+/**
+ * ReportButton - Enhanced 2025-2026 Version
+ * - Quick category chips for faster reporting
+ * - Clean modal interface
+ * - Apple Guideline 1.2 compliance (UGC safety)
+ */
 export default function ReportButton({
   contentType,
   contentId,
 }: ReportButtonProps) {
   const [showModal, setShowModal] = useState(false);
-  const [reason, setReason] = useState('');
+  const [category, setCategory] = useState<string>('');
+  const [details, setDetails] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleReport = async () => {
-    if (!reason.trim()) {
-      Alert.alert('Error', 'Please provide a reason for your report.');
+    if (!category.trim()) {
+      Alert.alert('Select a Category', 'Please select a category for your report.');
       return;
     }
 
@@ -32,14 +48,17 @@ export default function ReportButton({
       await api.post('/reports', {
         content_type: contentType,
         content_id: contentId,
-        reason,
+        category,
+        details,
       });
       hapticSuccess();
       setShowModal(false);
-      setReason('');
+      setCategory('');
+      setDetails('');
       Alert.alert(
         'Report Submitted',
-        'Thank you for helping keep our community safe. We will review this within 24 hours.'
+        'Thank you for helping keep our community safe. We will review this within 24 hours.',
+        [{ text: 'OK' }]
       );
     } catch {
       hapticError();
@@ -52,8 +71,9 @@ export default function ReportButton({
   return (
     <>
       <Pressable
-        className="flex-row items-center gap-1 p-2"
-        onPress={() => setShowModal(true)}
+        className="flex-row items-center gap-1 rounded-lg p-2"
+        onPress={() => { hapticSelection(); setShowModal(true); }}
+        style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
       >
         <Ionicons name="flag-outline" size={16} color="#ef4444" />
         <Text className="text-sm text-red-500">Report</Text>
@@ -63,21 +83,62 @@ export default function ReportButton({
         visible={showModal}
         onClose={() => setShowModal(false)}
         title="Report Content"
+        size="lg"
       >
-        <Text className="mb-4 text-sm text-gray-600">
+        <Text className="mb-4 text-sm text-gray-400">
           Tell us why you are reporting this {contentType}. Our team reviews all
           reports within 24 hours.
         </Text>
+
+        {/* Quick Category Selection */}
+        <View className="mb-4">
+          <Text className="mb-2 text-sm font-medium text-gray-400">Category</Text>
+          <View className="flex-row flex-wrap gap-2">
+            {REPORT_CATEGORIES.map((cat) => {
+              const isSelected = category === cat.id;
+              return (
+                <Pressable
+                  key={cat.id}
+                  className={`flex-row items-center gap-1.5 rounded-full px-3 py-2 ${
+                    isSelected
+                      ? 'bg-orange-600'
+                      : 'border border-gray-700 bg-gray-900'
+                  }`}
+                  onPress={() => { hapticSelection(); setCategory(cat.id); }}
+                >
+                  <Ionicons
+                    name={cat.icon as keyof typeof Ionicons.glyphMap}
+                    size={14}
+                    color={isSelected ? 'white' : '#9ca3af'}
+                  />
+                  <Text
+                    className={`text-xs font-medium ${
+                      isSelected ? 'text-white' : 'text-gray-400'
+                    }`}
+                  >
+                    {cat.label}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+
+        {/* Additional Details */}
         <View className="mb-4">
           <Input
-            label="Reason"
-            placeholder="Describe the issue..."
-            value={reason}
-            onChangeText={setReason}
+            label="Additional Details (Optional)"
+            placeholder="Provide more context..."
+            value={details}
+            onChangeText={setDetails}
             multiline
             numberOfLines={3}
+            showCharCount
+            maxLength={500}
           />
         </View>
+
+        {/* Actions */}
         <View className="flex-row gap-3">
           <View className="flex-1">
             <Button
@@ -88,7 +149,7 @@ export default function ReportButton({
           </View>
           <View className="flex-1">
             <Button
-              title="Submit"
+              title="Submit Report"
               variant="destructive"
               onPress={handleReport}
               isLoading={isSubmitting}

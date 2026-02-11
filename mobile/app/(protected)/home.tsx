@@ -13,7 +13,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../lib/api';
-import { hapticSuccess, hapticSelection, hapticError } from '../../lib/haptics';
+import {
+  hapticSuccess,
+  hapticSelection,
+  hapticError,
+  hapticVote,
+  hapticShare,
+} from '../../lib/haptics';
 import type { Challenge, ChallengeResult, ChallengeStats } from '../../types/challenge';
 
 interface StreakMilestone {
@@ -41,6 +47,13 @@ function getStreakMilestone(streak: number): StreakMilestone {
   return { name: 'Starter', icon: 'flame-outline', color: '#9CA3AF', threshold: 0, nextThreshold: 3 };
 }
 
+/**
+ * Home Screen - Enhanced 2025-2026 Version
+ * - Gamified streak system with visual milestones
+ * - Social proof elements
+ * - Enhanced haptic feedback
+ * - Contextual upgrade prompts
+ */
 export default function HomeScreen() {
   const { user, isGuest, guestUsageCount, canUseFeature, incrementGuestUsage } = useAuth();
   const [challenge, setChallenge] = useState<Challenge | null>(null);
@@ -98,6 +111,7 @@ export default function HomeScreen() {
     if (!challenge || voting || result) return;
 
     if (isGuest && !canUseFeature()) {
+      hapticSelection();
       Alert.alert(
         'Free Plays Used',
         'You have used all 3 free plays. Create an account to continue playing!',
@@ -109,7 +123,7 @@ export default function HomeScreen() {
       return;
     }
 
-    hapticSelection();
+    hapticVote();
     setVoting(true);
     try {
       await api.post('/challenges/vote', {
@@ -119,7 +133,6 @@ export default function HomeScreen() {
       if (isGuest) {
         await incrementGuestUsage();
       }
-      // Re-fetch to get updated percentages
       const res = await api.get('/challenges/daily');
       setChallenge(res.data.challenge);
       setResult(res.data);
@@ -137,7 +150,7 @@ export default function HomeScreen() {
 
   const handleShare = async () => {
     if (!result) return;
-    hapticSelection();
+    hapticShare();
     const myChoice = result.user_choice === 'A' ? result.challenge.option_a : result.challenge.option_b;
     const myPercent = result.user_choice === 'A' ? result.percent_a : result.percent_b;
     const streakText = stats && stats.current_streak > 0 ? `\nStreak: ${stats.current_streak} days` : '';
@@ -152,6 +165,7 @@ export default function HomeScreen() {
   };
 
   const onRefresh = () => {
+    hapticSelection();
     setRefreshing(true);
     fetchDaily();
   };
@@ -173,6 +187,7 @@ export default function HomeScreen() {
         <Pressable
           className="mt-6 rounded-2xl bg-orange-600 px-8 py-3"
           onPress={() => { setLoading(true); fetchDaily(); }}
+          style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
         >
           <Text className="font-bold text-white">Try Again</Text>
         </Pressable>
@@ -189,8 +204,8 @@ export default function HomeScreen() {
         contentContainerStyle={{ flexGrow: 1, paddingBottom: 24 }}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#ea580c" />}
       >
-        {/* Header */}
-        <View className="bg-orange-600 px-6 pb-8 pt-16" style={{ borderBottomLeftRadius: 24, borderBottomRightRadius: 24 }}>
+        {/* Header with Gradient */}
+        <View className="bg-gradient-to-r from-orange-600 to-orange-500 px-6 pb-8 pt-16" style={{ borderBottomLeftRadius: 24, borderBottomRightRadius: 24 }}>
           <Text className="text-center text-3xl font-bold text-white">Would You Rather?</Text>
           <View className="mt-3 flex-row items-center justify-center gap-4">
             {stats && stats.current_streak > 0 && (
@@ -214,7 +229,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Streak Warning */}
+        {/* Streak Warning (Loss Aversion Pattern) */}
         {stats && stats.current_streak > 0 && !result && (
           <View className="mx-6 mt-4 flex-row items-center rounded-xl border border-yellow-700 bg-yellow-900/30 p-3">
             <Ionicons name="warning-outline" size={20} color="#ca8a04" />
@@ -224,7 +239,7 @@ export default function HomeScreen() {
           </View>
         )}
 
-        {/* Streak Milestone */}
+        {/* Streak Milestone (Gamified Retention) */}
         {stats && stats.current_streak > 0 && streakInfo && (
           <View className="mx-6 mt-4 rounded-2xl border border-gray-800 bg-gray-900 p-4">
             <View className="flex-row items-center justify-between">
@@ -247,7 +262,7 @@ export default function HomeScreen() {
                 </Text>
                 <View className="h-2 overflow-hidden rounded-full bg-gray-800">
                   <View
-                    className="h-full rounded-full bg-orange-500"
+                    className="h-full rounded-full bg-gradient-to-r from-orange-500 to-orange-400"
                     style={{
                       width: `${Math.min(100, ((stats.current_streak - streakInfo.threshold) / (streakInfo.nextThreshold - streakInfo.threshold)) * 100)}%`,
                     }}
@@ -272,7 +287,7 @@ export default function HomeScreen() {
 
             {/* Option A */}
             <Pressable
-              className="w-full rounded-2xl bg-blue-600 py-5"
+              className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 py-5"
               onPress={() => handleVote('A')}
               disabled={voting}
               style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1, transform: [{ scale: pressed ? 0.98 : 1 }] })}
@@ -294,7 +309,7 @@ export default function HomeScreen() {
 
             {/* Option B */}
             <Pressable
-              className="w-full rounded-2xl bg-red-600 py-5"
+              className="w-full rounded-2xl bg-gradient-to-r from-red-600 to-red-500 py-5"
               onPress={() => handleVote('B')}
               disabled={voting}
               style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1, transform: [{ scale: pressed ? 0.98 : 1 }] })}
@@ -326,7 +341,7 @@ export default function HomeScreen() {
               </View>
               <View className="mt-2 h-3 overflow-hidden rounded-full bg-gray-800">
                 <View
-                  className="h-full rounded-full bg-blue-500"
+                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
                   style={{ width: `${result.percent_a}%` }}
                 />
               </View>
@@ -345,7 +360,7 @@ export default function HomeScreen() {
               </View>
               <View className="mt-2 h-3 overflow-hidden rounded-full bg-gray-800">
                 <View
-                  className="h-full rounded-full bg-red-500"
+                  className="h-full rounded-full bg-gradient-to-r from-red-500 to-red-400"
                   style={{ width: `${result.percent_b}%` }}
                 />
               </View>
@@ -356,7 +371,7 @@ export default function HomeScreen() {
               )}
             </View>
 
-            {/* Total votes */}
+            {/* Total votes with Social Proof */}
             <View className="mt-4 flex-row items-center justify-center border-t border-gray-800 pt-4">
               <Ionicons name="people-outline" size={18} color="#9ca3af" />
               <Text className="ml-2 text-sm text-gray-400">{result.total_votes.toLocaleString()} people voted</Text>
@@ -364,7 +379,7 @@ export default function HomeScreen() {
 
             {/* Share Button */}
             <Pressable
-              className="mt-4 flex-row items-center justify-center gap-2 rounded-2xl bg-orange-600 py-4"
+              className="mt-4 flex-row items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 py-4"
               onPress={handleShare}
               style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
             >
@@ -388,7 +403,7 @@ export default function HomeScreen() {
           </View>
         )}
 
-        {/* Stats Footer */}
+        {/* Stats Footer with Enhanced Design */}
         {stats && (
           <View className="mx-6 mt-6 flex-row justify-around rounded-2xl bg-gray-900 p-4">
             <View className="flex-1 items-center">
@@ -410,6 +425,7 @@ export default function HomeScreen() {
         <Pressable
           className="mx-6 mt-6 flex-row items-center justify-center gap-2 rounded-2xl border-2 border-orange-800 py-4"
           onPress={() => router.push('/(protected)/explore' as any)}
+          style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
         >
           <Ionicons name="compass-outline" size={22} color="#ea580c" />
           <Text className="text-base font-semibold text-orange-500">Explore More Challenges</Text>

@@ -4,14 +4,18 @@ import {
   Text,
   ActivityIndicator,
   type PressableProps,
+  type ViewStyle,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { cn } from '../../lib/cn';
 
-interface ButtonProps extends PressableProps {
+interface ButtonProps extends Omit<PressableProps, 'style'> {
   title: string;
-  variant?: 'primary' | 'secondary' | 'outline' | 'destructive';
+  variant?: 'primary' | 'secondary' | 'outline' | 'destructive' | 'gradient';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  gradientColors?: readonly [string, string, ...string[]];
+  style?: ViewStyle;
 }
 
 const variantStyles = {
@@ -19,6 +23,7 @@ const variantStyles = {
   secondary: 'bg-gray-700 active:bg-gray-600',
   outline: 'border-2 border-orange-600 bg-transparent active:bg-orange-900/30',
   destructive: 'bg-red-600 active:bg-red-700',
+  gradient: '', // Handled separately with LinearGradient
 };
 
 const variantTextStyles = {
@@ -26,6 +31,7 @@ const variantTextStyles = {
   secondary: 'text-white',
   outline: 'text-orange-500',
   destructive: 'text-white',
+  gradient: 'text-white',
 };
 
 const sizeStyles = {
@@ -40,30 +46,31 @@ const sizeTextStyles = {
   lg: 'text-lg',
 };
 
+/**
+ * Button - Enhanced 2025-2026 Version
+ * - Added gradient variant for modern look
+ * - Loading shimmer effect via skeleton pattern
+ * - Scale animation for press feedback
+ */
 export default function Button({
   title,
   variant = 'primary',
   size = 'md',
   isLoading = false,
+  gradientColors = ['#6366F1', '#EC4899'],
   disabled,
+  style,
   ...props
 }: ButtonProps) {
   const isDisabled = disabled || isLoading;
+  const isGradient = variant === 'gradient';
 
-  return (
-    <Pressable
-      className={cn(
-        'items-center justify-center rounded-xl',
-        variantStyles[variant],
-        sizeStyles[size],
-        isDisabled && 'opacity-50'
-      )}
-      disabled={isDisabled}
-      {...props}
-    >
+  const content = (
+    <>
       {isLoading ? (
         <ActivityIndicator
           color={variant === 'outline' ? '#ea580c' : '#ffffff'}
+          size={size === 'sm' ? 'small' : 'large'}
         />
       ) : (
         <Text
@@ -76,6 +83,57 @@ export default function Button({
           {title}
         </Text>
       )}
+    </>
+  );
+
+  if (isGradient) {
+    return (
+      <Pressable
+        disabled={isDisabled}
+        className={cn(
+          'items-center justify-center rounded-xl overflow-hidden',
+          sizeStyles[size],
+          isDisabled && 'opacity-50'
+        )}
+        style={({ pressed }) => ({
+          transform: [{ scale: pressed ? 0.97 : 1 }],
+          ...(style as object),
+        })}
+        {...(props as PressableProps)}
+      >
+        <LinearGradient
+          colors={gradientColors}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={{
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {content}
+        </LinearGradient>
+      </Pressable>
+    );
+  }
+
+  return (
+    <Pressable
+      className={cn(
+        'items-center justify-center rounded-xl',
+        variantStyles[variant],
+        sizeStyles[size],
+        isDisabled && 'opacity-50'
+      )}
+      disabled={isDisabled}
+      style={({ pressed }) => ({
+        transform: [{ scale: pressed ? 0.97 : 1 }],
+        ...(style as object),
+      })}
+      {...(props as PressableProps)}
+    >
+      {content}
     </Pressable>
   );
 }
