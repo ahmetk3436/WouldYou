@@ -114,25 +114,25 @@
       "id": "enhance_010",
       "title": "Enhance history screen with trend indicators and filtering",
       "description": "The current history screen works but needs visual polish per SPEC: trend indicators, category filtering, and better empty/loading states.\n\nFile to modify: mobile/app/(protected)/history.tsx\n\nChanges:\n1. Header: Replace bg-orange-600 with LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24. Keep 'History' title and total votes badge.\n2. Each history item card (#1A1A2E rounded-2xl p-5 border border-white/10):\n- Add trend indicator: If user voted with majority (their percent \u003e 50%), show green up-arrow (Ionicons trending-up, #00D4AA). If minority, show #FF6B9D trending-down. Display as small badge top-right of card.\n- Category badge: Colored pill matching category (life=#FF6B9D, deep=#C44DFF, superpower=#FFE66D, funny=#00D4AA, love=#FF6B9D, tech=#0EA5E9).\n- User's choice highlighted with checkmark in matching choice color (#FF6B9D for A, #00D4AA for B).\n- Vote bars: Option A bar LinearGradient ['#FF6B9D','#C44DFF'], Option B bar LinearGradient ['#00D4AA','#00B894'].\n- Date shown as relative time ('2h ago', 'Yesterday', 'Feb 12').\n- Share button per item (share-outline icon).\n3. Empty state: Large Ionicons 'time-outline' 80px in #1A1A2E. 'No history yet' text-xl bold white. 'Start voting to see your choices here' text-sm text-gray-500. 'Play Now' button LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl navigating to home.\n4. Loading: Three skeleton placeholder cards using Animated opacity pulse (Reanimated withRepeat + withTiming). Skeleton cards: #1A1A2E rounded-2xl with lighter #2A2A4A animated bars.\n5. Pull-to-refresh: Already implemented, update tintColor to '#FF6B9D'.\n6. Add FlatList item separator: View h-2 for spacing instead of mb-4 on items.",
+      "status": "completed",
+      "priority": 7,
+      "depends_on": [],
+      "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-14T16:17:08Z"
+    },
+    {
+      "id": "enhance_011",
+      "title": "Redesign settings screen with grouped sections and SPEC colors",
+      "description": "Update settings to use SPEC color scheme with properly grouped sections, glassmorphism cards, and improved layout.\n\nFile to modify: mobile/app/(protected)/settings.tsx\n\nChanges:\n1. Header: LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24.\n2. Background: #0A0A12 instead of gray-950.\n3. Group cards: Each section (Account, Subscription, Security, About, Danger Zone) wrapped in View #1A1A2E rounded-2xl border border-white/10 overflow-hidden. Section headers: text-xs font-bold uppercase tracking-wider text-gray-500 px-4 pt-4 pb-2.\n4. Account section: User email with person-circle icon. If authenticated (not guest), show email. If guest, show 'Guest User' with 'Create Account' CTA button in #FF6B9D.\n5. Subscription section: If subscribed, show green badge 'Premium Active' with crown icon. If not, show 'Upgrade to Pro' with LinearGradient ['#FF6B9D','#C44DFF'] button navigating to paywall. Restore Purchases row with refresh-outline icon.\n6. Security section: Biometric toggle with Face ID/Touch ID label (already exists). Keep biometric logic.\n7. About section: Privacy Policy, Terms of Service (already exist). Add 'Rate WouldYou' row with star-outline icon. Add 'Share with Friends' row with share-outline icon that calls Share.share({message:'Check out WouldYou...'}). App version from Constants.expoConfig?.version at bottom in text-xs text-gray-600.\n8. Danger Zone section: Red tinted border: border-#FF5757/20. 'Delete Account' in #FF5757 with trash-outline icon. Confirmation modal: bg #1A1A2E, 'Are you sure?' text, password input (for authenticated users), two buttons: 'Cancel' (border gray-700) and 'Delete' (bg #FF5757).\n9. Sign Out button: Full width at bottom, border-2 border-#FF5757, text-#FF5757, rounded-2xl py-4.\n10. Replace all orange references with #FF6B9D or appropriate SPEC color.",
       "status": "in_progress",
       "priority": 7,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T16:08:13Z"
-    },
-    {
-      "id": "enhance_011",
-      "title": "Redesign settings screen with grouped sections and SPEC colors",
-      "description": "Update settings to use SPEC color scheme with properly grouped sections, glassmorphism cards, and improved layout.\n\nFile to modify: mobile/app/(protected)/settings.tsx\n\nChanges:\n1. Header: LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24.\n2. Background: #0A0A12 instead of gray-950.\n3. Group cards: Each section (Account, Subscription, Security, About, Danger Zone) wrapped in View #1A1A2E rounded-2xl border border-white/10 overflow-hidden. Section headers: text-xs font-bold uppercase tracking-wider text-gray-500 px-4 pt-4 pb-2.\n4. Account section: User email with person-circle icon. If authenticated (not guest), show email. If guest, show 'Guest User' with 'Create Account' CTA button in #FF6B9D.\n5. Subscription section: If subscribed, show green badge 'Premium Active' with crown icon. If not, show 'Upgrade to Pro' with LinearGradient ['#FF6B9D','#C44DFF'] button navigating to paywall. Restore Purchases row with refresh-outline icon.\n6. Security section: Biometric toggle with Face ID/Touch ID label (already exists). Keep biometric logic.\n7. About section: Privacy Policy, Terms of Service (already exist). Add 'Rate WouldYou' row with star-outline icon. Add 'Share with Friends' row with share-outline icon that calls Share.share({message:'Check out WouldYou...'}). App version from Constants.expoConfig?.version at bottom in text-xs text-gray-600.\n8. Danger Zone section: Red tinted border: border-#FF5757/20. 'Delete Account' in #FF5757 with trash-outline icon. Confirmation modal: bg #1A1A2E, 'Are you sure?' text, password input (for authenticated users), two buttons: 'Cancel' (border gray-700) and 'Delete' (bg #FF5757).\n9. Sign Out button: Full width at bottom, border-2 border-#FF5757, text-#FF5757, rounded-2xl py-4.\n10. Replace all orange references with #FF6B9D or appropriate SPEC color.",
-      "status": "pending",
-      "priority": 7,
-      "depends_on": [],
-      "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
-      "auto_commit": true,
-      "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T16:17:08Z"
     },
     {
       "id": "enhance_012",
