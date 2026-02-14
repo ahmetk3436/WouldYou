@@ -50,14 +50,14 @@ export default function PaywallScreen() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-950">
-        <ActivityIndicator size="large" color="#ea580c" />
+      <View className="flex-1 items-center justify-center" style={{ backgroundColor: '#0A0A12' }}>
+        <ActivityIndicator size="large" color="#FF6B9D" />
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-gray-950">
+    <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
       <ScrollView className="flex-1">
         {/* Header */}
         <View className="items-center px-6 pb-6 pt-16">
@@ -68,8 +68,8 @@ export default function PaywallScreen() {
           >
             <Ionicons name="close" size={28} color="#9ca3af" />
           </Pressable>
-          <View className="mb-4 h-16 w-16 items-center justify-center rounded-full bg-orange-900/40">
-            <Ionicons name="diamond-outline" size={32} color="#ea580c" />
+          <View className="mb-4 h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+            <Ionicons name="diamond-outline" size={32} color="#FF6B9D" />
           </View>
           <Text className="mb-2 text-3xl font-bold text-white">
             Upgrade to Premium
@@ -92,10 +92,10 @@ export default function PaywallScreen() {
         {offerings?.availablePackages.map((pkg: PurchasesPackage) => (
           <Pressable
             key={pkg.identifier}
-            className="mx-6 mb-4 flex-row items-center rounded-2xl border border-gray-700 bg-gray-900 p-5"
+            className="mx-6 mb-4 flex-row items-center rounded-2xl p-5"
+            style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}
             onPress={() => handlePackagePurchase(pkg)}
             disabled={purchasing === pkg.identifier}
-            style={({ pressed }) => ({ opacity: pressed || purchasing === pkg.identifier ? 0.7 : 1 })}
           >
             <View className="flex-1">
               <Text className="mb-1 text-lg font-semibold text-white">
@@ -104,22 +104,23 @@ export default function PaywallScreen() {
               <Text className="mb-2 text-sm text-gray-400">
                 {pkg.product.description}
               </Text>
-              <Text className="text-2xl font-bold text-orange-500">
+              <Text className="text-2xl font-bold" style={{ color: '#FF6B9D' }}>
                 {pkg.product.priceString}
               </Text>
             </View>
             {purchasing === pkg.identifier && (
-              <ActivityIndicator color="#ea580c" style={{ marginLeft: 16 }} />
+              <ActivityIndicator color="#FF6B9D" style={{ marginLeft: 16 }} />
             )}
           </Pressable>
         ))}
 
         {/* Restore */}
         <Pressable
-          className="mx-6 mt-2 items-center rounded-2xl border border-orange-700 p-4"
+          className="mx-6 mt-2 items-center rounded-2xl p-4"
+          style={{ borderWidth: 1, borderColor: 'rgba(255, 107, 157, 0.4)' }}
           onPress={handleRestorePurchases}
         >
-          <Text className="text-base font-semibold text-orange-500">
+          <Text className="text-base font-semibold" style={{ color: '#FF6B9D' }}>
             Restore Purchases
           </Text>
         </Pressable>
@@ -140,7 +141,7 @@ function Feature({ icon, text }: { icon: string; text: string }) {
       <Ionicons
         name={icon as keyof typeof Ionicons.glyphMap}
         size={22}
-        color="#22c55e"
+        color="#FF6B9D"
       />
       <Text className="ml-3 text-base text-gray-200">{text}</Text>
     </View>

@@ -2,17 +2,19 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, FlatList, ActivityIndicator, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../../lib/api';
 import { hapticSelection, hapticSuccess, hapticError } from '../../lib/haptics';
 import type { ChallengeResult } from '../../types/challenge';
 
 const categories = [
-  { id: 'life', label: 'Life', icon: 'heart-outline' as const, bgActive: 'bg-red-600', bgInactive: 'bg-gray-800' },
-  { id: 'deep', label: 'Deep', icon: 'moon-outline' as const, bgActive: 'bg-purple-600', bgInactive: 'bg-gray-800' },
-  { id: 'superpower', label: 'Superpowers', icon: 'flash-outline' as const, bgActive: 'bg-yellow-600', bgInactive: 'bg-gray-800' },
-  { id: 'funny', label: 'Funny', icon: 'happy-outline' as const, bgActive: 'bg-green-600', bgInactive: 'bg-gray-800' },
-  { id: 'love', label: 'Love', icon: 'heart-half-outline' as const, bgActive: 'bg-pink-600', bgInactive: 'bg-gray-800' },
-  { id: 'tech', label: 'Tech', icon: 'laptop-outline' as const, bgActive: 'bg-blue-600', bgInactive: 'bg-gray-800' },
+  { id: 'life', label: 'Life', icon: 'heart-outline' as const },
+  { id: 'deep', label: 'Deep', icon: 'moon-outline' as const },
+  { id: 'superpower', label: 'Superpowers', icon: 'flash-outline' as const },
+  { id: 'funny', label: 'Funny', icon: 'happy-outline' as const },
+  { id: 'love', label: 'Love', icon: 'heart-half-outline' as const },
+  { id: 'tech', label: 'Tech', icon: 'laptop-outline' as const },
 ];
 
 export default function ExploreScreen() {
@@ -62,11 +64,11 @@ export default function ExploreScreen() {
     const isVoting = votingId === item.challenge.id;
 
     return (
-      <View className="mx-4 mb-4 rounded-2xl border border-gray-800 bg-gray-900 p-5">
+      <View className="mx-4 mb-4 rounded-2xl p-5" style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}>
         {/* Category badge */}
         {item.challenge.category && (
-          <View className="mb-4 self-start rounded-full bg-orange-900/40 px-3 py-1">
-            <Text className="text-xs font-semibold uppercase text-orange-400">{item.challenge.category}</Text>
+          <View className="mb-4 self-start rounded-full px-3 py-1" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+            <Text className="text-xs font-semibold uppercase" style={{ color: '#FF6B9D' }}>{item.challenge.category}</Text>
           </View>
         )}
 
@@ -76,19 +78,19 @@ export default function ExploreScreen() {
             <View className="mb-3">
               <View className="flex-row items-center justify-between">
                 <Text className="flex-1 text-sm text-gray-200">{item.challenge.option_a}</Text>
-                <Text className="ml-2 font-bold text-blue-400">{item.percent_a}%</Text>
+                <Text className="ml-2 font-bold" style={{ color: '#FF6B9D' }}>{item.percent_a}%</Text>
               </View>
               <View className="mt-1 h-2 overflow-hidden rounded-full bg-gray-800">
-                <View className="h-full rounded-full bg-blue-500" style={{ width: `${item.percent_a}%` }} />
+                <View className="h-full rounded-full" style={{ backgroundColor: '#FF6B9D', width: `${item.percent_a}%` }} />
               </View>
             </View>
             <View>
               <View className="flex-row items-center justify-between">
                 <Text className="flex-1 text-sm text-gray-200">{item.challenge.option_b}</Text>
-                <Text className="ml-2 font-bold text-red-400">{item.percent_b}%</Text>
+                <Text className="ml-2 font-bold" style={{ color: '#00D4AA' }}>{item.percent_b}%</Text>
               </View>
               <View className="mt-1 h-2 overflow-hidden rounded-full bg-gray-800">
-                <View className="h-full rounded-full bg-red-500" style={{ width: `${item.percent_b}%` }} />
+                <View className="h-full rounded-full" style={{ backgroundColor: '#00D4AA', width: `${item.percent_b}%` }} />
               </View>
             </View>
             <Text className="mt-3 text-center text-xs text-gray-500">{item.total_votes} votes</Text>
@@ -97,10 +99,10 @@ export default function ExploreScreen() {
           // Voting view
           <View>
             <Pressable
-              className="mb-3 w-full rounded-xl bg-blue-600 py-3"
+              className="mb-3 w-full rounded-xl py-3"
+              style={{ backgroundColor: '#FF6B9D' }}
               onPress={() => handleVote(item.challenge.id, 'A')}
               disabled={isVoting}
-              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
             >
               <Text className="text-center text-sm font-bold text-white">{item.challenge.option_a}</Text>
             </Pressable>
@@ -108,16 +110,16 @@ export default function ExploreScreen() {
               <Text className="text-xs font-bold text-gray-600">OR</Text>
             </View>
             <Pressable
-              className="mt-2 w-full rounded-xl bg-red-600 py-3"
+              className="mt-2 w-full rounded-xl py-3"
+              style={{ backgroundColor: '#00D4AA' }}
               onPress={() => handleVote(item.challenge.id, 'B')}
               disabled={isVoting}
-              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
             >
               <Text className="text-center text-sm font-bold text-white">{item.challenge.option_b}</Text>
             </Pressable>
             {isVoting && (
               <View className="mt-3 items-center">
-                <ActivityIndicator size="small" color="#ea580c" />
+                <ActivityIndicator size="small" color="#FF6B9D" />
               </View>
             )}
           </View>
@@ -127,16 +129,24 @@ export default function ExploreScreen() {
   };
 
   return (
-    <View className="flex-1 bg-gray-950">
-      {/* Header */}
-      <View className="bg-orange-600 px-6 pb-6 pt-16">
-        <View className="flex-row items-center">
-          <Pressable onPress={() => router.back()} hitSlop={8}>
-            <Ionicons name="arrow-back" size={24} color="white" />
-          </Pressable>
-          <Text className="ml-3 text-3xl font-bold text-white">Explore</Text>
+    <SafeAreaView className="flex-1" style={{ backgroundColor: '#0A0A12' }} edges={['top']}>
+      {/* Gradient Header */}
+      <LinearGradient
+        colors={['#FF6B9D', '#C44DFF']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        className="mx-4 mt-4 rounded-2xl px-6 py-4"
+      >
+        <View className="flex-row items-center justify-between">
+          <View>
+            <Text className="text-2xl font-bold text-white">Explore</Text>
+            <Text className="mt-1 text-sm text-white/80">Discover trending questions</Text>
+          </View>
+          <View className="h-12 w-12 items-center justify-center rounded-full" style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}>
+            <Ionicons name="compass" size={24} color="#FFFFFF" />
+          </View>
         </View>
-      </View>
+      </LinearGradient>
 
       {/* Category selector */}
       <ScrollView
@@ -150,9 +160,8 @@ export default function ExploreScreen() {
           return (
             <Pressable
               key={cat.id}
-              className={`mr-2 flex-row items-center gap-1.5 rounded-full px-4 py-2 ${
-                isSelected ? 'bg-orange-600' : 'border border-gray-700 bg-gray-800'
-              }`}
+              className="mr-2 flex-row items-center gap-1.5 rounded-full px-4 py-2"
+              style={isSelected ? { backgroundColor: '#FF6B9D' } : { backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}
               onPress={() => loadCategory(cat.id)}
             >
               <Ionicons
@@ -171,7 +180,7 @@ export default function ExploreScreen() {
       {/* Content */}
       {!selectedCategory && (
         <View className="flex-1 items-center justify-center px-8">
-          <Ionicons name="compass-outline" size={64} color="#9a3412" />
+          <Ionicons name="compass-outline" size={64} color="#FF6B9D" />
           <Text className="mt-4 text-center text-lg font-semibold text-gray-300">
             Choose a category to explore
           </Text>
@@ -183,7 +192,7 @@ export default function ExploreScreen() {
 
       {selectedCategory && loading && (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#ea580c" />
+          <ActivityIndicator size="large" color="#FF6B9D" />
         </View>
       )}
 
@@ -205,6 +214,6 @@ export default function ExploreScreen() {
           contentContainerStyle={{ paddingTop: 16, paddingBottom: 32 }}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 }

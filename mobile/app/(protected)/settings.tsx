@@ -79,9 +79,9 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View className="flex-1 bg-gray-950">
+    <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
       {/* Header */}
-      <View className="bg-orange-600 px-6 pb-6 pt-16">
+      <View className="px-6 pb-6 pt-16" style={{ backgroundColor: '#FF6B9D' }}>
         <Text className="text-3xl font-bold text-white">Settings</Text>
       </View>
 
@@ -89,13 +89,14 @@ export default function SettingsScreen() {
         {/* Guest CTA */}
         {isGuest && (
           <Pressable
-            className="mx-4 mt-6 rounded-2xl bg-orange-600 p-4"
+            className="mx-4 mt-6 rounded-2xl p-4"
+            style={{ backgroundColor: '#FF6B9D' }}
             onPress={() => router.push('/(auth)/register')}
           >
             <View className="flex-row items-center justify-between">
               <View className="flex-1">
                 <Text className="text-base font-bold text-white">Create an Account</Text>
-                <Text className="mt-1 text-sm text-orange-200">
+                <Text className="mt-1 text-sm text-white/70">
                   Save your history and unlock unlimited plays
                 </Text>
               </View>
@@ -107,8 +108,8 @@ export default function SettingsScreen() {
         )}
 
         {/* Account Section */}
-        <View className="mx-4 mt-6 overflow-hidden rounded-2xl bg-gray-900">
-          <View className="border-b border-gray-800 px-4 py-3">
+        <View className="mx-4 mt-6 overflow-hidden rounded-2xl" style={{ backgroundColor: '#1A1A2E' }}>
+          <View className="px-4 py-3" style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}>
             <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">Account</Text>
           </View>
           <View className="flex-row items-center px-4 py-4">
@@ -120,17 +121,18 @@ export default function SettingsScreen() {
               </Text>
             </View>
           </View>
-          <View className="flex-row items-center border-t border-gray-800 px-4 py-4">
+          <View className="flex-row items-center px-4 py-4" style={{ borderTopWidth: 1, borderTopColor: '#2a2a3e' }}>
             <Ionicons name="diamond-outline" size={22} color="#6b7280" />
             <View className="ml-3 flex-1">
               <Text className="text-xs text-gray-500">Subscription</Text>
               {isSubscribed ? (
-                <Text className="text-base font-bold text-orange-500">Premium</Text>
+                <Text className="text-base font-bold" style={{ color: '#FF6B9D' }}>Premium</Text>
               ) : (
                 <View className="flex-row items-center">
                   <Text className="text-base font-medium text-white">Free Plan</Text>
                   <Pressable
-                    className="ml-3 rounded-full bg-orange-600 px-3 py-1"
+                    className="ml-3 rounded-full px-3 py-1"
+                    style={{ backgroundColor: '#FF6B9D' }}
                     onPress={() => router.push('/(protected)/paywall' as any)}
                   >
                     <Text className="text-xs font-semibold text-white">Upgrade</Text>
@@ -143,8 +145,8 @@ export default function SettingsScreen() {
 
         {/* Security Section */}
         {!isGuest && biometricType && (
-          <View className="mx-4 mt-4 overflow-hidden rounded-2xl bg-gray-900">
-            <View className="border-b border-gray-800 px-4 py-3">
+          <View className="mx-4 mt-4 overflow-hidden rounded-2xl" style={{ backgroundColor: '#1A1A2E' }}>
+            <View className="px-4 py-3" style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}>
               <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">Security</Text>
             </View>
             <View className="flex-row items-center justify-between px-4 py-4">
@@ -158,30 +160,31 @@ export default function SettingsScreen() {
               <Switch
                 value={biometricEnabled}
                 onValueChange={setBiometricEnabled}
-                trackColor={{ true: '#ea580c', false: '#374151' }}
+                trackColor={{ true: '#FF6B9D', false: '#374151' }}
               />
             </View>
           </View>
         )}
 
         {/* Purchases Section */}
-        <View className="mx-4 mt-4 overflow-hidden rounded-2xl bg-gray-900">
-          <View className="border-b border-gray-800 px-4 py-3">
+        <View className="mx-4 mt-4 overflow-hidden rounded-2xl" style={{ backgroundColor: '#1A1A2E' }}>
+          <View className="px-4 py-3" style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}>
             <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">Purchases</Text>
           </View>
           <Pressable className="flex-row items-center px-4 py-4" onPress={handleRestorePurchases}>
             <Ionicons name="refresh-outline" size={22} color="#6b7280" />
-            <Text className="ml-3 text-base font-medium text-orange-500">Restore Purchases</Text>
+            <Text className="ml-3 text-base font-medium" style={{ color: '#FF6B9D' }}>Restore Purchases</Text>
           </Pressable>
         </View>
 
         {/* About Section */}
-        <View className="mx-4 mt-4 overflow-hidden rounded-2xl bg-gray-900">
-          <View className="border-b border-gray-800 px-4 py-3">
+        <View className="mx-4 mt-4 overflow-hidden rounded-2xl" style={{ backgroundColor: '#1A1A2E' }}>
+          <View className="px-4 py-3" style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}>
             <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">About</Text>
           </View>
           <Pressable
-            className="flex-row items-center border-b border-gray-800 px-4 py-4"
+            className="flex-row items-center px-4 py-4"
+            style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}
             onPress={() => Linking.openURL('https://wouldyou.app/privacy')}
           >
             <Ionicons name="shield-checkmark-outline" size={22} color="#6b7280" />
@@ -189,7 +192,8 @@ export default function SettingsScreen() {
             <Ionicons name="chevron-forward" size={18} color="#6b7280" />
           </Pressable>
           <Pressable
-            className="flex-row items-center border-b border-gray-800 px-4 py-4"
+            className="flex-row items-center px-4 py-4"
+            style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}
             onPress={() => Linking.openURL('https://wouldyou.app/terms')}
           >
             <Ionicons name="document-text-outline" size={22} color="#6b7280" />
@@ -207,11 +211,12 @@ export default function SettingsScreen() {
 
         {/* Sign Out */}
         <Pressable
-          className="mx-4 mt-4 flex-row items-center justify-center gap-2 rounded-2xl bg-gray-900 py-4"
+          className="mx-4 mt-4 flex-row items-center justify-center gap-2 rounded-2xl py-4"
+          style={{ backgroundColor: '#1A1A2E' }}
           onPress={handleLogout}
         >
-          <Ionicons name="log-out-outline" size={20} color="#ea580c" />
-          <Text className="text-base font-semibold text-orange-500">
+          <Ionicons name="log-out-outline" size={20} color="#FF6B9D" />
+          <Text className="text-base font-semibold" style={{ color: '#FF6B9D' }}>
             {isGuest ? 'Exit Guest Mode' : 'Sign Out'}
           </Text>
         </Pressable>

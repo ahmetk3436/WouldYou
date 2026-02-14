@@ -1,0 +1,1962 @@
+{
+  "app_name": "WouldYou",
+  "tagline": "The party game that never runs out of questions",
+  "description": "WouldYou is a social party game featuring AI-generated Would You Rather questions with unlimited variety. Players see real-time global voting stats after each choice, creating viral 'wait, really?!' moments. Free to play with zero paywalls blocking access — premium unlocks themed packs and private friend lobbies.",
+  "target_audience": "College students and young adults (18-28) who play party games at gatherings, pregames, and hangouts. Values fun over polish, shares results on social media.",
+  "market_research": {
+    "niche": "Would You Rather Social Party Game",
+    "market_size_estimate": "TAM estimated at 50-100M+ globally based on combined download figures (one app alone claims 5M+ downloads, top competitor has 207K+ reviews which typically represents 1-5% of downloads). SAM for English-speaking markets estimated at 20-40M. Market is mature but fragmented with no dominant player.",
+    "pain_points": [
+      {
+        "description": "Aggressive subscription paywalls blocking app access entirely - users can't even open apps without starting a trial or paying",
+        "frequency": 8,
+        "severity": 9,
+        "source": "App Store Reviews",
+        "quotes": [
+          "Force subscription fee just to see the app... You can't see the app till you agree",
+          "Can't even open the app without starting a trial or paying",
+          "can't even do anything they charge"
+        ]
+      },
+      {
+        "description": "Hidden/unwanted subscription charges and billing issues - users being charged even after cancelling",
+        "frequency": 7,
+        "severity": 10,
+        "source": "App Store Reviews",
+        "quotes": [
+          "I bought it an immediately cancelled the subscription. It's been charging my twice a month, $4.95 each time",
+          "YOU CHARGED ME $30: I only wanted a free trial"
+        ]
+      },
+      {
+        "description": "Excessive ads disrupting gameplay experience",
+        "frequency": 6,
+        "severity": 6,
+        "source": "App Store Reviews",
+        "quotes": [
+          "ts game got to many ads vro",
+          "ts game is so ahh"
+        ]
+      },
+      {
+        "description": "App crashes and technical bugs making games unplayable",
+        "frequency": 5,
+        "severity": 8,
+        "source": "App Store Reviews",
+        "quotes": [
+          "Screen goes white and black. Will not let us play games!!!",
+          "Every three-five questions, when I enter the comments [it crashes]",
+          "Ever since the new update the game crashes a lot"
+        ]
+      },
+      {
+        "description": "Repetitive/boring questions lacking variety and humor compared to physical card versions",
+        "frequency": 5,
+        "severity": 5,
+        "source": "App Store Reviews",
+        "quotes": [
+          "Have played actual card version of this game. On line version is not fun or funny. Vanilla"
+        ]
+      },
+      {
+        "description": "Difficulty playing with friends - requires paid subscriptions for private lobbies",
+        "frequency": 4,
+        "severity": 7,
+        "source": "App Store Reviews",
+        "quotes": [
+          "You have to pay $10 a month to create a lobby with your friends. The only way to play with friends is through a public lobby"
+        ]
+      }
+    ],
+    "feature_requests": [
+      {
+        "name": "AI-Generated Questions",
+        "description": "Endless fresh questions generated on-the-fly instead of fixed question decks that become repetitive",
+        "demand_score": 8,
+        "source": "Reddit Developer Posts"
+      },
+      {
+        "name": "Truly Free Option",
+        "description": "100% free without ads or trackers, or at least reasonable one-time purchase instead of subscriptions",
+        "demand_score": 9,
+        "source": "App Store Reviews, Reddit"
+      },
+      {
+        "name": "Multiplayer with Friends",
+        "description": "Easy way to create private lobbies and play with specific friends without paywalls",
+        "demand_score": 8,
+        "source": "App Store Reviews"
+      },
+      {
+        "name": "Global Stats & Social Features",
+        "description": "See how others voted globally, comment on questions, track opinions",
+        "demand_score": 6,
+        "source": "Web Search Results"
+      },
+      {
+        "name": "Combined Party Games",
+        "description": "Multiple game types in one app (Would You Rather + Truth or Dare + Never Have I Ever)",
+        "demand_score": 7,
+        "source": "Reddit, Web Search"
+      }
+    ],
+    "competitors": [
+      {
+        "name": "What Would You Choose? Rather",
+        "rating": 4.6,
+        "review_count": 207976,
+        "price_model": "freemium",
+        "strengths": [
+          "Massive user base",
+          "High rating",
+          "Hundreds of hand-picked questions"
+        ],
+        "weaknesses": [
+          "Too many ads per user reviews",
+          "Removed access to paid version for long-time users"
+        ],
+        "missing_features": [
+          "Fresh/AI-generated questions",
+          "Ad-free affordable option"
+        ]
+      },
+      {
+        "name": "Party Roulette: Group games",
+        "rating": 4.6,
+        "review_count": 80378,
+        "price_model": "freemium",
+        "strengths": [
+          "Strong brand recognition",
+          "Good for drinking/party context",
+          "Fun without subscription possible"
+        ],
+        "weaknesses": [
+          "Billing issues reported",
+          "Aggressive subscription tactics"
+        ],
+        "missing_features": [
+          "Transparent pricing",
+          "Better billing management"
+        ]
+      },
+      {
+        "name": "Picolo · Party game",
+        "rating": 4.7,
+        "review_count": 44469,
+        "price_model": "freemium",
+        "strengths": [
+          "Highest rating",
+          "Team and solo play options",
+          "Wild/crazy questions"
+        ],
+        "weaknesses": [
+          "$4.99/week subscription considered 'ridiculous'",
+          "Billing complaints"
+        ],
+        "missing_features": [
+          "Reasonable pricing",
+          "One-time purchase option"
+        ]
+      },
+      {
+        "name": "Would You Rather? Adult",
+        "rating": 4.6,
+        "review_count": 18107,
+        "price_model": "freemium",
+        "strengths": [
+          "Good for adult parties",
+          "Similar to other party games"
+        ],
+        "weaknesses": [
+          "Generic offering",
+          "Subscription fatigue"
+        ],
+        "missing_features": [
+          "Unique differentiators"
+        ]
+      },
+      {
+        "name": "Bunch is MiniParty!",
+        "rating": 4.1,
+        "review_count": 13878,
+        "price_model": "freemium",
+        "strengths": [
+          "Cross-platform (phone/laptop)",
+          "Built-in chat",
+          "Multiple mini-games"
+        ],
+        "weaknesses": [
+          "Very buggy",
+          "Crashes frequently",
+          "$10/month for private lobbies"
+        ],
+        "missing_features": [
+          "Stability",
+          "Free friend lobbies"
+        ]
+      },
+      {
+        "name": "Would You Rather? Dirty Adult",
+        "rating": 4.6,
+        "review_count": 7322,
+        "price_model": "freemium",
+        "strengths": [
+          "Adult-focused niche",
+          "Party/college audience"
+        ],
+        "weaknesses": [
+          "Forced subscription to even open app",
+          "Less fun than card version"
+        ],
+        "missing_features": [
+          "Free trial access",
+          "Better question variety"
+        ]
+      },
+      {
+        "name": "Would You Rather? Viral Game",
+        "rating": 4.3,
+        "review_count": 1461,
+        "price_model": "freemium",
+        "strengths": [
+          "5M+ downloads claimed",
+          "Social network features",
+          "Comment on questions"
+        ],
+        "weaknesses": [
+          "Crashes every 3-5 questions",
+          "Smaller review base"
+        ],
+        "missing_features": [
+          "Stability improvements"
+        ]
+      }
+    ],
+    "market_sentiment": "negative",
+    "market_sentiment_score": 2.5,
+    "trends": [
+      "AI-generated questions for endless variety - developers actively shipping this in 2025",
+      "Subscription fatigue - users increasingly frustrated with weekly fees ($4.99-$10/week)",
+      "All-in-one party game apps combining WYR, Truth or Dare, Never Have I Ever",
+      "Social/viral features - global voting stats, comments, sharing",
+      "Indie developers releasing 100% free alternatives without ads/trackers"
+    ],
+    "monetization_insights": [
+      "Weekly subscriptions ($4.99-$10/week) are common but highly resented by users",
+      "Many apps force subscription screens before users can even try the app - high churn risk",
+      "Ad-supported free tier exists but users complain about ad frequency",
+      "One developer released 100% free app specifically to compete against paywalled alternatives",
+      "Billing/subscription management is a major pain point causing 1-star reviews",
+      "Long-time paying users report losing access to features they already paid for"
+    ],
+    "raw_data_summary": "Analyzed 8 competitor apps with combined 380K+ reviews and ratings ranging from 4.1-4.7 stars. Major themes from user reviews include frustration with forced subscriptions and billing issues (frequency 8/10), excessive ads, and app crashes. Reddit discussions reveal indie developers successfully differentiating with AI-generated questions and 100% free models. Market is crowded but vulnerable to disruption due to widespread user dissatisfaction with monetization practices."
+  },
+  "strategy": {
+    "niche": "Would You Rather Social Party Game",
+    "opportunities": [
+      {
+        "name": "WouldYou",
+        "tagline": "The party game that never runs out of questions",
+        "description": "WouldYou is a social party game featuring AI-generated Would You Rather questions with unlimited variety. Players see real-time global voting stats after each choice, creating viral 'wait, really?!' moments. Free to play with zero paywalls blocking access — premium unlocks themed packs and private friend lobbies.",
+        "target_audience": "College students and young adults (18-28) who play party games at gatherings, pregames, and hangouts. Values fun over polish, shares results on social media.",
+        "core_features": [
+          "AI-generated Would You Rather questions using GLM-5 API with category filters (funny, deep, spicy, gross)",
+          "Global voting stats revealed after each answer — see what percentage of players chose each option",
+          "Free private friend lobbies via shareable 6-digit room codes (no subscription required)",
+          "Swipe-based gameplay — swipe left or right to choose, with haptic feedback on selection",
+          "Daily viral question — one curated question per day shown to all users with global leaderboard",
+          "Share cards — auto-generated Instagram Story / TikTok-ready images showing your answer vs global stats",
+          "Streak system — consecutive daily plays unlock exclusive question categories",
+          "Offline mode with cached question packs for airplane/road trip play"
+        ],
+        "differentiator": "Only WYR app combining AI-generated infinite questions with free friend lobbies and viral share cards. Competitors either paywall multiplayer ($10/month) or have repetitive fixed question sets. WouldYou solves both problems simultaneously.",
+        "monetization": "Freemium with generous free tier. Free: unlimited AI questions, global stats, friend lobbies (up to 8 players), daily viral question. Premium ($2.99/month or $19.99/year): themed packs (NSFW, couples, family), lobbies up to 20 players, no ads, custom question creation. No weekly subscriptions — positioned as anti-subscription-fatigue.",
+        "feasibility": "moderate",
+        "estimated_dev_days": 10,
+        "risk_factors": [
+          "AI question quality may require significant prompt engineering and content moderation to avoid inappropriate/offensive outputs",
+          "Real-time multiplayer lobby management adds backend complexity (WebSocket or polling)",
+          "Content moderation for user-generated custom questions needed for App Store compliance (Guideline 1.2)",
+          "Crowded market requires strong ASO and viral mechanics to gain initial traction"
+        ],
+        "confidence_score": 0.85
+      },
+      {
+        "name": "PartyMix",
+        "tagline": "5 party games in one app — no subscriptions, no BS",
+        "description": "PartyMix combines Would You Rather, Truth or Dare, Never Have I Ever, Most Likely To, and Hot Takes into a single app with seamless game switching. Pass-and-play design means one phone serves the whole group. Positioned as the anti-subscription party app with a one-time purchase model.",
+        "target_audience": "Friend groups aged 20-35 who host game nights, house parties, and road trips. Frustrated by downloading 5 separate apps that each demand $5/week subscriptions.",
+        "core_features": [
+          "5 game modes: Would You Rather, Truth or Dare, Never Have I Ever, Most Likely To, Hot Takes (agree/disagree)",
+          "Pass-and-play mode — one phone, players tap their name when it's their turn, phone vibrates on pass",
+          "Category wheel — spin to randomly select game mode and difficulty level with satisfying animation",
+          "Player profiles with emoji avatars — tracks who dodged the most dares, who's most controversial",
+          "3 intensity levels per game: Clean (family), Spicy (friends), NSFW (21+ with age gate)",
+          "Custom question builder — add your own questions to any game mode",
+          "Session recap — shareable summary card showing funniest moments and player stats from the night"
+        ],
+        "differentiator": "Only all-in-one party game app with a one-time purchase model instead of subscriptions. Competitors charge $5-10/week for single-game apps. PartyMix offers 5 games for a single $4.99 lifetime purchase, directly attacking the #1 pain point in this market.",
+        "monetization": "Free tier with 50 questions per game mode (250 total). One-time purchase: $4.99 unlocks all 2000+ questions across all modes, all intensity levels, and custom question builder. Optional $0.99 themed expansion packs (Holiday, Date Night, Road Trip). Zero subscriptions — marketed explicitly as 'buy once, play forever'.",
+        "feasibility": "easy",
+        "estimated_dev_days": 7,
+        "risk_factors": [
+          "One-time purchase generates less recurring revenue than subscription competitors",
+          "Content creation for 2000+ quality questions across 5 game modes requires significant upfront work",
+          "NSFW content requires robust age-gating to satisfy App Store review (Guideline 1.1)",
+          "Pass-and-play limits social features compared to networked multiplayer competitors"
+        ],
+        "confidence_score": 0.82
+      },
+      {
+        "name": "DilemmaVote",
+        "tagline": "Vote on dilemmas. See how the world thinks.",
+        "description": "DilemmaVote turns Would You Rather into a social polling platform where every answer contributes to global statistics. Browse trending dilemmas, see demographic breakdowns (age, region), and debate in comments. Think Reddit polls meets Would You Rather with beautiful data visualization.",
+        "target_audience": "Social media-savvy users aged 16-30 who enjoy opinion-based content, personality quizzes, and viral polls on TikTok/Instagram. Engages solo users, not just party groups.",
+        "core_features": [
+          "Infinite scroll feed of dilemma cards — swipe to vote, tap to see results with animated bar charts",
+          "Demographic breakdowns after voting — see how your age group, country, and gender voted differently",
+          "Trending dilemmas board — algorithmically surfaced based on vote velocity and controversy score",
+          "Comment threads on each dilemma — debate your choice with other voters",
+          "Daily streak with notification — one featured dilemma per day, vote to maintain streak",
+          "Profile page showing your voting history, personality insights based on voting patterns",
+          "Submit your own dilemmas — community-sourced with upvote moderation queue"
+        ],
+        "differentiator": "Shifts WYR from a party game into a solo social experience like a casual Reddit or BuzzFeed quiz. No competitors combine polling with demographic data visualization and social commenting. Works alone (not just at parties), dramatically expanding the addressable market.",
+        "monetization": "Ad-supported free tier with interstitial ads every 15 votes. Premium ($1.99/month or $14.99/year): ad-free, detailed demographic analytics, priority dilemma submission, exclusive 'Controversial' feed showing most polarizing questions. Contextual paywall after user has voted 50+ times (value moment, not blocking access).",
+        "feasibility": "moderate",
+        "estimated_dev_days": 12,
+        "risk_factors": [
+          "Requires critical mass of users for meaningful demographic data — cold start problem",
+          "Comment moderation needed for UGC compliance (Guideline 1.2) — requires reporting and blocking systems",
+          "Demographic data collection must comply with privacy regulations and App Store privacy nutrition labels",
+          "Solo experience may lack the viral word-of-mouth that party games naturally generate",
+          "Higher backend complexity for real-time vote aggregation and demographic segmentation"
+        ],
+        "confidence_score": 0.72
+      }
+    ],
+    "selected_opportunity": {
+      "name": "WouldYou",
+      "tagline": "The party game that never runs out of questions",
+      "description": "WouldYou is a social party game featuring AI-generated Would You Rather questions with unlimited variety. Players see real-time global voting stats after each choice, creating viral 'wait, really?!' moments. Free to play with zero paywalls blocking access — premium unlocks themed packs and private friend lobbies.",
+      "target_audience": "College students and young adults (18-28) who play party games at gatherings, pregames, and hangouts. Values fun over polish, shares results on social media.",
+      "core_features": [
+        "AI-generated Would You Rather questions using GLM-5 API with category filters (funny, deep, spicy, gross)",
+        "Global voting stats revealed after each answer — see what percentage of players chose each option",
+        "Free private friend lobbies via shareable 6-digit room codes (no subscription required)",
+        "Swipe-based gameplay — swipe left or right to choose, with haptic feedback on selection",
+        "Daily viral question — one curated question per day shown to all users with global leaderboard",
+        "Share cards — auto-generated Instagram Story / TikTok-ready images showing your answer vs global stats",
+        "Streak system — consecutive daily plays unlock exclusive question categories",
+        "Offline mode with cached question packs for airplane/road trip play"
+      ],
+      "differentiator": "Only WYR app combining AI-generated infinite questions with free friend lobbies and viral share cards. Competitors either paywall multiplayer ($10/month) or have repetitive fixed question sets. WouldYou solves both problems simultaneously.",
+      "monetization": "Freemium with generous free tier. Free: unlimited AI questions, global stats, friend lobbies (up to 8 players), daily viral question. Premium ($2.99/month or $19.99/year): themed packs (NSFW, couples, family), lobbies up to 20 players, no ads, custom question creation. No weekly subscriptions — positioned as anti-subscription-fatigue.",
+      "feasibility": "moderate",
+      "estimated_dev_days": 10,
+      "risk_factors": [
+        "AI question quality may require significant prompt engineering and content moderation to avoid inappropriate/offensive outputs",
+        "Real-time multiplayer lobby management adds backend complexity (WebSocket or polling)",
+        "Content moderation for user-generated custom questions needed for App Store compliance (Guideline 1.2)",
+        "Crowded market requires strong ASO and viral mechanics to gain initial traction"
+      ],
+      "confidence_score": 0.85
+    },
+    "rejected_features": [
+      {
+        "feature": "Real-time video chat during multiplayer games",
+        "reason": "WebRTC in React Native is technically possible but extremely complex, unstable, and adds significant development time. Party games are played in-person or via existing video call apps — no need to rebuild FaceTime.",
+        "feasibility": "hard"
+      },
+      {
+        "feature": "AR-based question cards floating in room",
+        "reason": "ARKit integration through Expo is severely limited and would require ejecting from managed workflow. Adds novelty but no gameplay value. High crash risk.",
+        "feasibility": "impossible"
+      },
+      {
+        "feature": "Voice-controlled gameplay (answer by speaking)",
+        "reason": "Speech recognition in React Native requires native modules (expo-speech only does TTS, not STT). Noisy party environments would make voice input unreliable. Swipe/tap is faster and more reliable.",
+        "feasibility": "hard"
+      },
+      {
+        "feature": "Apple Watch companion app for buzzer/voting",
+        "reason": "WatchOS apps require native Swift development outside React Native/Expo ecosystem. Not feasible without significant native module work and separate Apple Watch app submission.",
+        "feasibility": "impossible"
+      },
+      {
+        "feature": "Widget showing daily question on home screen",
+        "reason": "WidgetKit requires native iOS module development. Expo does not support widgets in managed workflow. Would need to eject or use expo-dev-client with custom native code.",
+        "feasibility": "hard"
+      },
+      {
+        "feature": "Cross-platform desktop/web play",
+        "reason": "While React Native Web exists, maintaining feature parity across mobile and web for real-time multiplayer significantly increases development scope. Focus on mobile-first for MVP.",
+        "feasibility": "moderate"
+      }
+    ],
+    "market_positioning": "Position against the market's #1 pain point: subscription abuse. Every competitor charges $4.99-$10/week and blocks access behind paywalls — users are furious (sentiment score 2.5/5, frequency 8/10). The winning strategy is to lead with 'free to play, no BS' messaging. WouldYou captures the largest opportunity by combining AI-generated infinite content (solving repetition complaints) with free friend lobbies (solving the $10/month multiplayer paywall). PartyMix attacks the fragmentation problem — users download 5 apps and pay 5 subscriptions. DilemmaVote expands the market beyond parties into solo social engagement. All three apps should explicitly market against subscription fatigue in App Store descriptions and screenshots: 'No $5/week subscriptions. Ever.' This directly converts frustrated users searching for alternatives to current top apps."
+  },
+  "design_system": {
+    "colors": [
+      {
+        "name": "primary",
+        "hex": "#FF6B9D",
+        "usage": "Primary brand color, choice A indicators, active states, CTA buttons"
+      },
+      {
+        "name": "secondary",
+        "hex": "#00D4AA",
+        "usage": "Secondary brand color, choice B indicators, success states, positive stats"
+      },
+      {
+        "name": "accent",
+        "hex": "#FFE66D",
+        "usage": "Highlights, streak flames, daily badge, attention-grabbing elements"
+      },
+      {
+        "name": "background",
+        "hex": "#0A0A12",
+        "usage": "OLED-optimized deep background, main screen backdrop"
+      },
+      {
+        "name": "surface",
+        "hex": "#1A1A2E",
+        "usage": "Card backgrounds, elevated surfaces, glassmorphism base layer"
+      },
+      {
+        "name": "surface_glass",
+        "hex": "#2A2A4A",
+        "usage": "Glassmorphism overlay with 60% opacity for question cards"
+      },
+      {
+        "name": "text_primary",
+        "hex": "#FFFFFF",
+        "usage": "Main text on dark backgrounds, question text, headings"
+      },
+      {
+        "name": "text_secondary",
+        "hex": "#B8B8D0",
+        "usage": "Secondary text, descriptions, metadata, timestamps"
+      },
+      {
+        "name": "text_muted",
+        "hex": "#6B6B8A",
+        "usage": "Disabled states, placeholder text, less important info"
+      },
+      {
+        "name": "gradient_haze_start",
+        "hex": "#FF6B9D",
+        "usage": "AI gradient haze start - creates atmospheric background glow"
+      },
+      {
+        "name": "gradient_haze_mid",
+        "hex": "#C44DFF",
+        "usage": "AI gradient haze middle - purple transition for dreamy effect"
+      },
+      {
+        "name": "gradient_haze_end",
+        "hex": "#00D4AA",
+        "usage": "AI gradient haze end - teal for dynamic movement"
+      },
+      {
+        "name": "choice_a",
+        "hex": "#FF6B9D",
+        "usage": "Left swipe choice indicator, option A highlighting"
+      },
+      {
+        "name": "choice_b",
+        "hex": "#00D4AA",
+        "usage": "Right swipe choice indicator, option B highlighting"
+      },
+      {
+        "name": "streak_fire",
+        "hex": "#FF9F43",
+        "usage": "Streak counter accent, flame icon, engagement rewards"
+      },
+      {
+        "name": "error",
+        "hex": "#FF5757",
+        "usage": "Error states, connection issues, moderation flags"
+      },
+      {
+        "name": "overlay",
+        "hex": "#000000",
+        "usage": "Modal backdrop with 70% opacity for focus"
+      }
+    ],
+    "typography": [
+      {
+        "name": "question",
+        "font_size": 26,
+        "font_weight": "bold",
+        "line_height": 1.3
+      },
+      {
+        "name": "heading1",
+        "font_size": 28,
+        "font_weight": "bold",
+        "line_height": 1.2
+      },
+      {
+        "name": "heading2",
+        "font_size": 22,
+        "font_weight": "semibold",
+        "line_height": 1.3
+      },
+      {
+        "name": "heading3",
+        "font_size": 18,
+        "font_weight": "semibold",
+        "line_height": 1.4
+      },
+      {
+        "name": "body",
+        "font_size": 16,
+        "font_weight": "normal",
+        "line_height": 1.5
+      },
+      {
+        "name": "body_bold",
+        "font_size": 16,
+        "font_weight": "semibold",
+        "line_height": 1.5
+      },
+      {
+        "name": "stat_number",
+        "font_size": 48,
+        "font_weight": "bold",
+        "line_height": 1.0
+      },
+      {
+        "name": "stat_percent",
+        "font_size": 32,
+        "font_weight": "bold",
+        "line_height": 1.0
+      },
+      {
+        "name": "caption",
+        "font_size": 14,
+        "font_weight": "normal",
+        "line_height": 1.4
+      },
+      {
+        "name": "micro",
+        "font_size": 12,
+        "font_weight": "normal",
+        "line_height": 1.3
+      },
+      {
+        "name": "swipe_hint",
+        "font_size": 14,
+        "font_weight": "medium",
+        "line_height": 1.0
+      }
+    ],
+    "spacing": [
+      {
+        "name": "xs",
+        "value": 4
+      },
+      {
+        "name": "sm",
+        "value": 8
+      },
+      {
+        "name": "md",
+        "value": 16
+      },
+      {
+        "name": "lg",
+        "value": 24
+      },
+      {
+        "name": "xl",
+        "value": 32
+      },
+      {
+        "name": "2xl",
+        "value": 48
+      },
+      {
+        "name": "3xl",
+        "value": 64
+      },
+      {
+        "name": "touch_target",
+        "value": 44
+      }
+    ],
+    "components": [
+      {
+        "name": "question_card",
+        "border_radius": 24,
+        "padding": "p-6",
+        "shadow": "shadow-xl",
+        "notes": "Glassmorphism card with blur-20 bg-white/10 border border-white/20, displays WYR question with swipe gestures"
+      },
+      {
+        "name": "choice_button",
+        "border_radius": 16,
+        "padding": "p-4",
+        "shadow": "shadow-lg",
+        "notes": "44x44px min touch target, haptic feedback on press, scales to 0.95 on active state"
+      },
+      {
+        "name": "swipe_indicator",
+        "border_radius": 12,
+        "padding": "px-4 py-2",
+        "shadow": "",
+        "notes": "Left/right swipe hint overlays with choice_a/choice_b colors, fades during swipe"
+      },
+      {
+        "name": "stats_card",
+        "border_radius": 20,
+        "padding": "p-5",
+        "shadow": "shadow-md",
+        "notes": "Bento grid layout for voting percentages, animated number reveal with spring animation"
+      },
+      {
+        "name": "lobby_card",
+        "border_radius": 16,
+        "padding": "p-4",
+        "shadow": "shadow-md",
+        "notes": "Friend lobby item with 6-digit code display, player avatars in horizontal stack"
+      },
+      {
+        "name": "share_card",
+        "border_radius": 24,
+        "padding": "p-6",
+        "shadow": "shadow-2xl",
+        "notes": "Instagram Story format (1080x1920), gradient background, question + user choice + global stats"
+      },
+      {
+        "name": "category_pill",
+        "border_radius": 9999,
+        "padding": "px-4 py-2",
+        "shadow": "",
+        "notes": "Category filter chips (funny, deep, spicy, gross), active state with primary background"
+      },
+      {
+        "name": "streak_badge",
+        "border_radius": 12,
+        "padding": "px-3 py-1",
+        "shadow": "shadow-sm",
+        "notes": "Fire icon + streak number, accent background, pulse animation on increment"
+      },
+      {
+        "name": "daily_card",
+        "border_radius": 20,
+        "padding": "p-5",
+        "shadow": "shadow-xl",
+        "notes": "Featured daily viral question with gradient border accent and crown icon"
+      },
+      {
+        "name": "modal_sheet",
+        "border_radius": 28,
+        "padding": "p-6",
+        "shadow": "shadow-2xl",
+        "notes": "Bottom sheet modal with drag handle, glassmorphism background, slides up from bottom"
+      },
+      {
+        "name": "input_field",
+        "border_radius": 12,
+        "padding": "p-4",
+        "shadow": "",
+        "notes": "Custom question input, surface background with 1px border-white/10, 44px height"
+      },
+      {
+        "name": "avatar_stack",
+        "border_radius": 9999,
+        "padding": "",
+        "shadow": "",
+        "notes": "Overlapping player avatars -8px offset, ring border for current player turn"
+      }
+    ],
+    "overall_style": "Playful-Modern with AI Gradient Haze and OLED Deep Dark. Combines vibrant Gen Z energy with sophisticated glassmorphism. Bold typography for question readability, haptic-visual feedback loops, and bento-grid stat displays create shareable viral moments.",
+    "dark_mode_palette": [
+      {
+        "name": "background_light",
+        "hex": "#F8F7FC",
+        "usage": "Light mode main background"
+      },
+      {
+        "name": "surface_light",
+        "hex": "#FFFFFF",
+        "usage": "Light mode card surfaces"
+      },
+      {
+        "name": "text_primary_light",
+        "hex": "#1A1A2E",
+        "usage": "Light mode primary text"
+      },
+      {
+        "name": "text_secondary_light",
+        "hex": "#6B6B8A",
+        "usage": "Light mode secondary text"
+      },
+      {
+        "name": "gradient_light_start",
+        "hex": "#FFB8D0",
+        "usage": "Light mode gradient haze start - softer pink"
+      },
+      {
+        "name": "gradient_light_end",
+        "hex": "#B8FFF0",
+        "usage": "Light mode gradient haze end - softer teal"
+      }
+    ],
+    "nativewind_config": {
+      "theme": {
+        "extend": {
+          "colors": {
+            "primary": "#FF6B9D",
+            "secondary": "#00D4AA",
+            "accent": "#FFE66D",
+            "background": "#0A0A12",
+            "surface": "#1A1A2E",
+            "surface-glass": "#2A2A4A",
+            "text-primary": "#FFFFFF",
+            "text-secondary": "#B8B8D0",
+            "text-muted": "#6B6B8A",
+            "choice-a": "#FF6B9D",
+            "choice-b": "#00D4AA",
+            "streak-fire": "#FF9F43",
+            "error": "#FF5757"
+          },
+          "fontFamily": {
+            "display": [
+              "System",
+              "sans-serif"
+            ],
+            "body": [
+              "System",
+              "sans-serif"
+            ]
+          },
+          "borderRadius": {
+            "card": "24px",
+            "button": "16px",
+            "pill": "9999px",
+            "modal": "28px"
+          },
+          "boxShadow": {
+            "glass": "0 8px 32px rgba(0, 0, 0, 0.3)",
+            "glow-primary": "0 0 40px rgba(255, 107, 157, 0.3)",
+            "glow-secondary": "0 0 40px rgba(0, 212, 170, 0.3)"
+          },
+          "spacing": {
+            "touch": "44px"
+          },
+          "animation": {
+            "swipe-left": "swipeLeft 0.3s ease-out",
+            "swipe-right": "swipeRight 0.3s ease-out",
+            "reveal": "reveal 0.5s spring",
+            "pulse-glow": "pulseGlow 2s infinite",
+            "bounce-in": "bounceIn 0.4s spring"
+          },
+          "keyframes": {
+            "swipeLeft": {
+              "0%": {
+                "transform": "translateX(0) rotate(0deg)",
+                "opacity": "1"
+              },
+              "100%": {
+                "transform": "translateX(-150%) rotate(-20deg)",
+                "opacity": "0"
+              }
+            },
+            "swipeRight": {
+              "0%": {
+                "transform": "translateX(0) rotate(0deg)",
+                "opacity": "1"
+              },
+              "100%": {
+                "transform": "translateX(150%) rotate(20deg)",
+                "opacity": "0"
+              }
+            },
+            "reveal": {
+              "0%": {
+                "transform": "scale(0.8)",
+                "opacity": "0"
+              },
+              "100%": {
+                "transform": "scale(1)",
+                "opacity": "1"
+              }
+            },
+            "pulseGlow": {
+              "0%, 100%": {
+                "boxShadow": "0 0 20px rgba(255, 107, 157, 0.3)"
+              },
+              "50%": {
+                "boxShadow": "0 0 40px rgba(255, 107, 157, 0.6)"
+              }
+            },
+            "bounceIn": {
+              "0%": {
+                "transform": "scale(0.3)",
+                "opacity": "0"
+              },
+              "50%": {
+                "transform": "scale(1.05)"
+              },
+              "70%": {
+                "transform": "scale(0.9)"
+              },
+              "100%": {
+                "transform": "scale(1)",
+                "opacity": "1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "design_notes": [
+      "AI Gradient Haze: Animated gradient blobs (primary -> purple -> secondary) create atmospheric backgrounds that shift subtly during gameplay, reinforcing the AI-generated content theme",
+      "OLED Deep Dark: True black (#0A0A12) background saves battery on OLED screens and makes vibrant choice colors pop dramatically",
+      "Glassmorphism: Question cards use backdrop-blur with semi-transparent backgrounds, creating depth without losing readability",
+      "Bento Grid: Stats reveal uses asymmetric grid layout - large percentage number (60%) with smaller secondary stats arranged around it",
+      "Haptic-Visual Sync: Swipe animations are timed to match iOS/Android haptic feedback durations (100ms light impact), creating satisfying choice confirmation",
+      "Touch targets: All interactive elements exceed 44x44px minimum - swipe area covers full card, buttons use p-4 minimum padding",
+      "Color coding: Choice A (pink/left) vs Choice B (teal/right) creates instant visual recognition for swipe direction",
+      "Accessibility: All text on dark backgrounds meets WCAG AA contrast ratio (4.5:1 for body, 3:1 for large text)",
+      "Share cards use 9:16 aspect ratio optimized for Instagram Stories and TikTok, with gradient backgrounds matching app aesthetic",
+      "Streak system uses fire icon with warm orange (#FF9F43) distinct from primary/secondary to create reward differentiation"
+    ]
+  },
+  "ux_architecture": {
+    "screens": [
+      {
+        "name": "index",
+        "route": "app/index.tsx",
+        "description": "Smart router: checks AsyncStorage for onboarding completion, then auth state. Redirects to onboarding (first launch), guest-home (not logged in), or protected home (authenticated). No visible UI — just a full-screen spinner during redirect logic.",
+        "components": [
+          "ActivityIndicator",
+          "useEffect redirect logic"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "onboarding-welcome",
+        "route": "app/(auth)/onboarding.tsx",
+        "description": "Step 1: Full-screen gradient background (#6C5CE7 → #A855F7). Centered illustration of two cards being swiped. Headline: 'Would You Rather...?' in 32px bold white. Subtext: 'The party game that never runs out of questions' in 16px white/70%. Bottom: 'Get Started' pill button (#FFFFFF bg, #6C5CE7 text). Three dot indicators at bottom showing step 1/3. Swipe right to advance.",
+        "components": [
+          "LinearGradient",
+          "Animated.View (card illustration)",
+          "StepIndicator (3 dots)",
+          "PillButton"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "onboarding-features",
+        "route": "app/(auth)/onboarding.tsx",
+        "description": "Step 2 (same file, step state): Dark background (#1A1A2E). Three feature cards stacked vertically with icons: (1) Ionicons 'infinite-outline' + 'Endless AI Questions — Never play the same question twice' (2) Ionicons 'people-outline' + 'Free Friend Lobbies — No subscription, just a room code' (3) Ionicons 'share-social-outline' + 'Share Your Takes — Viral-ready cards for Stories & TikTok'. Cards have #2D2B55 background, 16px rounded corners, left icon 24px in #A855F7. Swipe right to advance.",
+        "components": [
+          "FeatureCard (icon + title + subtitle)",
+          "StepIndicator",
+          "LinearGradient"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "onboarding-cta",
+        "route": "app/(auth)/onboarding.tsx",
+        "description": "Step 3: Dark background (#1A1A2E). Centered large emoji 🎉. Headline: 'Ready to Play?' 28px bold white. Subtext: '3 free rounds — no account needed' 14px #ABABC0. Two buttons stacked: (1) 'Play as Guest' — outlined button, #A855F7 border, #A855F7 text, calls continueAsGuest() (2) 'Create Account' — filled #A855F7 button, white text, navigates to register. Below: 'Already have an account? Log in' text link in #ABABC0. Sets onboarding_complete in AsyncStorage.",
+        "components": [
+          "PillButton (filled)",
+          "PillButton (outlined)",
+          "TextLink"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "login",
+        "route": "app/(auth)/login.tsx",
+        "description": "Dark background (#1A1A2E). Top: 'Welcome Back' 28px bold white + 'Log in to continue your streak' 14px #ABABC0. Email input (#2D2B55 bg, #FFFFFF text, placeholder #6B6B8D) with Ionicons 'mail-outline'. Password input (same style) with Ionicons 'lock-closed-outline' and show/hide toggle. 'Forgot Password?' text link right-aligned #A855F7. 'Log In' full-width pill button #A855F7. Divider '— or —' in #6B6B8D. Apple Sign In button (ASAuthorizationButton). Bottom: 'Don\\'t have an account? Sign up' text link.",
+        "components": [
+          "TextInput (email)",
+          "TextInput (password)",
+          "PillButton",
+          "AppleSignInButton",
+          "TextLink"
+        ],
+        "api_calls": [
+          "POST /api/auth/login",
+          "POST /api/auth/apple"
+        ]
+      },
+      {
+        "name": "register",
+        "route": "app/(auth)/register.tsx",
+        "description": "Dark background (#1A1A2E). Top: 'Create Account' 28px bold white + 'Join 50K+ players worldwide' 14px #ABABC0. Email input, password input (with strength indicator bar — red/yellow/green), confirm password input. All inputs #2D2B55 bg. 'Create Account' pill button #A855F7. Divider. Apple Sign In button. Bottom: 'Already have an account? Log in' link. On success: auto-login + hapticSuccess() + confetti animation + redirect to protected home.",
+        "components": [
+          "TextInput (email)",
+          "TextInput (password)",
+          "TextInput (confirm)",
+          "PasswordStrengthBar",
+          "PillButton",
+          "AppleSignInButton",
+          "ConfettiAnimation"
+        ],
+        "api_calls": [
+          "POST /api/auth/register",
+          "POST /api/auth/apple"
+        ]
+      },
+      {
+        "name": "guest-home",
+        "route": "app/(auth)/guest-home.tsx",
+        "description": "Same layout as protected home but with a persistent top banner: 'Guest Mode — X of 3 free plays remaining' in #FFA502 bg, black text, with 'Sign Up Free' link. When guestUsageCount >= 3, tapping Play shows a bottom sheet soft paywall instead of starting game. The daily question card is always visible and playable (no guest limit). Room join is disabled for guests (shows 'Create account to play with friends' tooltip).",
+        "components": [
+          "GuestBanner",
+          "DailyQuestionCard",
+          "PlayButton",
+          "CategoryChips",
+          "SoftPaywallSheet"
+        ],
+        "api_calls": [
+          "GET /api/questions/daily"
+        ]
+      },
+      {
+        "name": "home",
+        "route": "app/(protected)/home.tsx",
+        "description": "Main hub. Dark background (#1A1A2E). Top bar: left — streak flame icon 🔥 + streak count in #FFA502, right — settings gear icon. Below: Daily Question Card — special gradient card (#6C5CE7 → #A855F7) with 'DAILY CHALLENGE' badge, question text 18px white, 'X,XXX players today' counter, tap to play. Main section: 'Quick Play' large pill button (#A855F7, full width) with Ionicons 'play-outline'. Below: horizontal scroll of category filter chips (All, Funny 😂, Deep 🧠, Spicy 🌶️, Gross 🤢) — each is a rounded pill, selected = #A855F7 fill, unselected = #2D2B55 outline. Below: 'Play with Friends' button (#2D2B55 bg, #A855F7 text) with Ionicons 'people-outline'. Bottom: stats row — 'X questions answered' | 'X day streak' | 'Top X%'.",
+        "components": [
+          "StreakBadge",
+          "DailyQuestionCard",
+          "PillButton (Quick Play)",
+          "CategoryChipScroll",
+          "PillButton (Friends)",
+          "StatsRow",
+          "CustomTabBar"
+        ],
+        "api_calls": [
+          "GET /api/questions/daily",
+          "GET /api/users/me/stats",
+          "GET /api/streaks/current"
+        ]
+      },
+      {
+        "name": "gameplay",
+        "route": "app/(protected)/gameplay.tsx",
+        "description": "Full-screen swipe-based question card. Dark background (#0D0D1A). Center: large card (90% width, 60% height, 24px rounded, #2D2B55 bg) with gradient top border. Card content: 'Would You Rather...' 14px #A855F7 top label. Option A text (18px bold white) on top half. Divider line with 'OR' circle badge (#A855F7). Option B text (18px bold white) on bottom half. Swipe left = Option A (card tilts left, left edge glows #FF6B6B). Swipe right = Option B (card tilts right, right edge glows #4ECDC4). Haptic impact (medium) on swipe threshold. On release past threshold: hapticSuccess(), card flies off screen, results overlay appears. Top right: question counter 'X/10'. Top left: category badge. Bottom: 'Skip' text button #6B6B8D. Receives category and mode (solo/daily/room) as route params.",
+        "components": [
+          "SwipeableCard (PanGestureHandler + Animated.View)",
+          "OptionText (A)",
+          "DividerWithBadge",
+          "OptionText (B)",
+          "QuestionCounter",
+          "CategoryBadge",
+          "SkipButton"
+        ],
+        "api_calls": [
+          "GET /api/questions?category={cat}&count=10",
+          "POST /api/answers"
+        ]
+      },
+      {
+        "name": "results",
+        "route": "app/(protected)/results.tsx",
+        "description": "Appears as overlay/modal after answering. Dark background (#1A1A2E). Top: 'You chose...' 14px #ABABC0. Your answer highlighted in large text with checkmark ✓ and your choice color (#4ECDC4 or #FF6B6B). Global stats reveal animation: two horizontal bars animate from 0% to actual percentage. Option A bar in #FF6B6B, Option B bar in #4ECDC4. Percentage labels at bar ends. 'X,XXX votes' total counter. Majority badge: 'You\\'re with the majority! 🎉' or 'Bold choice! Only X% agree 🦄' in a card. Two action buttons: (1) 'Share This' — #A855F7 pill, opens share card generator (2) 'Next Question' — outlined pill. After 10 questions: summary screen replaces Next button with 'See Your Results' leading to round-summary.",
+        "components": [
+          "AnswerHighlight",
+          "AnimatedPercentageBar (A)",
+          "AnimatedPercentageBar (B)",
+          "VoteCounter",
+          "MajorityBadge",
+          "ShareButton",
+          "NextButton"
+        ],
+        "api_calls": [
+          "GET /api/questions/{id}/stats"
+        ]
+      },
+      {
+        "name": "round-summary",
+        "route": "app/(protected)/round-summary.tsx",
+        "description": "After completing 10 questions. Dark bg (#1A1A2E). Top: '🎉 Round Complete!' 28px bold white. Stats card (#2D2B55 bg, 16px rounded): 'You agreed with the majority X/10 times'. Personality badge based on answers: 'Crowd Pleaser' (>7 majority), 'Wild Card' (4-6), 'Rebel' (<4) — each with unique gradient and emoji. Streak update: '+1 Day 🔥' with flame animation if streak continued. Below: 'Your Boldest Take' — the question where you were most in the minority, with percentage. Share button: 'Share Round Results' generates a branded card. Two bottom buttons: 'Play Again' (#A855F7) and 'Home' (outlined).",
+        "components": [
+          "RoundStatsCard",
+          "PersonalityBadge",
+          "StreakAnimation",
+          "BoldestTakeCard",
+          "ShareRoundButton",
+          "PillButton (Play Again)",
+          "PillButton (Home)"
+        ],
+        "api_calls": [
+          "POST /api/rounds/complete",
+          "GET /api/streaks/current"
+        ]
+      },
+      {
+        "name": "share-card",
+        "route": "app/(protected)/share-card.tsx",
+        "description": "Modal screen. Generates a 1080x1920 share-ready image. Dark gradient background (#1A1A2E → #2D2B55). Top: WouldYou logo + 'wouldyou.app' watermark. Center: the question text in 24px bold white. Two option blocks showing 'Option A — XX%' and 'Option B — XX%' with your choice highlighted (glowing border). Your answer has a 'MY PICK ▸' label. Bottom: 'Play now — Download WouldYou' CTA text. Preview of the card shown at 60% scale. Below preview: share target row — Instagram Stories, TikTok, Copy Link, Save Image, More — each as a circular icon button. Uses ViewShot to capture the card as an image. Expo Sharing API to share.",
+        "components": [
+          "ViewShot (card capture)",
+          "ShareCardPreview",
+          "ShareTargetRow (Instagram, TikTok, Copy, Save, More)",
+          "WatermarkLogo"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "friends-lobby",
+        "route": "app/(protected)/friends-lobby.tsx",
+        "description": "Dark bg (#1A1A2E). Two sections: CREATE and JOIN. Create section: 'Host a Room' card (#2D2B55, 16px rounded). 'Choose Categories' — multi-select chips (same as home). 'Number of Questions' — stepper (5/10/15/20). 'Create Room' pill button #A855F7. Generates 6-digit room code. Join section: 'Join a Room' card. 6-digit code input — 6 individual square inputs (#2D2B55 bg) that auto-advance, large monospace font. 'Join' pill button. Paste button (clipboard icon) auto-fills code. On successful join: navigate to waiting-room.",
+        "components": [
+          "CreateRoomCard",
+          "CategoryChipMultiSelect",
+          "QuestionCountStepper",
+          "PillButton (Create)",
+          "JoinRoomCard",
+          "CodeInput (6 digits)",
+          "PillButton (Join)",
+          "PasteButton"
+        ],
+        "api_calls": [
+          "POST /api/rooms",
+          "POST /api/rooms/join"
+        ]
+      },
+      {
+        "name": "waiting-room",
+        "route": "app/(protected)/waiting-room.tsx",
+        "description": "Dark bg (#1A1A2E). Top: Room code displayed large (48px, monospace, #A855F7, letter-spaced) with copy button. 'Share Code' button opens native share sheet with message 'Join my WouldYou room! Code: XXXXXX'. Player list: circular avatars (or initials in colored circles) with usernames, host has crown 👑 badge. Animated dots for 'Waiting for players...' when < 2. Settings (host only): category and question count shown, editable. Bottom: Host sees 'Start Game' pill button (enabled when 2+ players). Non-host sees 'Waiting for host to start...' disabled state. Leave button (top left, 'x' icon) with confirmation alert.",
+        "components": [
+          "RoomCodeDisplay",
+          "ShareCodeButton",
+          "PlayerList",
+          "HostBadge",
+          "RoomSettings (host)",
+          "StartGameButton (host)",
+          "WaitingLabel (non-host)",
+          "LeaveButton"
+        ],
+        "api_calls": [
+          "GET /api/rooms/{code}",
+          "POST /api/rooms/{code}/start",
+          "DELETE /api/rooms/{code}/leave"
+        ]
+      },
+      {
+        "name": "multiplayer-gameplay",
+        "route": "app/(protected)/multiplayer-gameplay.tsx",
+        "description": "Same swipe UI as solo gameplay but with multiplayer additions. Top: player avatars in a row — each shows a checkmark when they have answered, spinning indicator while deciding. Timer: 30-second countdown bar below avatars (#A855F7 → #FF6B6B as time runs low). After all answer (or timer expires): results show with per-player breakdown — who chose what. 'X/Y chose Option A' with avatar stack. Haptic notification when all players answered. Same card swipe mechanics. After final question: multiplayer summary screen.",
+        "components": [
+          "PlayerAvatarRow (with status)",
+          "CountdownBar",
+          "SwipeableCard",
+          "MultiplayerResultOverlay",
+          "PlayerChoiceBreakdown"
+        ],
+        "api_calls": [
+          "GET /api/rooms/{code}/question",
+          "POST /api/rooms/{code}/answer",
+          "GET /api/rooms/{code}/results"
+        ]
+      },
+      {
+        "name": "multiplayer-summary",
+        "route": "app/(protected)/multiplayer-summary.tsx",
+        "description": "Dark bg (#1A1A2E). '🏆 Game Over!' 28px bold white. Podium-style ranking: 1st/2nd/3rd with avatar, username, and 'agreed with group X times' metric. Gold/Silver/Bronze colored accents (#FFD700, #C0C0C0, #CD7F32). 'Most Controversial Player' award — the person who was in the minority most often. 'Most Basic Player' award — agreed with majority every time. Share button generates group results card. 'Rematch' button creates new room with same players. 'Home' button.",
+        "components": [
+          "PodiumRanking",
+          "AwardCard (Controversial)",
+          "AwardCard (Basic)",
+          "ShareGroupButton",
+          "PillButton (Rematch)",
+          "PillButton (Home)"
+        ],
+        "api_calls": [
+          "GET /api/rooms/{code}/summary",
+          "POST /api/rooms"
+        ]
+      },
+      {
+        "name": "daily-challenge",
+        "route": "app/(protected)/daily-challenge.tsx",
+        "description": "Special gameplay for the daily question. Dark bg with unique daily gradient (#FF6B6B → #FFA502 top glow). 'DAILY CHALLENGE' badge with calendar date. Single question displayed large (22px, bold white). Same swipe mechanics. After answering: expanded results view with global leaderboard — 'X,XXX,XXX votes today'. Animated world map dots or globe icon showing participation. Your rank: 'You and XX% chose the same'. Historical section: 'Yesterday\\'s Daily' showing last daily with final stats. Countdown timer to next daily question. Share card auto-generated with daily branding.",
+        "components": [
+          "DailyBadge",
+          "DateDisplay",
+          "SwipeableCard",
+          "GlobalStatsReveal",
+          "WorldParticipation",
+          "YesterdayDailyCard",
+          "CountdownToNext",
+          "ShareDailyButton"
+        ],
+        "api_calls": [
+          "GET /api/questions/daily",
+          "POST /api/questions/daily/answer",
+          "GET /api/questions/daily/stats",
+          "GET /api/questions/daily/yesterday"
+        ]
+      },
+      {
+        "name": "profile",
+        "route": "app/(protected)/profile.tsx",
+        "description": "Dark bg (#1A1A2E). Top: circular avatar (from Apple ID or generated initials, 80px, #2D2B55 bg). Username 22px bold white. Member since date 12px #ABABC0. Streak section: large flame 🔥 with current streak count, 'Longest: X days', calendar heatmap showing last 30 days of activity (green = played, dark = missed, today = #A855F7 ring). Stats grid (2x2, #2D2B55 cards): 'Questions Answered' (number), 'Majority Agrees' (percentage), 'Categories Played' (X/4), 'Friends Played' (count). Personality section: dominant personality badge (Crowd Pleaser/Wild Card/Rebel) with description. Below: 'Unlocked Categories' — shows locked/unlocked category icons based on streak milestones (7-day = Deep+, 14-day = Spicy+, 30-day = Extreme). Bottom: 'Share Profile' button.",
+        "components": [
+          "AvatarCircle",
+          "UsernameDisplay",
+          "StreakDisplay",
+          "CalendarHeatmap",
+          "StatsGrid (2x2)",
+          "PersonalityBadge",
+          "UnlockedCategories",
+          "ShareProfileButton"
+        ],
+        "api_calls": [
+          "GET /api/users/me",
+          "GET /api/users/me/stats",
+          "GET /api/streaks/current",
+          "GET /api/streaks/history"
+        ]
+      },
+      {
+        "name": "settings",
+        "route": "app/(protected)/settings.tsx",
+        "description": "Dark bg (#1A1A2E). Scrollable list of grouped settings. Account section (#2D2B55 cards): Edit Profile (chevron), Change Password (chevron), Linked Accounts (Apple badge if linked). Preferences section: Haptic Feedback toggle (default on), Sound Effects toggle (default on), Offline Mode — 'Download Question Packs' with download progress bar, Dark Mode label showing 'Always On' (app is dark-only). Notifications section: Daily Challenge Reminder toggle, Streak Reminder toggle, Friend Invites toggle. Support section: Rate WouldYou, Share with Friends, Privacy Policy, Terms of Service. Danger zone: 'Restore Purchases' button (#A855F7 text), 'Delete Account' button (#FF6B6B text) — opens confirmation modal with password input. App version at very bottom in #6B6B8D 12px. Logout button at bottom (#FF6B6B outlined pill).",
+        "components": [
+          "SettingsGroup",
+          "SettingsRow (chevron)",
+          "SettingsToggle",
+          "DownloadPackButton",
+          "ProgressBar",
+          "DeleteAccountModal",
+          "PillButton (Logout)",
+          "VersionLabel"
+        ],
+        "api_calls": [
+          "PUT /api/users/me",
+          "DELETE /api/auth/account",
+          "POST /api/auth/logout",
+          "GET /api/packs/available",
+          "GET /api/packs/download"
+        ]
+      },
+      {
+        "name": "offline-packs",
+        "route": "app/(protected)/offline-packs.tsx",
+        "description": "Dark bg (#1A1A2E). 'Question Packs' 24px bold white. Grid of pack cards (2 columns). Each card: category emoji icon, pack name ('Road Trip Mix', 'Party Starter', 'Deep Conversations', 'Spicy Edition'), question count ('50 questions'), size ('~200KB'). Downloaded packs show green checkmark overlay. Not downloaded show download cloud icon. Tap to download — shows progress ring animation around the card. Long press on downloaded pack: 'Delete Pack' option. Top: total downloaded counter 'X packs (X questions) saved offline'. Banner: 'Pro packs' section for premium users (locked with crown icon for free users).",
+        "components": [
+          "PackGrid",
+          "PackCard (emoji, name, count, size, status)",
+          "DownloadProgressRing",
+          "TotalDownloadedCounter",
+          "ProPacksBanner"
+        ],
+        "api_calls": [
+          "GET /api/packs/available",
+          "GET /api/packs/{id}/questions"
+        ]
+      },
+      {
+        "name": "paywall",
+        "route": "app/(protected)/paywall.tsx",
+        "description": "Modal presentation (slide up). Gradient background (#1A1A2E → #2D2B55). Top: 'WouldYou Pro' 28px bold white with crown 👑 emoji. Feature list with checkmarks (#A855F7): 'Unlimited plays' , 'Exclusive question categories (Extreme, Philosophical)', 'Ad-free experience', 'Custom room themes', 'Priority access to new packs', 'Profile badge & frame'. Pricing cards (horizontal scroll, snap): Weekly $2.99/wk, Monthly $4.99/mo (POPULAR badge in #FFA502), Annual $39.99/yr (BEST VALUE badge in #22C55E showing '$0.77/week'). Selected card has #A855F7 border glow. 'Continue' button fills with selected plan. Fine print: 'Cancel anytime. Restore purchases.' links. Close X button top right.",
+        "components": [
+          "LinearGradient",
+          "FeatureCheckList",
+          "PricingCardScroll (Weekly/Monthly/Annual)",
+          "PopularBadge",
+          "BestValueBadge",
+          "ContinueButton",
+          "RestorePurchasesLink",
+          "CloseButton"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "layout-root",
+        "route": "app/_layout.tsx",
+        "description": "Root layout. Wraps entire app in AuthProvider and SubscriptionProvider. Sets StatusBar to light-content. Uses Slot (NOT Stack or Tabs) for NativeWind v4 compatibility. Loads custom fonts if needed. Sets background to #0D0D1A.",
+        "components": [
+          "AuthProvider",
+          "SubscriptionProvider",
+          "StatusBar (light-content)",
+          "Slot"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "layout-auth",
+        "route": "app/(auth)/_layout.tsx",
+        "description": "Auth group layout. Simple Slot wrapper. No tab bar. No auth guard — these screens are accessible without login.",
+        "components": [
+          "Slot"
+        ],
+        "api_calls": []
+      },
+      {
+        "name": "layout-protected",
+        "route": "app/(protected)/_layout.tsx",
+        "description": "Protected group layout. Auth guard: if !isAuthenticated && !isGuest, redirect to login. Custom tab bar at bottom with 4 items using Pressable components (NOT Tabs navigator). Tab bar bg: #1A1A2E with top border #2D2B55. Active tab icon color: #A855F7, inactive: #6B6B8D. Uses Slot for content area above tab bar.",
+        "components": [
+          "AuthGuard",
+          "Slot",
+          "CustomTabBar (4 Pressable items)"
+        ],
+        "api_calls": []
+      }
+    ],
+    "flows": [
+      {
+        "name": "first-launch",
+        "steps": [
+          "index",
+          "onboarding-welcome",
+          "onboarding-features",
+          "onboarding-cta"
+        ],
+        "description": "First app open. index.tsx detects no onboarding_complete in AsyncStorage → redirects to onboarding step 1. User swipes through 3 steps. On step 3, chooses 'Play as Guest' (→ guest-home) or 'Create Account' (→ register → home)."
+      },
+      {
+        "name": "guest-flow",
+        "steps": [
+          "guest-home",
+          "gameplay",
+          "results",
+          "round-summary"
+        ],
+        "description": "Guest user taps Quick Play on guest-home. Plays through 10 questions with swipe mechanic. Sees global results after each. After round summary, guestUsageCount increments. After 3 rounds, gameplay is blocked and SoftPaywallSheet appears suggesting signup. Daily question is always accessible regardless of guest limit."
+      },
+      {
+        "name": "authentication",
+        "steps": [
+          "login",
+          "home"
+        ],
+        "description": "User enters email/password or taps Apple Sign In. On success: JWT stored in SecureStore, AuthContext updates, redirects to protected home. Failed login shows inline error with shake animation."
+      },
+      {
+        "name": "registration",
+        "steps": [
+          "register",
+          "home"
+        ],
+        "description": "User fills email, password, confirm password. On success: auto-login (JWT stored), confetti animation, hapticSuccess(), redirect to protected home."
+      },
+      {
+        "name": "solo-play",
+        "steps": [
+          "home",
+          "gameplay",
+          "results",
+          "round-summary",
+          "share-card"
+        ],
+        "description": "From home: user selects category chips (or All) → taps Quick Play. Navigated to gameplay with category param. Swipes through 10 questions. After each: results overlay with global stats + share option. After 10th: round-summary with personality badge, streak update, share option. Optional: share-card modal for social media sharing."
+      },
+      {
+        "name": "daily-challenge",
+        "steps": [
+          "home",
+          "daily-challenge",
+          "share-card"
+        ],
+        "description": "User taps Daily Question Card on home. Navigated to daily-challenge screen. One question with special daily UI. After answering: global stats with total vote count, historical comparison, countdown to next daily. Share card auto-generated with daily branding."
+      },
+      {
+        "name": "multiplayer",
+        "steps": [
+          "home",
+          "friends-lobby",
+          "waiting-room",
+          "multiplayer-gameplay",
+          "multiplayer-summary"
+        ],
+        "description": "From home: tap 'Play with Friends'. Choose Create (set categories, question count → get room code → share) or Join (enter 6-digit code). Both land in waiting-room. Host starts when 2+ players. Multiplayer gameplay with timers and per-player status. Ends with podium ranking and awards."
+      },
+      {
+        "name": "settings-flow",
+        "steps": [
+          "home",
+          "settings",
+          "offline-packs"
+        ],
+        "description": "User taps gear icon on home → settings. Can navigate to offline-packs for downloading question packs. Can delete account (confirmation modal + password), logout, toggle preferences."
+      },
+      {
+        "name": "streak-engagement",
+        "steps": [
+          "home",
+          "gameplay",
+          "results",
+          "round-summary"
+        ],
+        "description": "Daily streak mechanic. User plays at least one round per day to maintain streak. Streak count shown on home (flame icon). After round-summary, streak increments with animation. Milestones: 7 days = unlock Deep+ category, 14 days = unlock Spicy+, 30 days = unlock Extreme. Missed day = streak resets to 0 with sympathetic message."
+      },
+      {
+        "name": "paywall-upgrade",
+        "steps": [
+          "paywall"
+        ],
+        "description": "Triggered from: guest soft paywall, locked categories, pro packs, or settings. Modal slides up. User selects pricing tier. RevenueCat handles purchase. On success: SubscriptionContext updates, modal dismisses, hapticSuccess(), pro badge appears on profile."
+      }
+    ],
+    "navigation_type": "custom-tabs",
+    "tab_bar_items": [
+      {
+        "label": "Play",
+        "icon": "game-controller-outline",
+        "activeIcon": "game-controller",
+        "route": "home",
+        "activeColor": "#A855F7",
+        "inactiveColor": "#6B6B8D"
+      },
+      {
+        "label": "Daily",
+        "icon": "today-outline",
+        "activeIcon": "today",
+        "route": "daily-challenge",
+        "activeColor": "#FFA502",
+        "inactiveColor": "#6B6B8D"
+      },
+      {
+        "label": "Friends",
+        "icon": "people-outline",
+        "activeIcon": "people",
+        "route": "friends-lobby",
+        "activeColor": "#4ECDC4",
+        "inactiveColor": "#6B6B8D"
+      },
+      {
+        "label": "Profile",
+        "icon": "person-outline",
+        "activeIcon": "person",
+        "route": "profile",
+        "activeColor": "#A855F7",
+        "inactiveColor": "#6B6B8D"
+      }
+    ],
+    "mermaid_diagram": "graph TD\n    A[App Launch - index.tsx] --> B{First Launch?}\n    B -->|Yes| C[Onboarding 3 Steps]\n    B -->|No| D{Authenticated?}\n    C --> E{Guest or Signup?}\n    E -->|Guest| F[Guest Home]\n    E -->|Signup| G[Register]\n    G --> H[Protected Home]\n    D -->|Yes| H\n    D -->|No - Guest| F\n    D -->|No - Not Guest| I[Login]\n    I --> H\n    F --> J{Guest Limit?}\n    J -->|< 3 plays| K[Gameplay - Swipe Cards]\n    J -->|>= 3 plays| L[Soft Paywall Sheet]\n    L --> G\n    H --> K\n    H --> M[Daily Challenge]\n    H --> N[Friends Lobby]\n    H --> O[Profile]\n    H --> P[Settings]\n    K --> Q[Results - Global Stats]\n    Q --> R[Next Question]\n    R --> K\n    Q --> S[Share Card]\n    Q --> T{10th Question?}\n    T -->|Yes| U[Round Summary]\n    U --> V[Personality Badge + Streak]\n    V --> S\n    V --> H\n    M --> Q\n    N --> W{Create or Join?}\n    W -->|Create| X[Set Categories + Create Room]\n    W -->|Join| Y[Enter 6-Digit Code]\n    X --> Z[Waiting Room]\n    Y --> Z\n    Z --> AA[Multiplayer Gameplay]\n    AA --> AB[Per-Player Results]\n    AB --> AC{More Questions?}\n    AC -->|Yes| AA\n    AC -->|No| AD[Multiplayer Summary + Podium]\n    AD --> H\n    P --> AE[Offline Packs]\n    P --> AF[Delete Account]\n    P --> AG[Logout]\n    AG --> I\n    O --> AH[Stats + Heatmap]\n    O --> AI[Unlocked Categories]\n    H --> AJ[Paywall Modal]\n    AJ --> AK[RevenueCat Purchase]\n    AK --> H"
+  },
+  "backend_spec": {
+    "models": [
+      {
+        "name": "User",
+        "table": "users",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "Email": "string;uniqueIndex;not null",
+          "PasswordHash": "string",
+          "AppleUserID": "string;uniqueIndex",
+          "DisplayName": "string;size:50",
+          "AvatarURL": "string",
+          "IsPremium": "bool;default:false",
+          "PremiumExpiresAt": "*time.Time",
+          "CurrentStreak": "int;default:0",
+          "LongestStreak": "int;default:0",
+          "LastPlayedAt": "*time.Time",
+          "TotalAnswered": "int;default:0",
+          "UnlockedCategories": "text;default:'[\"funny\",\"deep\"]'",
+          "IsGuest": "bool;default:false",
+          "GuestUsageCount": "int;default:0",
+          "CreatedAt": "time.Time",
+          "UpdatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        }
+      },
+      {
+        "name": "RefreshToken",
+        "table": "refresh_tokens",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "UserID": "uuid;index;not null",
+          "Token": "string;uniqueIndex;not null",
+          "ExpiresAt": "time.Time;not null",
+          "Revoked": "bool;default:false",
+          "CreatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "relations": {
+          "User": "belongsTo User"
+        }
+      },
+      {
+        "name": "Question",
+        "table": "questions",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "OptionA": "text;not null",
+          "OptionB": "text;not null",
+          "Category": "string;size:20;index;not null",
+          "Difficulty": "string;size:10;default:'medium'",
+          "Source": "string;size:10;default:'ai'",
+          "IsDaily": "bool;default:false",
+          "DailyDate": "*time.Time;uniqueIndex",
+          "VotesA": "int;default:0",
+          "VotesB": "int;default:0",
+          "TotalVotes": "int;default:0",
+          "IsFlagged": "bool;default:false",
+          "CreatedAt": "time.Time",
+          "UpdatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "notes": "Category enum: funny, deep, spicy, gross, holiday, extreme, celebrity, survival. Source enum: ai, curated, community."
+      },
+      {
+        "name": "Answer",
+        "table": "answers",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "UserID": "uuid;index;not null",
+          "QuestionID": "uuid;index;not null",
+          "Choice": "string;size:1;not null",
+          "LobbyID": "*uuid",
+          "CreatedAt": "time.Time"
+        },
+        "relations": {
+          "User": "belongsTo User",
+          "Question": "belongsTo Question",
+          "Lobby": "belongsTo Lobby"
+        },
+        "indexes": [
+          "uniqueIndex:idx_user_question ON (UserID, QuestionID)"
+        ],
+        "notes": "Choice is 'A' or 'B'. One answer per user per question."
+      },
+      {
+        "name": "Lobby",
+        "table": "lobbies",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "Code": "string;size:6;uniqueIndex;not null",
+          "HostUserID": "uuid;index;not null",
+          "Status": "string;size:20;default:'waiting'",
+          "Category": "string;size:20;default:'funny'",
+          "MaxPlayers": "int;default:8",
+          "CurrentQuestionID": "*uuid",
+          "QuestionIndex": "int;default:0",
+          "TotalQuestions": "int;default:10",
+          "ExpiresAt": "time.Time;not null",
+          "CreatedAt": "time.Time",
+          "UpdatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "relations": {
+          "HostUser": "belongsTo User",
+          "Players": "hasMany LobbyPlayer",
+          "CurrentQuestion": "belongsTo Question"
+        },
+        "notes": "Status enum: waiting, playing, finished, expired. Code is 6-digit alphanumeric uppercase. ExpiresAt set to 4 hours from creation."
+      },
+      {
+        "name": "LobbyPlayer",
+        "table": "lobby_players",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "LobbyID": "uuid;index;not null",
+          "UserID": "uuid;index;not null",
+          "IsReady": "bool;default:false",
+          "Score": "int;default:0",
+          "JoinedAt": "time.Time",
+          "LeftAt": "*time.Time"
+        },
+        "relations": {
+          "Lobby": "belongsTo Lobby",
+          "User": "belongsTo User"
+        },
+        "indexes": [
+          "uniqueIndex:idx_lobby_user ON (LobbyID, UserID)"
+        ]
+      },
+      {
+        "name": "DailyStreak",
+        "table": "daily_streaks",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "UserID": "uuid;index;not null",
+          "Date": "time.Time;not null",
+          "QuestionsAnswered": "int;default:0",
+          "DailyCompleted": "bool;default:false",
+          "CreatedAt": "time.Time"
+        },
+        "relations": {
+          "User": "belongsTo User"
+        },
+        "indexes": [
+          "uniqueIndex:idx_user_date ON (UserID, Date)"
+        ]
+      },
+      {
+        "name": "QuestionPack",
+        "table": "question_packs",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "Name": "string;size:100;not null",
+          "Description": "text",
+          "Category": "string;size:20;not null",
+          "QuestionCount": "int;default:0",
+          "IsPremium": "bool;default:false",
+          "Version": "int;default:1",
+          "CreatedAt": "time.Time",
+          "UpdatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "notes": "Pre-built question packs for offline mode. Version increments when pack is updated so clients can sync."
+      },
+      {
+        "name": "QuestionPackItem",
+        "table": "question_pack_items",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "PackID": "uuid;index;not null",
+          "QuestionID": "uuid;index;not null",
+          "SortOrder": "int;default:0"
+        },
+        "relations": {
+          "Pack": "belongsTo QuestionPack",
+          "Question": "belongsTo Question"
+        }
+      },
+      {
+        "name": "ShareEvent",
+        "table": "share_events",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "UserID": "uuid;index;not null",
+          "QuestionID": "uuid;index;not null",
+          "Platform": "string;size:20;not null",
+          "CreatedAt": "time.Time"
+        },
+        "relations": {
+          "User": "belongsTo User",
+          "Question": "belongsTo Question"
+        },
+        "notes": "Platform enum: instagram_story, tiktok, twitter, copy_link, other. Used for analytics and viral tracking."
+      },
+      {
+        "name": "Subscription",
+        "table": "subscriptions",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "UserID": "uuid;index;not null",
+          "RevenueCatID": "string;uniqueIndex",
+          "ProductID": "string;size:50",
+          "Status": "string;size:20;default:'active'",
+          "ExpiresAt": "*time.Time",
+          "CreatedAt": "time.Time",
+          "UpdatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "relations": {
+          "User": "belongsTo User"
+        },
+        "notes": "Status enum: active, expired, cancelled, billing_retry. Synced via RevenueCat webhooks."
+      },
+      {
+        "name": "Report",
+        "table": "reports",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "ReporterID": "uuid;index;not null",
+          "TargetType": "string;size:20;not null",
+          "TargetID": "uuid;not null",
+          "Reason": "string;size:50;not null",
+          "Details": "text",
+          "Status": "string;size:20;default:'pending'",
+          "ResolvedBy": "*uuid",
+          "ResolvedAt": "*time.Time",
+          "CreatedAt": "time.Time",
+          "UpdatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "relations": {
+          "Reporter": "belongsTo User"
+        },
+        "notes": "TargetType: question, user, lobby. Reason: inappropriate, offensive, spam, harassment, other."
+      },
+      {
+        "name": "Block",
+        "table": "blocks",
+        "fields": {
+          "ID": "uuid;default:gen_random_uuid();primaryKey",
+          "BlockerID": "uuid;index;not null",
+          "BlockedID": "uuid;index;not null",
+          "CreatedAt": "time.Time",
+          "DeletedAt": "gorm.DeletedAt;index"
+        },
+        "relations": {
+          "Blocker": "belongsTo User",
+          "Blocked": "belongsTo User"
+        },
+        "indexes": [
+          "uniqueIndex:idx_blocker_blocked ON (BlockerID, BlockedID)"
+        ]
+      }
+    ],
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/health",
+        "description": "Health check — returns server status, DB connectivity, and current time. Response: {\"status\": \"ok\", \"database\": \"connected\", \"timestamp\": \"2026-02-14T12:00:00Z\", \"version\": \"1.0.0\"}",
+        "auth_required": false,
+        "request_body": null,
+        "response_body": null
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/register",
+        "description": "Register with email and password. Creates user, hashes password with bcrypt, returns JWT access (15min) + refresh (7d) tokens.",
+        "auth_required": false,
+        "request_body": "{\"email\": \"string\", \"password\": \"string\", \"display_name\": \"string\"}",
+        "response_body": "{\"user\": {\"id\": \"uuid\", \"email\": \"string\", \"display_name\": \"string\"}, \"access_token\": \"string\", \"refresh_token\": \"string\", \"expires_in\": 900}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/login",
+        "description": "Login with email and password. Validates credentials, returns JWT tokens.",
+        "auth_required": false,
+        "request_body": "{\"email\": \"string\", \"password\": \"string\"}",
+        "response_body": "{\"user\": {\"id\": \"uuid\", \"email\": \"string\", \"display_name\": \"string\", \"is_premium\": false, \"current_streak\": 0}, \"access_token\": \"string\", \"refresh_token\": \"string\", \"expires_in\": 900}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/apple",
+        "description": "Sign in with Apple. Validates identity token, creates or retrieves user by apple_user_id, returns JWT tokens. Required for App Store guideline 4.8.",
+        "auth_required": false,
+        "request_body": "{\"identity_token\": \"string\", \"authorization_code\": \"string\", \"full_name\": \"string|null\"}",
+        "response_body": "{\"user\": {\"id\": \"uuid\", \"email\": \"string\", \"display_name\": \"string\"}, \"access_token\": \"string\", \"refresh_token\": \"string\", \"expires_in\": 900}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/refresh",
+        "description": "Refresh access token using refresh token. Implements token rotation — old refresh token is revoked, new pair issued.",
+        "auth_required": false,
+        "request_body": "{\"refresh_token\": \"string\"}",
+        "response_body": "{\"access_token\": \"string\", \"refresh_token\": \"string\", \"expires_in\": 900}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/logout",
+        "description": "Logout — revokes the refresh token.",
+        "auth_required": true,
+        "request_body": "{\"refresh_token\": \"string\"}",
+        "response_body": "{\"message\": \"logged out\"}"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/auth/account",
+        "description": "Delete user account permanently. Revokes all tokens, soft-deletes user and associated data. Required for App Store guideline 5.1.1.",
+        "auth_required": true,
+        "request_body": "{\"password\": \"string\"}",
+        "response_body": "{\"message\": \"account deleted\"}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/questions/feed",
+        "description": "Get a batch of questions for solo play. Returns 10 questions the user hasn't answered yet, filtered by category. Includes global vote percentages for already-answered questions. Query params: ?category=funny&limit=10",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"questions\": [{\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\", \"category\": \"string\", \"total_votes\": 1500}], \"remaining\": 42}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/questions/answer",
+        "description": "Submit an answer to a question. Records the choice, increments vote counters atomically, updates user streak. Returns global vote stats revealed after answering.",
+        "auth_required": true,
+        "request_body": "{\"question_id\": \"uuid\", \"choice\": \"A|B\"}",
+        "response_body": "{\"vote_stats\": {\"votes_a\": 892, \"votes_b\": 608, \"percent_a\": 59.5, \"percent_b\": 40.5, \"total_votes\": 1500}, \"streak\": {\"current\": 7, \"unlocked_category\": \"extreme|null\"}}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/questions/generate",
+        "description": "Generate new AI questions using GLM-5 API. Called by the server internally or by admin. Generates batch of 20 questions for a given category. Admin only.",
+        "auth_required": true,
+        "request_body": "{\"category\": \"string\", \"count\": 20, \"difficulty\": \"easy|medium|hard\"}",
+        "response_body": "{\"generated\": 20, \"questions\": [{\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\", \"category\": \"string\"}]}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/questions/daily",
+        "description": "Get today's daily viral question. Returns the curated question of the day with current global stats. If user already answered, includes their choice and full stats.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"question\": {\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\", \"category\": \"string\", \"total_votes\": 45200}, \"user_answer\": \"A|B|null\", \"vote_stats\": {\"votes_a\": 28000, \"votes_b\": 17200, \"percent_a\": 61.9, \"percent_b\": 38.1}, \"leaderboard\": [{\"rank\": 1, \"display_name\": \"string\", \"choice\": \"A\", \"answered_at\": \"2026-02-14T08:00:00Z\"}]}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/questions/daily/leaderboard",
+        "description": "Get daily question leaderboard — users ranked by earliest answer time. Shows top 100. Query params: ?date=2026-02-14",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"date\": \"2026-02-14\", \"question_id\": \"uuid\", \"leaderboard\": [{\"rank\": 1, \"user_id\": \"uuid\", \"display_name\": \"string\", \"choice\": \"A\", \"answered_at\": \"2026-02-14T06:12:00Z\"}], \"total_participants\": 45200, \"user_rank\": 342}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/lobbies",
+        "description": "Create a new private lobby. Generates a unique 6-digit alphanumeric code. Host is automatically added as first player. Lobby expires after 4 hours.",
+        "auth_required": true,
+        "request_body": "{\"category\": \"funny|deep|spicy|gross\", \"total_questions\": 10, \"max_players\": 8}",
+        "response_body": "{\"lobby\": {\"id\": \"uuid\", \"code\": \"ABC123\", \"status\": \"waiting\", \"category\": \"funny\", \"total_questions\": 10, \"max_players\": 8, \"players\": [{\"user_id\": \"uuid\", \"display_name\": \"string\", \"is_ready\": false}]}, \"expires_at\": \"2026-02-14T16:00:00Z\"}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/lobbies/join",
+        "description": "Join an existing lobby using the 6-digit room code. Validates lobby exists, isn't full, and is in 'waiting' status.",
+        "auth_required": true,
+        "request_body": "{\"code\": \"ABC123\"}",
+        "response_body": "{\"lobby\": {\"id\": \"uuid\", \"code\": \"ABC123\", \"status\": \"waiting\", \"category\": \"funny\", \"host_user_id\": \"uuid\", \"players\": [{\"user_id\": \"uuid\", \"display_name\": \"string\", \"is_ready\": false}]}, \"player_count\": 3, \"max_players\": 8}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/lobbies/:id",
+        "description": "Get lobby state — current players, current question, scores. Used for polling lobby status.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"lobby\": {\"id\": \"uuid\", \"code\": \"ABC123\", \"status\": \"waiting|playing|finished\", \"category\": \"funny\", \"question_index\": 3, \"total_questions\": 10, \"current_question\": {\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\"}, \"players\": [{\"user_id\": \"uuid\", \"display_name\": \"string\", \"is_ready\": true, \"score\": 5, \"has_answered_current\": false}]}}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/lobbies/:id/ready",
+        "description": "Toggle ready status in lobby. When all players are ready, host can start the game.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"is_ready\": true, \"all_ready\": false, \"ready_count\": 2, \"total_players\": 4}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/lobbies/:id/start",
+        "description": "Host starts the game. Fetches questions for the lobby category, sets status to 'playing', assigns first question. Only the host can call this.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"status\": \"playing\", \"current_question\": {\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\", \"question_index\": 1, \"total_questions\": 10}}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/lobbies/:id/answer",
+        "description": "Submit answer in lobby context. When all players have answered the current question, auto-advance to next question and reveal stats. If last question, set lobby status to 'finished'.",
+        "auth_required": true,
+        "request_body": "{\"question_id\": \"uuid\", \"choice\": \"A|B\"}",
+        "response_body": "{\"recorded\": true, \"all_answered\": false, \"waiting_for\": 2, \"results\": null}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/lobbies/:id/results",
+        "description": "Get final results for a finished lobby game. Shows scores, per-question breakdown, and winner.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"status\": \"finished\", \"winner\": {\"user_id\": \"uuid\", \"display_name\": \"string\", \"score\": 8}, \"players\": [{\"user_id\": \"uuid\", \"display_name\": \"string\", \"score\": 8, \"rank\": 1}], \"questions\": [{\"question_id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\", \"lobby_votes_a\": 3, \"lobby_votes_b\": 1, \"global_percent_a\": 61.5}]}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/lobbies/:id/leave",
+        "description": "Leave an active lobby. If host leaves, ownership transfers to next player. If last player leaves, lobby is closed.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"left\": true, \"lobby_closed\": false, \"new_host_id\": \"uuid|null\"}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/streaks/me",
+        "description": "Get current user's streak info — current streak count, longest streak, unlocked categories, and next unlock milestone.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"current_streak\": 7, \"longest_streak\": 14, \"last_played_at\": \"2026-02-13T20:00:00Z\", \"unlocked_categories\": [\"funny\", \"deep\", \"spicy\"], \"next_unlock\": {\"category\": \"extreme\", \"days_required\": 14, \"days_remaining\": 7}, \"milestones\": [{\"days\": 3, \"reward\": \"spicy\", \"achieved\": true}, {\"days\": 7, \"reward\": \"gross\", \"achieved\": true}, {\"days\": 14, \"reward\": \"extreme\", \"achieved\": false}, {\"days\": 30, \"reward\": \"celebrity\", \"achieved\": false}]}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/streaks/history",
+        "description": "Get streak calendar — daily play history for the current month. Used to render a calendar heatmap. Query params: ?month=2026-02&year=2026",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"month\": \"2026-02\", \"days\": [{\"date\": \"2026-02-01\", \"questions_answered\": 12, \"daily_completed\": true}, {\"date\": \"2026-02-02\", \"questions_answered\": 0, \"daily_completed\": false}]}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/packs",
+        "description": "List available question packs for offline download. Returns pack metadata with version numbers so client can check for updates.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"packs\": [{\"id\": \"uuid\", \"name\": \"Road Trip Classics\", \"description\": \"50 funny questions perfect for long drives\", \"category\": \"funny\", \"question_count\": 50, \"is_premium\": false, \"version\": 3}]}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/packs/:id/download",
+        "description": "Download a full question pack for offline play. Returns all questions in the pack. Client caches locally with version number.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"pack_id\": \"uuid\", \"name\": \"Road Trip Classics\", \"version\": 3, \"questions\": [{\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\", \"category\": \"funny\"}]}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/packs/:id/sync",
+        "description": "Sync offline answers back to server. Client sends cached answers made while offline. Server records votes, updates streaks, deduplicates by (user_id, question_id).",
+        "auth_required": true,
+        "request_body": "{\"answers\": [{\"question_id\": \"uuid\", \"choice\": \"A|B\", \"answered_at\": \"2026-02-14T12:00:00Z\"}]}",
+        "response_body": "{\"synced\": 15, \"duplicates_skipped\": 2, \"streak_updated\": true, \"current_streak\": 8}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/share",
+        "description": "Generate a shareable card image data. Returns a pre-rendered share card URL showing the user's answer vs global stats, formatted for Instagram Stories (1080x1920) or TikTok. Also records the share event for analytics.",
+        "auth_required": true,
+        "request_body": "{\"question_id\": \"uuid\", \"platform\": \"instagram_story|tiktok|twitter|copy_link\"}",
+        "response_body": "{\"share_url\": \"https://wouldyou.app/share/abc123\", \"image_url\": \"https://cdn.wouldyou.app/cards/abc123.png\", \"card_data\": {\"option_a\": \"string\", \"option_b\": \"string\", \"user_choice\": \"A\", \"percent_a\": 61.5, \"percent_b\": 38.5, \"total_votes\": 15000}}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/share/:code",
+        "description": "Public endpoint — view a shared question card by share code. Returns question, stats, and app download CTA. No auth required (viral entry point).",
+        "auth_required": false,
+        "request_body": null,
+        "response_body": "{\"question\": {\"option_a\": \"string\", \"option_b\": \"string\", \"category\": \"funny\"}, \"stats\": {\"percent_a\": 61.5, \"percent_b\": 38.5, \"total_votes\": 15000}, \"sharer\": {\"display_name\": \"string\", \"choice\": \"A\"}, \"app_url\": \"https://apps.apple.com/app/wouldyou/id000000\"}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/me",
+        "description": "Get current user profile — display name, email, streak, premium status, stats, unlocked categories.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"id\": \"uuid\", \"email\": \"string\", \"display_name\": \"string\", \"is_premium\": false, \"current_streak\": 7, \"longest_streak\": 14, \"total_answered\": 342, \"unlocked_categories\": [\"funny\", \"deep\", \"spicy\", \"gross\"], \"created_at\": \"2026-01-01T00:00:00Z\"}"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/users/me",
+        "description": "Update user profile — display name and avatar.",
+        "auth_required": true,
+        "request_body": "{\"display_name\": \"string\", \"avatar_url\": \"string\"}",
+        "response_body": "{\"id\": \"uuid\", \"display_name\": \"string\", \"avatar_url\": \"string\", \"updated_at\": \"2026-02-14T12:00:00Z\"}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/me/stats",
+        "description": "Get detailed user statistics — total answered, category breakdown, favorite category, majority agreement percentage, personality badge.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"total_answered\": 342, \"categories\": {\"funny\": 120, \"deep\": 85, \"spicy\": 72, \"gross\": 65}, \"favorite_category\": \"funny\", \"majority_agreement\": 68.4, \"personality_badge\": \"Crowd Follower\", \"daily_streak_best\": 14, \"lobbies_played\": 12, \"lobbies_won\": 5}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/reports",
+        "description": "Report inappropriate content or user. Supports reporting questions, users, or lobbies. Required for App Store guideline 1.2.",
+        "auth_required": true,
+        "request_body": "{\"target_type\": \"question|user|lobby\", \"target_id\": \"uuid\", \"reason\": \"inappropriate|offensive|spam|harassment|other\", \"details\": \"string|null\"}",
+        "response_body": "{\"report_id\": \"uuid\", \"message\": \"Report submitted. We will review within 24 hours.\"}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/blocks",
+        "description": "Block a user. Blocked users won't appear in lobbies or leaderboards.",
+        "auth_required": true,
+        "request_body": "{\"user_id\": \"uuid\"}",
+        "response_body": "{\"blocked\": true, \"message\": \"User blocked\"}"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/blocks/:id",
+        "description": "Unblock a user.",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"unblocked\": true}"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/moderation/reports",
+        "description": "Admin: list pending reports with pagination. Query params: ?status=pending&page=1&limit=20",
+        "auth_required": true,
+        "request_body": null,
+        "response_body": "{\"reports\": [{\"id\": \"uuid\", \"reporter_id\": \"uuid\", \"target_type\": \"question\", \"target_id\": \"uuid\", \"reason\": \"inappropriate\", \"details\": \"string\", \"status\": \"pending\", \"created_at\": \"2026-02-14T12:00:00Z\"}], \"total\": 42, \"page\": 1, \"pages\": 3}"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/admin/moderation/reports/:id",
+        "description": "Admin: action a report — approve (remove content/ban user), dismiss, or escalate.",
+        "auth_required": true,
+        "request_body": "{\"action\": \"approve|dismiss|escalate\", \"note\": \"string|null\"}",
+        "response_body": "{\"report_id\": \"uuid\", \"status\": \"resolved\", \"action_taken\": \"approve\"}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/questions/generate",
+        "description": "Admin: trigger AI question generation via GLM-5 API. Generates a batch of questions for the specified category and stores them in the database.",
+        "auth_required": true,
+        "request_body": "{\"category\": \"string\", \"count\": 20, \"difficulty\": \"easy|medium|hard\"}",
+        "response_body": "{\"generated\": 20, \"failed\": 0, \"questions\": [{\"id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\"}]}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/daily",
+        "description": "Admin: set the daily viral question for a specific date. Can select from existing questions or generate a new one.",
+        "auth_required": true,
+        "request_body": "{\"question_id\": \"uuid\", \"date\": \"2026-02-15\"}",
+        "response_body": "{\"daily_date\": \"2026-02-15\", \"question_id\": \"uuid\", \"option_a\": \"string\", \"option_b\": \"string\"}"
+      },
+      {
+        "method": "POST",
+        "path": "/api/webhooks/revenuecat",
+        "description": "RevenueCat webhook handler. Processes subscription lifecycle events (INITIAL_PURCHASE, RENEWAL, CANCELLATION, EXPIRATION, BILLING_ISSUE). Updates user premium status and Subscription model. Validates webhook authorization header.",
+        "auth_required": false,
+        "request_body": "RevenueCat webhook payload — see RevenueCat docs for schema. Key fields: event.type, event.app_user_id, event.product_id, event.expiration_at_ms",
+        "response_body": "{\"status\": \"ok\"}"
+      }
+    ],
+    "services": [
+      "AuthService: Handles user registration (bcrypt password hashing), login, Apple Sign-In (identity token validation via Apple JWKS endpoint), JWT token generation (access: 15min, refresh: 7d), token refresh with rotation (revoke old, issue new pair), logout (revoke refresh token), account deletion (soft-delete user + cascade). Methods: Register(email, password, displayName) → (User, TokenPair), Login(email, password) → (User, TokenPair), AppleSignIn(identityToken, authCode, fullName) → (User, TokenPair), RefreshToken(refreshToken) → TokenPair, Logout(refreshToken), DeleteAccount(userID, password).",
+      "QuestionService: Manages question lifecycle — AI generation, retrieval, filtering, and voting. Integrates with GLM-5 API (https://api.z.ai/api/paas/v4/chat/completions, model: glm-5) to generate questions by category. Prompt template asks GLM-5 to generate creative Would You Rather questions as JSON array. Handles feed retrieval with user-answer exclusion (LEFT JOIN answers WHERE answer IS NULL), atomic vote counter updates (UPDATE questions SET votes_a = votes_a + 1 WHERE id = ?), and category filtering. Methods: GenerateBatch(category, count, difficulty) → []Question, GetFeed(userID, category, limit) → []Question, SubmitAnswer(userID, questionID, choice) → VoteStats, GetQuestionByID(id) → Question.",
+      "DailyService: Manages the daily viral question feature. Selects or assigns the question of the day (one per calendar date, UTC). Handles daily leaderboard ranking by earliest answer time. Auto-generates daily question at midnight UTC via cron if none is set manually. Methods: GetDailyQuestion(date) → (Question, VoteStats), GetDailyLeaderboard(date, limit) → []LeaderboardEntry, SetDailyQuestion(questionID, date), AutoGenerateDaily() — called by scheduler.",
+      "LobbyService: Manages private friend lobbies with 6-digit room codes. Generates unique codes (alphanumeric uppercase, collision-checked with DB query). Handles player joins, ready toggles, game start (host-only), answer submission with auto-advance (when all players answered current question, move to next), and lobby cleanup (expire after 4 hours). Score is calculated by majority agreement — if your answer matches the lobby majority, you get 1 point. Methods: CreateLobby(hostUserID, category, totalQuestions, maxPlayers) → Lobby, JoinLobby(code, userID) → Lobby, ToggleReady(lobbyID, userID) → ReadyStatus, StartGame(lobbyID, hostUserID) → Question, SubmitLobbyAnswer(lobbyID, userID, questionID, choice) → AnswerResult, GetLobbyState(lobbyID) → LobbyState, GetResults(lobbyID) → GameResults, LeaveLobby(lobbyID, userID), CleanupExpiredLobbies() — called by scheduler.",
+      "StreakService: Tracks consecutive daily play streaks and unlocks question categories at milestones. A streak day is counted when the user answers at least 1 question. Streak resets if a calendar day (UTC) is missed. Milestone unlocks: 3 days → spicy, 7 days → gross, 14 days → extreme, 30 days → celebrity, 60 days → survival. Methods: RecordPlay(userID) → StreakInfo (called after each answer), GetStreak(userID) → StreakInfo, GetHistory(userID, month, year) → []DayEntry, CheckAndUnlock(userID, currentStreak) → unlockedCategory|nil.",
+      "PackService: Manages offline question packs — creating packs, adding questions to packs, downloading full packs, and syncing offline answers. Each pack has a version number that increments on update, allowing clients to check if their cached copy is stale. Sync endpoint deduplicates by (user_id, question_id) unique index — INSERT ... ON CONFLICT DO NOTHING. Methods: ListPacks(userID) → []PackMeta, DownloadPack(packID) → PackWithQuestions, SyncOfflineAnswers(userID, answers) → SyncResult, CreatePack(name, description, category, questionIDs) — admin only, UpdatePackVersion(packID) — admin only.",
+      "ShareService: Generates shareable card data for social media. Creates a unique share code per (user, question) pair. Card data includes the question text, user's choice, and global vote percentages. The actual image rendering happens client-side or via a serverless function — the backend provides the data and a shareable URL. Tracks share events for analytics (platform, timestamp). Methods: GenerateShareCard(userID, questionID, platform) → ShareCard, GetSharedCard(shareCode) → PublicCardData, GetShareAnalytics(questionID) → ShareStats.",
+      "SubscriptionService: Handles RevenueCat webhook events to manage premium subscriptions. Processes events: INITIAL_PURCHASE (activate premium, set expiry), RENEWAL (extend expiry), CANCELLATION (mark cancelled but keep active until expiry), EXPIRATION (deactivate premium), BILLING_ISSUE (flag for retry). Updates both Subscription model and User.IsPremium flag. Validates webhook via authorization header. Methods: HandleWebhook(event) → error, GetSubscription(userID) → Subscription, IsUserPremium(userID) → bool, DeactivateExpired() — called by scheduler.",
+      "ModerationService: Handles content reports and user blocks. Creates report records, notifies admin queue, and supports admin actions (approve = remove offending content or ban user, dismiss = close report, escalate = flag for senior review). Block list is checked during feed generation and lobby joins to filter out blocked users. Methods: CreateReport(reporterID, targetType, targetID, reason, details) → Report, ListReports(status, page, limit) → []Report, ActionReport(reportID, action, adminID, note) → Report, BlockUser(blockerID, blockedID), UnblockUser(blockerID, blockedID), IsBlocked(blockerID, blockedID) → bool, GetBlockedIDs(userID) → []uuid.",
+      "SchedulerService: Background job runner using goroutine + time.Ticker. Runs three scheduled tasks: (1) DailyQuestionGenerator — midnight UTC, auto-sets daily question if none exists for today, (2) LobbyCleanup — every 30 minutes, expires lobbies older than 4 hours, (3) ExpiredSubscriptionCheck — hourly, deactivates subscriptions past their expiry date. Methods: Start(), Stop(), registerJob(name, interval, fn)."
+    ]
+  },
+  "monetization_model": "Freemium with generous free tier. Free: unlimited AI questions, global stats, friend lobbies (up to 8 players), daily viral question. Premium ($2.99/month or $19.99/year): themed packs (NSFW, couples, family), lobbies up to 20 players, no ads, custom question creation. No weekly subscriptions — positioned as anti-subscription-fatigue.",
+  "subscription_tiers": [
+    {
+      "name": "Free",
+      "price": "0",
+      "features": [
+        "3 uses/day",
+        "Basic features",
+        "Ads"
+      ]
+    },
+    {
+      "name": "Premium",
+      "price": "$4.99/month",
+      "features": [
+        "Unlimited",
+        "All features",
+        "No ads"
+      ]
+    },
+    {
+      "name": "Annual",
+      "price": "$39.99/year",
+      "features": [
+        "All Premium",
+        "33% savings"
+      ]
+    }
+  ],
+  "tech_stack": {
+    "mobile": "Expo SDK 54 + React Native 0.81 + NativeWind v4 + Expo Router v6",
+    "backend": "Go-Fiber v2 + GORM + PostgreSQL",
+    "auth": "JWT + Sign in with Apple",
+    "payments": "RevenueCat",
+    "deployment": "Coolify PaaS",
+    "ci_cd": "EAS Build + Fastlane"
+  },
+  "apple_compliance": [
+    "4.8 Sign in with Apple",
+    "5.1.1 Account Deletion",
+    "1.2 UGC Safety (Report + Block)",
+    "3.1.1 IAP via RevenueCat",
+    "5.1 Privacy Policy"
+  ],
+  "generated_at": "2026-02-14T12:53:17.556133+00:00",
+  "pipeline_version": "1.0.0"
+}

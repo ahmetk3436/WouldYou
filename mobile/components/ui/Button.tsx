@@ -19,9 +19,9 @@ interface ButtonProps extends Omit<PressableProps, 'style'> {
 }
 
 const variantStyles = {
-  primary: 'bg-orange-600 active:bg-orange-700',
+  primary: '',
   secondary: 'bg-gray-700 active:bg-gray-600',
-  outline: 'border-2 border-orange-600 bg-transparent active:bg-orange-900/30',
+  outline: 'bg-transparent active:bg-pink-900/30',
   destructive: 'bg-red-600 active:bg-red-700',
   gradient: '', // Handled separately with LinearGradient
 };
@@ -29,7 +29,7 @@ const variantStyles = {
 const variantTextStyles = {
   primary: 'text-white',
   secondary: 'text-white',
-  outline: 'text-orange-500',
+  outline: '',
   destructive: 'text-white',
   gradient: 'text-white',
 };
@@ -57,7 +57,7 @@ export default function Button({
   variant = 'primary',
   size = 'md',
   isLoading = false,
-  gradientColors = ['#6366F1', '#EC4899'],
+  gradientColors = ['#FF6B9D', '#C44DFF'],
   disabled,
   style,
   ...props
@@ -69,7 +69,7 @@ export default function Button({
     <>
       {isLoading ? (
         <ActivityIndicator
-          color={variant === 'outline' ? '#ea580c' : '#ffffff'}
+          color={variant === 'outline' ? '#FF6B9D' : '#ffffff'}
           size={size === 'sm' ? 'small' : 'large'}
         />
       ) : (
@@ -79,6 +79,7 @@ export default function Button({
             variantTextStyles[variant],
             sizeTextStyles[size]
           )}
+          style={variant === 'outline' ? { color: '#FF6B9D' } : undefined}
         >
           {title}
         </Text>
@@ -129,6 +130,8 @@ export default function Button({
       disabled={isDisabled}
       style={({ pressed }) => ({
         transform: [{ scale: pressed ? 0.97 : 1 }],
+        ...(variant === 'primary' ? { backgroundColor: '#FF6B9D' } : {}),
+        ...(variant === 'outline' ? { borderWidth: 2, borderColor: '#FF6B9D' } : {}),
         ...(style as object),
       })}
       {...(props as PressableProps)}

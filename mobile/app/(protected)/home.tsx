@@ -172,8 +172,8 @@ export default function HomeScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-950">
-        <ActivityIndicator size="large" color="#ea580c" />
+      <View className="flex-1 items-center justify-center" style={{ backgroundColor: '#0A0A12' }}>
+        <ActivityIndicator size="large" color="#FF6B9D" />
         <Text className="mt-4 text-base text-gray-500">Loading today's challenge...</Text>
       </View>
     );
@@ -181,13 +181,13 @@ export default function HomeScreen() {
 
   if (error) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-950 px-8">
+      <View className="flex-1 items-center justify-center px-8" style={{ backgroundColor: '#0A0A12' }}>
         <Ionicons name="cloud-offline-outline" size={64} color="#4b5563" />
         <Text className="mt-4 text-center text-lg font-semibold text-gray-300">{error}</Text>
         <Pressable
-          className="mt-6 rounded-2xl bg-orange-600 px-8 py-3"
+          className="mt-6 rounded-2xl px-8 py-3"
+          style={{ backgroundColor: '#FF6B9D' }}
           onPress={() => { setLoading(true); fetchDaily(); }}
-          style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
         >
           <Text className="font-bold text-white">Try Again</Text>
         </Pressable>
@@ -198,14 +198,14 @@ export default function HomeScreen() {
   const streakInfo = stats ? getStreakMilestone(stats.current_streak) : null;
 
   return (
-    <View className="flex-1 bg-gray-950">
+    <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
       <ScrollView
         className="flex-1"
         contentContainerStyle={{ flexGrow: 1, paddingBottom: 24 }}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#ea580c" />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#FF6B9D" />}
       >
         {/* Header with Gradient */}
-        <View className="bg-gradient-to-r from-orange-600 to-orange-500 px-6 pb-8 pt-16" style={{ borderBottomLeftRadius: 24, borderBottomRightRadius: 24 }}>
+        <View className="px-6 pb-8 pt-16" style={{ backgroundColor: '#FF6B9D', borderBottomLeftRadius: 24, borderBottomRightRadius: 24 }}>
           <Text className="text-center text-3xl font-bold text-white">Would You Rather?</Text>
           <View className="mt-3 flex-row items-center justify-center gap-4">
             {stats && stats.current_streak > 0 && (
@@ -231,9 +231,9 @@ export default function HomeScreen() {
 
         {/* Streak Warning (Loss Aversion Pattern) */}
         {stats && stats.current_streak > 0 && !result && (
-          <View className="mx-6 mt-4 flex-row items-center rounded-xl border border-yellow-700 bg-yellow-900/30 p-3">
-            <Ionicons name="warning-outline" size={20} color="#ca8a04" />
-            <Text className="ml-2 flex-1 text-sm text-yellow-500">
+          <View className="mx-6 mt-4 flex-row items-center rounded-xl p-3" style={{ backgroundColor: 'rgba(255, 159, 67, 0.15)', borderWidth: 1, borderColor: 'rgba(255, 159, 67, 0.3)' }}>
+            <Ionicons name="warning-outline" size={20} color="#FF9F43" />
+            <Text className="ml-2 flex-1 text-sm" style={{ color: '#FF9F43' }}>
               Don't lose your {stats.current_streak}-day streak! Vote now!
             </Text>
           </View>
@@ -241,7 +241,7 @@ export default function HomeScreen() {
 
         {/* Streak Milestone (Gamified Retention) */}
         {stats && stats.current_streak > 0 && streakInfo && (
-          <View className="mx-6 mt-4 rounded-2xl border border-gray-800 bg-gray-900 p-4">
+          <View className="mx-6 mt-4 rounded-2xl p-4" style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}>
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center">
                 <Ionicons name={streakInfo.icon as any} size={28} color={streakInfo.color} />
@@ -262,8 +262,9 @@ export default function HomeScreen() {
                 </Text>
                 <View className="h-2 overflow-hidden rounded-full bg-gray-800">
                   <View
-                    className="h-full rounded-full bg-gradient-to-r from-orange-500 to-orange-400"
+                    className="h-full rounded-full"
                     style={{
+                      backgroundColor: '#FF6B9D',
                       width: `${Math.min(100, ((stats.current_streak - streakInfo.threshold) / (streakInfo.nextThreshold - streakInfo.threshold)) * 100)}%`,
                     }}
                   />
@@ -275,11 +276,11 @@ export default function HomeScreen() {
 
         {/* Challenge Card - Before Voting */}
         {challenge && !result && (
-          <View className="mx-6 mt-6 rounded-3xl border border-gray-800 bg-gray-900 p-6">
+          <View className="mx-6 mt-6 rounded-3xl p-6" style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}>
             {/* Category */}
             {challenge.category && (
-              <View className="mb-6 self-start rounded-full bg-orange-900/40 px-4 py-1.5">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-orange-400">
+              <View className="mb-6 self-start rounded-full px-4 py-1.5" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+                <Text className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#FF6B9D' }}>
                   {challenge.category}
                 </Text>
               </View>
@@ -287,10 +288,10 @@ export default function HomeScreen() {
 
             {/* Option A */}
             <Pressable
-              className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 py-5"
+              className="w-full rounded-2xl py-5"
+              style={{ backgroundColor: '#FF6B9D' }}
               onPress={() => handleVote('A')}
               disabled={voting}
-              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1, transform: [{ scale: pressed ? 0.98 : 1 }] })}
             >
               <View className="flex-row items-center justify-center px-4">
                 <Ionicons name="hand-left-outline" size={20} color="white" />
@@ -301,18 +302,18 @@ export default function HomeScreen() {
             {/* VS Divider */}
             <View className="my-4 flex-row items-center">
               <View className="h-px flex-1 bg-gray-700" />
-              <View className="mx-3 h-10 w-10 items-center justify-center rounded-full bg-orange-900/40">
-                <Text className="text-xs font-bold text-orange-400">VS</Text>
+              <View className="mx-3 h-10 w-10 items-center justify-center rounded-full" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+                <Text className="text-xs font-bold" style={{ color: '#FF6B9D' }}>VS</Text>
               </View>
               <View className="h-px flex-1 bg-gray-700" />
             </View>
 
             {/* Option B */}
             <Pressable
-              className="w-full rounded-2xl bg-gradient-to-r from-red-600 to-red-500 py-5"
+              className="w-full rounded-2xl py-5"
+              style={{ backgroundColor: '#00D4AA' }}
               onPress={() => handleVote('B')}
               disabled={voting}
-              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1, transform: [{ scale: pressed ? 0.98 : 1 }] })}
             >
               <View className="flex-row items-center justify-center px-4">
                 <Ionicons name="hand-right-outline" size={20} color="white" />
@@ -322,7 +323,7 @@ export default function HomeScreen() {
 
             {voting && (
               <View className="mt-6 items-center">
-                <ActivityIndicator size="small" color="#ea580c" />
+                <ActivityIndicator size="small" color="#FF6B9D" />
               </View>
             )}
           </View>
@@ -330,23 +331,23 @@ export default function HomeScreen() {
 
         {/* Results Section */}
         {result && (
-          <View className="mx-6 mt-6 rounded-3xl border border-gray-800 bg-gray-900 p-6">
+          <View className="mx-6 mt-6 rounded-3xl p-6" style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}>
             <Text className="mb-6 text-center text-xl font-bold text-white">Results are in!</Text>
 
             {/* Option A Result */}
             <View className="relative mb-4">
               <View className="flex-row items-center justify-between">
                 <Text className="flex-1 text-base text-gray-200">{result.challenge.option_a}</Text>
-                <Text className="ml-2 text-lg font-bold text-blue-400">{result.percent_a}%</Text>
+                <Text className="ml-2 text-lg font-bold" style={{ color: '#FF6B9D' }}>{result.percent_a}%</Text>
               </View>
               <View className="mt-2 h-3 overflow-hidden rounded-full bg-gray-800">
                 <View
-                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
-                  style={{ width: `${result.percent_a}%` }}
+                  className="h-full rounded-full"
+                  style={{ backgroundColor: '#FF6B9D', width: `${result.percent_a}%` }}
                 />
               </View>
               {result.user_choice === 'A' && (
-                <View className="absolute -right-2 -top-2 h-6 w-6 items-center justify-center rounded-full bg-blue-500">
+                <View className="absolute -right-2 -top-2 h-6 w-6 items-center justify-center rounded-full" style={{ backgroundColor: '#FF6B9D' }}>
                   <Ionicons name="checkmark" size={14} color="white" />
                 </View>
               )}
@@ -356,16 +357,16 @@ export default function HomeScreen() {
             <View className="relative mb-4">
               <View className="flex-row items-center justify-between">
                 <Text className="flex-1 text-base text-gray-200">{result.challenge.option_b}</Text>
-                <Text className="ml-2 text-lg font-bold text-red-400">{result.percent_b}%</Text>
+                <Text className="ml-2 text-lg font-bold" style={{ color: '#00D4AA' }}>{result.percent_b}%</Text>
               </View>
               <View className="mt-2 h-3 overflow-hidden rounded-full bg-gray-800">
                 <View
-                  className="h-full rounded-full bg-gradient-to-r from-red-500 to-red-400"
-                  style={{ width: `${result.percent_b}%` }}
+                  className="h-full rounded-full"
+                  style={{ backgroundColor: '#00D4AA', width: `${result.percent_b}%` }}
                 />
               </View>
               {result.user_choice === 'B' && (
-                <View className="absolute -right-2 -top-2 h-6 w-6 items-center justify-center rounded-full bg-red-500">
+                <View className="absolute -right-2 -top-2 h-6 w-6 items-center justify-center rounded-full" style={{ backgroundColor: '#00D4AA' }}>
                   <Ionicons name="checkmark" size={14} color="white" />
                 </View>
               )}
@@ -379,9 +380,9 @@ export default function HomeScreen() {
 
             {/* Share Button */}
             <Pressable
-              className="mt-4 flex-row items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 py-4"
+              className="mt-4 flex-row items-center justify-center gap-2 rounded-2xl py-4"
+              style={{ backgroundColor: '#FF6B9D' }}
               onPress={handleShare}
-              style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
             >
               <Ionicons name="share-outline" size={20} color="white" />
               <Text className="text-base font-bold text-white">Share Your Choice</Text>
@@ -391,13 +392,13 @@ export default function HomeScreen() {
 
         {/* Share Prompt */}
         {showSharePrompt && result && (
-          <View className="mx-6 mt-4 flex-row items-center rounded-2xl border border-orange-800 bg-orange-900/30 p-4">
-            <Ionicons name="share-social" size={24} color="#ea580c" />
+          <View className="mx-6 mt-4 flex-row items-center rounded-2xl p-4" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)', borderWidth: 1, borderColor: 'rgba(255, 107, 157, 0.3)' }}>
+            <Ionicons name="share-social" size={24} color="#FF6B9D" />
             <View className="ml-3 flex-1">
-              <Text className="font-semibold text-orange-200">Share your choice!</Text>
-              <Text className="mt-0.5 text-xs text-orange-400">Let your friends know where you stand</Text>
+              <Text className="font-semibold" style={{ color: '#FFB3CF' }}>Share your choice!</Text>
+              <Text className="mt-0.5 text-xs" style={{ color: '#FF6B9D' }}>Let your friends know where you stand</Text>
             </View>
-            <Pressable className="rounded-xl bg-orange-600 px-4 py-2" onPress={handleShare}>
+            <Pressable className="rounded-xl px-4 py-2" style={{ backgroundColor: '#FF6B9D' }} onPress={handleShare}>
               <Text className="text-sm font-semibold text-white">Share</Text>
             </Pressable>
           </View>
@@ -405,17 +406,17 @@ export default function HomeScreen() {
 
         {/* Stats Footer with Enhanced Design */}
         {stats && (
-          <View className="mx-6 mt-6 flex-row justify-around rounded-2xl bg-gray-900 p-4">
+          <View className="mx-6 mt-6 flex-row justify-around rounded-2xl p-4" style={{ backgroundColor: '#1A1A2E' }}>
             <View className="flex-1 items-center">
-              <Text className="text-2xl font-bold text-orange-400">{stats.total_votes}</Text>
+              <Text className="text-2xl font-bold" style={{ color: '#FF6B9D' }}>{stats.total_votes}</Text>
               <Text className="mt-1 text-xs text-gray-500">Total Votes</Text>
             </View>
             <View className="flex-1 items-center">
-              <Text className="text-2xl font-bold text-orange-400">{stats.current_streak}</Text>
+              <Text className="text-2xl font-bold" style={{ color: '#FF6B9D' }}>{stats.current_streak}</Text>
               <Text className="mt-1 text-xs text-gray-500">Current Streak</Text>
             </View>
             <View className="flex-1 items-center">
-              <Text className="text-2xl font-bold text-orange-400">{stats.longest_streak}</Text>
+              <Text className="text-2xl font-bold" style={{ color: '#FF6B9D' }}>{stats.longest_streak}</Text>
               <Text className="mt-1 text-xs text-gray-500">Best Streak</Text>
             </View>
           </View>
@@ -423,12 +424,12 @@ export default function HomeScreen() {
 
         {/* Explore More */}
         <Pressable
-          className="mx-6 mt-6 flex-row items-center justify-center gap-2 rounded-2xl border-2 border-orange-800 py-4"
+          className="mx-6 mt-6 flex-row items-center justify-center gap-2 rounded-2xl py-4"
+          style={{ borderWidth: 2, borderColor: 'rgba(255, 107, 157, 0.4)' }}
           onPress={() => router.push('/(protected)/explore' as any)}
-          style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
         >
-          <Ionicons name="compass-outline" size={22} color="#ea580c" />
-          <Text className="text-base font-semibold text-orange-500">Explore More Challenges</Text>
+          <Ionicons name="compass-outline" size={22} color="#FF6B9D" />
+          <Text className="text-base font-semibold" style={{ color: '#FF6B9D' }}>Explore More Challenges</Text>
         </Pressable>
       </ScrollView>
     </View>

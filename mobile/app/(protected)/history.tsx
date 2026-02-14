@@ -53,9 +53,9 @@ export default function HistoryScreen() {
     const isPopular = yourPercent > 50;
 
     return (
-      <View className="mx-4 mb-4 overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
+      <View className="mx-4 mb-4 overflow-hidden rounded-2xl" style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2a2a3e' }}>
         {/* Top bar */}
-        <View className="flex-row items-center justify-between border-b border-gray-800 bg-gray-900/80 px-4 py-3">
+        <View className="flex-row items-center justify-between px-4 py-3" style={{ borderBottomWidth: 1, borderBottomColor: '#2a2a3e' }}>
           <View className="flex-row items-center">
             <Ionicons name="calendar-outline" size={14} color="#6b7280" />
             <Text className="ml-1 text-xs text-gray-500">
@@ -63,8 +63,8 @@ export default function HistoryScreen() {
             </Text>
           </View>
           {item.challenge.category && (
-            <View className="rounded-full bg-orange-900/40 px-3 py-1">
-              <Text className="text-xs font-semibold uppercase text-orange-400">{item.challenge.category}</Text>
+            <View className="rounded-full px-3 py-1" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+              <Text className="text-xs font-semibold uppercase" style={{ color: '#FF6B9D' }}>{item.challenge.category}</Text>
             </View>
           )}
         </View>
@@ -73,31 +73,31 @@ export default function HistoryScreen() {
         <View className="p-4">
           {/* Option A */}
           <View className="mb-3 flex-row items-center">
-            <View className={`mr-3 h-3 w-3 rounded-full ${item.user_choice === 'A' ? 'bg-blue-500' : 'bg-gray-700'}`} />
+            <View className="mr-3 h-3 w-3 rounded-full" style={{ backgroundColor: item.user_choice === 'A' ? '#FF6B9D' : '#374151' }} />
             <Text className={`flex-1 ${item.user_choice === 'A' ? 'font-semibold text-white' : 'text-gray-400'}`}>
               {item.challenge.option_a}
             </Text>
-            <Text className="ml-2 font-bold text-blue-400">{item.percent_a}%</Text>
+            <Text className="ml-2 font-bold" style={{ color: '#FF6B9D' }}>{item.percent_a}%</Text>
           </View>
           <View className="mb-3 ml-6 h-1.5 overflow-hidden rounded-full bg-gray-800">
-            <View className="h-full rounded-full bg-blue-500" style={{ width: `${item.percent_a}%` }} />
+            <View className="h-full rounded-full" style={{ backgroundColor: '#FF6B9D', width: `${item.percent_a}%` }} />
           </View>
 
           {/* Option B */}
           <View className="mb-1 flex-row items-center">
-            <View className={`mr-3 h-3 w-3 rounded-full ${item.user_choice === 'B' ? 'bg-red-500' : 'bg-gray-700'}`} />
+            <View className="mr-3 h-3 w-3 rounded-full" style={{ backgroundColor: item.user_choice === 'B' ? '#00D4AA' : '#374151' }} />
             <Text className={`flex-1 ${item.user_choice === 'B' ? 'font-semibold text-white' : 'text-gray-400'}`}>
               {item.challenge.option_b}
             </Text>
-            <Text className="ml-2 font-bold text-red-400">{item.percent_b}%</Text>
+            <Text className="ml-2 font-bold" style={{ color: '#00D4AA' }}>{item.percent_b}%</Text>
           </View>
           <View className="ml-6 h-1.5 overflow-hidden rounded-full bg-gray-800">
-            <View className="h-full rounded-full bg-red-500" style={{ width: `${item.percent_b}%` }} />
+            <View className="h-full rounded-full" style={{ backgroundColor: '#00D4AA', width: `${item.percent_b}%` }} />
           </View>
         </View>
 
         {/* Footer */}
-        <View className="flex-row items-center justify-between border-t border-gray-800 px-4 py-3">
+        <View className="flex-row items-center justify-between px-4 py-3" style={{ borderTopWidth: 1, borderTopColor: '#2a2a3e' }}>
           <View className="flex-row items-center">
             <Ionicons
               name={isPopular ? 'trending-up' : 'trending-down'}
@@ -124,8 +124,8 @@ export default function HistoryScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-950">
-        <ActivityIndicator size="large" color="#ea580c" />
+      <View className="flex-1 items-center justify-center" style={{ backgroundColor: '#0A0A12' }}>
+        <ActivityIndicator size="large" color="#FF6B9D" />
         <Text className="mt-4 text-base text-gray-500">Loading your history...</Text>
       </View>
     );
@@ -133,16 +133,17 @@ export default function HistoryScreen() {
 
   if (error) {
     return (
-      <View className="flex-1 bg-gray-950">
-        <View className="bg-orange-600 px-6 pb-6 pt-16">
+      <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
+        <View className="px-6 pb-6 pt-16" style={{ backgroundColor: '#FF6B9D' }}>
           <Text className="text-3xl font-bold text-white">Your Choices</Text>
-          <Text className="mt-1 text-base text-orange-200">See how your opinions compare</Text>
+          <Text className="mt-1 text-base text-white/70">See how your opinions compare</Text>
         </View>
         <View className="flex-1 items-center justify-center px-8">
           <Ionicons name="cloud-offline-outline" size={64} color="#4b5563" />
           <Text className="mt-4 text-center text-lg font-semibold text-gray-300">{error}</Text>
           <Pressable
-            className="mt-6 rounded-2xl bg-orange-600 px-8 py-3"
+            className="mt-6 rounded-2xl px-8 py-3"
+            style={{ backgroundColor: '#FF6B9D' }}
             onPress={() => { setLoading(true); fetchHistory(); }}
           >
             <Text className="font-bold text-white">Try Again</Text>
@@ -153,22 +154,23 @@ export default function HistoryScreen() {
   }
 
   return (
-    <View className="flex-1 bg-gray-950">
+    <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
       {/* Header */}
-      <View className="bg-orange-600 px-6 pb-6 pt-16">
+      <View className="px-6 pb-6 pt-16" style={{ backgroundColor: '#FF6B9D' }}>
         <Text className="text-3xl font-bold text-white">Your Choices</Text>
-        <Text className="mt-1 text-base text-orange-200">See how your opinions compare</Text>
+        <Text className="mt-1 text-base text-white/70">See how your opinions compare</Text>
       </View>
 
       {history.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
-          <Ionicons name="time-outline" size={80} color="#9a3412" />
+          <Ionicons name="time-outline" size={80} color="#FF6B9D" />
           <Text className="mt-6 text-xl font-bold text-gray-200">No choices yet</Text>
           <Text className="mt-2 text-center text-base text-gray-500">
             Vote on today's challenge to start building your history!
           </Text>
           <Pressable
-            className="mt-6 rounded-2xl bg-orange-600 px-8 py-3"
+            className="mt-6 rounded-2xl px-8 py-3"
+            style={{ backgroundColor: '#FF6B9D' }}
             onPress={() => router.push('/(protected)/home' as any)}
           >
             <Text className="font-bold text-white">Play Now</Text>
@@ -182,7 +184,7 @@ export default function HistoryScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingTop: 16, paddingBottom: 32 }}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#ea580c" />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#FF6B9D" />
           }
         />
       )}

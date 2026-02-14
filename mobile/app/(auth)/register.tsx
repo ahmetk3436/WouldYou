@@ -45,15 +45,16 @@ export default function RegisterScreen() {
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-gray-950"
+      className="flex-1"
+      style={{ backgroundColor: '#0A0A12' }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
         <View className="px-8">
           {/* Branding */}
           <View className="mb-8 items-center">
-            <View className="mb-6 h-24 w-24 items-center justify-center rounded-3xl bg-orange-900/40">
-              <Ionicons name="person-add" size={48} color="#ea580c" />
+            <View className="mb-6 h-24 w-24 items-center justify-center rounded-3xl" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+              <Ionicons name="person-add" size={48} color="#FF6B9D" />
             </View>
             <Text className="text-3xl font-bold text-white">Create account</Text>
             <Text className="mt-2 text-base text-gray-400">Join thousands of players</Text>
@@ -110,10 +111,10 @@ export default function RegisterScreen() {
 
           {/* Submit Button */}
           <Pressable
-            className="w-full items-center rounded-2xl bg-orange-600 py-4"
+            className="w-full items-center rounded-2xl py-4"
+            style={{ backgroundColor: '#FF6B9D' }}
             onPress={handleRegister}
             disabled={isLoading}
-            style={({ pressed }) => ({ opacity: pressed || isLoading ? 0.8 : 1 })}
           >
             {isLoading ? (
               <ActivityIndicator color="white" />
@@ -126,7 +127,7 @@ export default function RegisterScreen() {
           <View className="mt-6 mb-8 flex-row items-center justify-center">
             <Text className="text-gray-400">Already have an account? </Text>
             <Link href="/(auth)/login" asChild>
-              <Text className="font-semibold text-orange-500">Sign In</Text>
+              <Text className="font-semibold" style={{ color: '#FF6B9D' }}>Sign In</Text>
             </Link>
           </View>
         </View>

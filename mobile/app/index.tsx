@@ -20,8 +20,8 @@ export default function Index() {
 
   if (isLoading || !onboardingChecked) {
     return (
-      <View className="flex-1 items-center justify-center bg-gray-950">
-        <ActivityIndicator size="large" color="#ea580c" />
+      <View className="flex-1 items-center justify-center" style={{ backgroundColor: '#0A0A12' }}>
+        <ActivityIndicator size="large" color="#FF6B9D" />
       </View>
     );
   }

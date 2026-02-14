@@ -41,15 +41,16 @@ export default function LoginScreen() {
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-gray-950"
+      className="flex-1"
+      style={{ backgroundColor: '#0A0A12' }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
         <View className="px-8">
           {/* Branding */}
           <View className="mb-8 items-center">
-            <View className="mb-6 h-24 w-24 items-center justify-center rounded-3xl bg-orange-900/40">
-              <Ionicons name="help-circle" size={48} color="#ea580c" />
+            <View className="mb-6 h-24 w-24 items-center justify-center rounded-3xl" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+              <Ionicons name="help-circle" size={48} color="#FF6B9D" />
             </View>
             <Text className="text-3xl font-bold text-white">Welcome back</Text>
             <Text className="mt-2 text-base text-gray-400">Sign in to continue playing</Text>
@@ -93,10 +94,10 @@ export default function LoginScreen() {
 
           {/* Sign In Button */}
           <Pressable
-            className="w-full items-center rounded-2xl bg-orange-600 py-4"
+            className="w-full items-center rounded-2xl py-4"
+            style={{ backgroundColor: '#FF6B9D' }}
             onPress={handleLogin}
             disabled={isLoading}
-            style={({ pressed }) => ({ opacity: pressed || isLoading ? 0.8 : 1 })}
           >
             {isLoading ? (
               <ActivityIndicator color="white" />
@@ -120,7 +121,7 @@ export default function LoginScreen() {
             className="mt-5 items-center py-4"
             onPress={handleGuestMode}
           >
-            <Text className="text-base font-semibold text-orange-500">Skip for now</Text>
+            <Text className="text-base font-semibold" style={{ color: '#FF6B9D' }}>Skip for now</Text>
             <Text className="mt-1 text-xs text-gray-500">Play 3 free rounds without an account</Text>
           </Pressable>
 
@@ -128,7 +129,7 @@ export default function LoginScreen() {
           <View className="mt-4 mb-8 flex-row items-center justify-center">
             <Text className="text-gray-400">Don't have an account? </Text>
             <Link href="/(auth)/register" asChild>
-              <Text className="font-semibold text-orange-500">Sign Up</Text>
+              <Text className="font-semibold" style={{ color: '#FF6B9D' }}>Sign Up</Text>
             </Link>
           </View>
         </View>

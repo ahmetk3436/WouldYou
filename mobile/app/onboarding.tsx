@@ -11,14 +11,14 @@ const pages = [
   {
     icon: 'help-circle' as const,
     iconSize: 100,
-    iconColor: '#ea580c',
+    iconColor: '#FF6B9D',
     title: 'Would You Rather?',
     subtitle: 'The ultimate dilemma game that reveals who you really are',
   },
   {
     icon: 'stats-chart' as const,
     iconSize: 80,
-    iconColor: '#ea580c',
+    iconColor: '#FF6B9D',
     title: 'Discover & Compare',
     subtitle: 'Vote on daily challenges and see how your choices stack up against the world',
     features: [
@@ -30,7 +30,7 @@ const pages = [
   {
     icon: 'rocket-outline' as const,
     iconSize: 80,
-    iconColor: '#ea580c',
+    iconColor: '#FF6B9D',
     title: 'Ready to Choose?',
     subtitle: 'Jump in and start making tough decisions',
   },
@@ -56,7 +56,7 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <View className="flex-1 bg-gray-950">
+    <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
       <ScrollView
         ref={scrollRef}
         horizontal
@@ -67,7 +67,7 @@ export default function OnboardingScreen() {
       >
         {/* Page 1: Welcome */}
         <View style={{ width }} className="flex-1 items-center justify-center px-8">
-          <View className="mb-6 h-32 w-32 items-center justify-center rounded-3xl bg-orange-900/30">
+          <View className="mb-6 h-32 w-32 items-center justify-center rounded-3xl" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
             <Ionicons name={pages[0].icon} size={pages[0].iconSize} color={pages[0].iconColor} />
           </View>
           <Text className="mt-4 text-center text-4xl font-bold text-white">
@@ -85,8 +85,8 @@ export default function OnboardingScreen() {
           </Text>
           {pages[1].features?.map((feature, index) => (
             <View key={index} className="mb-6 w-full flex-row items-center">
-              <View className="h-14 w-14 items-center justify-center rounded-2xl bg-orange-900/30">
-                <Ionicons name={feature.icon} size={28} color="#ea580c" />
+              <View className="h-14 w-14 items-center justify-center rounded-2xl" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
+                <Ionicons name={feature.icon} size={28} color="#FF6B9D" />
               </View>
               <View className="ml-4 flex-1">
                 <Text className="text-lg font-semibold text-white">{feature.label}</Text>
@@ -98,7 +98,7 @@ export default function OnboardingScreen() {
 
         {/* Page 3: CTA */}
         <View style={{ width }} className="flex-1 items-center justify-center px-8">
-          <View className="mb-6 h-28 w-28 items-center justify-center rounded-full bg-orange-900/30">
+          <View className="mb-6 h-28 w-28 items-center justify-center rounded-full" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
             <Ionicons name={pages[2].icon} size={pages[2].iconSize} color={pages[2].iconColor} />
           </View>
           <Text className="mt-4 text-center text-3xl font-bold text-white">
@@ -109,7 +109,8 @@ export default function OnboardingScreen() {
           </Text>
 
           <Pressable
-            className="mt-10 w-full items-center rounded-2xl bg-orange-600 py-4"
+            className="mt-10 w-full items-center rounded-2xl py-4"
+            style={{ backgroundColor: '#FF6B9D' }}
             onPress={handleComplete}
           >
             <Text className="text-lg font-bold text-white">Start Playing</Text>
@@ -119,7 +120,7 @@ export default function OnboardingScreen() {
             className="mt-4 items-center py-3"
             onPress={handleComplete}
           >
-            <Text className="text-base font-semibold text-orange-500">
+            <Text className="text-base font-semibold" style={{ color: '#FF6B9D' }}>
               I already have an account
             </Text>
           </Pressable>
@@ -131,11 +132,12 @@ export default function OnboardingScreen() {
         {pages.map((_, index) => (
           <View
             key={index}
-            className={`mx-1.5 rounded-full ${
+            className="mx-1.5 rounded-full"
+            style={
               index === currentPage
-                ? 'h-3 w-3 bg-orange-600'
-                : 'h-2 w-2 bg-gray-600'
-            }`}
+                ? { width: 12, height: 12, backgroundColor: '#FF6B9D' }
+                : { width: 8, height: 8, backgroundColor: '#374151' }
+            }
           />
         ))}
       </View>

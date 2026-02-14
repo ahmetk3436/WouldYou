@@ -47,7 +47,7 @@ export default function FeatureCard({
       >
         {/* Badge */}
         {badge && (
-          <View className="mb-2 self-start rounded-full bg-orange-500 px-3 py-1">
+          <View className="mb-2 self-start rounded-full px-3 py-1" style={{ backgroundColor: '#FF6B9D' }}>
             <Text className="text-xs font-bold text-white uppercase tracking-wider">{badge}</Text>
           </View>
         )}

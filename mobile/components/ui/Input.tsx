@@ -49,7 +49,7 @@ export default function Input({
           className={cn(
             'w-full rounded-xl border bg-gray-900 px-4 py-3 text-base text-white pr-12',
             isFocused
-              ? 'border-orange-500'
+              ? 'border-pink-500'
               : 'border-gray-700',
             error && 'border-red-500',
             className
@@ -89,7 +89,7 @@ export default function Input({
 
           {/* Focus indicator dot */}
           {isFocused && !error && (
-            <View className="ml-2 h-2 w-2 rounded-full bg-orange-500" />
+            <View className="ml-2 h-2 w-2 rounded-full" style={{ backgroundColor: '#FF6B9D' }} />
           )}
         </View>
       </View>

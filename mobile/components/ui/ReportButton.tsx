@@ -99,11 +99,8 @@ export default function ReportButton({
               return (
                 <Pressable
                   key={cat.id}
-                  className={`flex-row items-center gap-1.5 rounded-full px-3 py-2 ${
-                    isSelected
-                      ? 'bg-orange-600'
-                      : 'border border-gray-700 bg-gray-900'
-                  }`}
+                  className="flex-row items-center gap-1.5 rounded-full px-3 py-2"
+                  style={isSelected ? { backgroundColor: '#FF6B9D' } : { borderWidth: 1, borderColor: '#374151', backgroundColor: '#1A1A2E' }}
                   onPress={() => { hapticSelection(); setCategory(cat.id); }}
                 >
                   <Ionicons
