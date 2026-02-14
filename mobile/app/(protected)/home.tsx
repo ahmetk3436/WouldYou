@@ -19,7 +19,9 @@ import {
   hapticError,
   hapticVote,
   hapticShare,
+  hapticMedium,
 } from '../../lib/haptics';
+import { LinearGradient } from 'expo-linear-gradient';
 import type { Challenge, ChallengeResult, ChallengeStats } from '../../types/challenge';
 
 interface StreakMilestone {
@@ -170,6 +172,11 @@ export default function HomeScreen() {
     fetchDaily();
   };
 
+  const handleQuickPlay = useCallback(() => {
+    hapticMedium();
+    router.push('/(protected)/gameplay?category=all&mode=solo');
+  }, []);
+
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center" style={{ backgroundColor: '#0A0A12' }}>
@@ -273,6 +280,54 @@ export default function HomeScreen() {
             )}
           </View>
         )}
+
+        {/* Game Mode Selection */}
+        <View className="mx-6 mt-6 gap-3">
+          {/* Quick Play - Primary CTA */}
+          <Pressable
+            onPress={handleQuickPlay}
+            className="rounded-2xl overflow-hidden"
+          >
+            <LinearGradient
+              colors={['#FF6B9D', '#FF8FB1']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 16, paddingHorizontal: 20 }}
+            >
+              <View className="flex-row items-center gap-3">
+                <View className="w-12 h-12 rounded-full items-center justify-center" style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}>
+                  <Ionicons name="swap-horizontal" size={24} color="#FFFFFF" />
+                </View>
+                <View>
+                  <Text className="text-white text-lg font-bold">Quick Play</Text>
+                  <Text className="text-xs" style={{ color: 'rgba(255,255,255,0.7)' }}>Swipe to decide</Text>
+                </View>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
+            </LinearGradient>
+          </Pressable>
+
+          {/* Daily Challenge - Secondary */}
+          <Pressable
+            onPress={() => {
+              hapticMedium();
+              router.push('/(protected)/gameplay?category=daily&mode=daily');
+            }}
+            className="rounded-2xl flex-row items-center justify-between py-4 px-5"
+            style={{ backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)' }}
+          >
+            <View className="flex-row items-center gap-3">
+              <View className="w-12 h-12 rounded-full items-center justify-center" style={{ backgroundColor: 'rgba(0,212,170,0.2)' }}>
+                <Ionicons name="today" size={24} color="#00D4AA" />
+              </View>
+              <View>
+                <Text className="text-white text-lg font-bold">Daily Challenge</Text>
+                <Text className="text-xs" style={{ color: '#9CA3AF' }}>New question every day</Text>
+              </View>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+          </Pressable>
+        </View>
 
         {/* Challenge Card - Before Voting */}
         {challenge && !result && (

@@ -17,26 +17,26 @@
       "id": "enhance_002",
       "title": "Add AI question generation endpoint with GLM-5 API",
       "description": "The SPEC requires AI-generated Would You Rather questions via GLM-5 API, but the backend only has 60 hardcoded questions in DailyChallenges pool. Add a QuestionGeneratorService that calls the GLM-5 API to generate fresh questions on demand.\n\nFiles to create/modify:\n1. backend/internal/services/question_generator.go: Create QuestionGeneratorService struct with db *gorm.DB, apiURL string (from env GLM_API_URL default 'https://api.z.ai/api/paas/v4/chat/completions'), apiKey string (from env GLM_API_KEY), model string (from env GLM_MODEL default 'glm-5'). Method GenerateBatch(category string, count int) ([]models.Challenge, error): Build HTTP POST request with JSON body {\"model\": model, \"messages\": [{\"role\": \"system\", \"content\": \"You generate creative Would You Rather questions...\"}, {\"role\": \"user\", \"content\": \"Generate {count} Would You Rather questions for category: {category}. Return JSON array: [{\\\"option_a\\\": ..., \\\"option_b\\\": ..., \\\"category\\\": ...\\\"}]\"}], \"temperature\": 0.9, \"max_tokens\": 4096}. Parse response content[0].text or choices[0].message.content. Unmarshal JSON array into []Challenge. Insert into DB with gorm Create. Return created challenges.\n2. backend/internal/config/config.go: Add fields GLMApiURL, GLMApiKey, GLMModel string with env tags.\n3. backend/internal/handlers/challenge_handler.go: Add GenerateQuestions handler (admin-only). Accepts POST {\"category\": \"funny\", \"count\": 10}. Calls service.GenerateBatch. Returns 201 with generated challenges.\n4. backend/internal/routes/routes.go: Add admin route: admin.Post(\"/challenges/generate\", challengeHandler.GenerateQuestions).\n5. backend/internal/services/challenge_service.go: Update GetRandomChallenge and GetChallengesByCategory to auto-generate via GLM-5 if category has fewer than 5 unvoted challenges for this user. Call questionGenerator.GenerateBatch(category, 10) as fallback. Add questionGenerator *QuestionGeneratorService field to ChallengeService.\n6. backend/cmd/server/main.go: Initialize QuestionGeneratorService with config, inject into ChallengeService.",
-      "status": "in_progress",
+      "status": "completed",
       "priority": 10,
       "depends_on": [],
       "test_command": "cd backend \u0026\u0026 go build ./...",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T14:50:42Z",
+      "updated_at": "2026-02-14T15:10:00Z",
       "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (glm-5): failed after 2 retries: API call failed: Post \"https://api.z.ai/api/paas/v4/chat/completions\": context deadline exceeded"
     },
     {
       "id": "enhance_003",
       "title": "Build swipe-based gameplay screen with gesture handler",
       "description": "The SPEC describes a full-screen swipe-based gameplay experience (swipe left=Option A, swipe right=Option B) but the current app only has tap-to-vote buttons. Add a dedicated gameplay screen with PanGestureHandler swipe mechanics.\n\nFile to create: mobile/app/(protected)/gameplay.tsx\n\nImports: React, useState, useEffect, useCallback from 'react'; View, Text, Pressable, ActivityIndicator, Dimensions from 'react-native'; Ionicons from '@expo/vector-icons'; useLocalSearchParams, router from 'expo-router'; Gesture, GestureDetector from 'react-native-gesture-handler'; Animated, useSharedValue, useAnimatedStyle, withSpring, withTiming, runOnJS, interpolate from 'react-native-reanimated'; LinearGradient from 'expo-linear-gradient'; api from '../../lib/api'; hapticVote, hapticSuccess, hapticError, hapticMedium from '../../lib/haptics'.\n\nState: questions (Challenge[]), currentIndex (number), result (ChallengeResult|null), loading (bool). Params: category (string), mode ('solo'|'daily').\n\nSwipe Logic: const translateX = useSharedValue(0); const SWIPE_THRESHOLD = 120; Pan gesture: onUpdate sets translateX.value, onEnd checks if |translateX| \u003e SWIPE_THRESHOLD. If left (negative) → vote A with runOnJS. If right (positive) → vote B with runOnJS. Animated card style: transform [{translateX}, {rotate: interpolate(translateX, [-200,0,200], ['-15deg','0deg','15deg'])}], opacity interpolated. Left edge overlay: LinearGradient ['#FF6B9D','transparent'] opacity based on negative translateX. Right edge overlay: LinearGradient ['transparent','#00D4AA'] opacity based on positive translateX.\n\nFetch: GET /challenges/category/{category}?limit=10 or /challenges/daily. On vote: POST /challenges/vote, then show result overlay with animated percentage bars for 2s, then advance to next card.\n\nUI Layout: Full screen dark bg #0A0A12. Top bar: back button, category badge (rounded-full, #1A1A2E bg), question counter 'X/10'. Center: large card (90% width, ~55% height, rounded-3xl, #1A1A2E bg, border border-white/10). Card content: 'Would You Rather...' label in #FF6B9D 14px, Option A text 18px bold white top half, divider with 'OR' circle badge (#FF6B9D bg), Option B text bottom half. Bottom: skip button text-gray-500.\n\nModify: mobile/app/(protected)/home.tsx - Add 'Quick Play' button that navigates to /(protected)/gameplay?category=all\u0026mode=solo. mobile/app/(protected)/_layout.tsx - Add 'gameplay' to isSubScreen check so tab bar hides.",
-      "status": "pending",
+      "status": "in_progress",
       "priority": 8,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T15:10:00Z"
     },
     {
       "id": "enhance_004",
