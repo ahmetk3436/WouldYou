@@ -102,25 +102,25 @@
       "id": "enhance_009",
       "title": "Add shareable result card component with 9:16 format",
       "description": "The SPEC requires Instagram Stories / TikTok-ready share cards (1080x1920 / 9:16 aspect ratio) with branded gradient backgrounds. Currently sharing uses plain text via Share.share(). Add a visual share card component.\n\nFile to modify: mobile/components/ui/ShareableResult.tsx (already exists but needs enhancement)\n\nThe existing ShareableResult component renders a visual card but doesn't capture it as an image. Since react-native-view-shot is NOT in package.json and we can't add new packages, enhance the text-based share with richer formatting and keep the visual card as a preview-only component.\n\nEnhance the component:\n1. Update colors: Replace existing gradient props default to colors={['#FF6B9D','#C44DFF','#00D4AA']}.\n2. Layout: 9:16 aspect ratio (width:screenWidth-48, height:(screenWidth-48)*16/9 capped at 500). LinearGradient background with rounded-3xl.\n3. Content: Top: 'WouldYou' text-lg bold white + 'wouldyou.app' text-xs text-white/50 watermark. Center: 'Would You Rather...' text-sm text-white/70. Option A text-lg bold white with percent bar and 'MY PICK ▸' label if user chose A (highlighted with #FF6B9D border-2). Option B same but #00D4AA highlight if chosen. Bottom: 'Play now — Download WouldYou' text-xs text-white/50.\n4. Add share function to home.tsx, gameplay results, round-summary: Construct rich text message including the question, both options with percentages, user's pick marked with ✓, streak info, and app link. Format: 'Would You Rather...\\n\\n✓ A: {option_a} ({percent_a}%)\\n  B: {option_b} ({percent_b}%)\\n\\nI picked {choice}! {majorityText}\\n\\n🔥 {streak}-day streak\\n\\nPlay: https://wouldyou.app'\n5. Add ShareableResult preview in a Modal that shows the visual card before sharing. The modal has the card preview + row of share buttons (Instagram, TikTok, Copy, More) using Ionicons (logo-instagram, logo-tiktok, copy-outline, share-outline). Each calls Share.share() with the text content.",
+      "status": "completed",
+      "priority": 7,
+      "depends_on": [],
+      "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-14T16:08:13Z"
+    },
+    {
+      "id": "enhance_010",
+      "title": "Enhance history screen with trend indicators and filtering",
+      "description": "The current history screen works but needs visual polish per SPEC: trend indicators, category filtering, and better empty/loading states.\n\nFile to modify: mobile/app/(protected)/history.tsx\n\nChanges:\n1. Header: Replace bg-orange-600 with LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24. Keep 'History' title and total votes badge.\n2. Each history item card (#1A1A2E rounded-2xl p-5 border border-white/10):\n- Add trend indicator: If user voted with majority (their percent \u003e 50%), show green up-arrow (Ionicons trending-up, #00D4AA). If minority, show #FF6B9D trending-down. Display as small badge top-right of card.\n- Category badge: Colored pill matching category (life=#FF6B9D, deep=#C44DFF, superpower=#FFE66D, funny=#00D4AA, love=#FF6B9D, tech=#0EA5E9).\n- User's choice highlighted with checkmark in matching choice color (#FF6B9D for A, #00D4AA for B).\n- Vote bars: Option A bar LinearGradient ['#FF6B9D','#C44DFF'], Option B bar LinearGradient ['#00D4AA','#00B894'].\n- Date shown as relative time ('2h ago', 'Yesterday', 'Feb 12').\n- Share button per item (share-outline icon).\n3. Empty state: Large Ionicons 'time-outline' 80px in #1A1A2E. 'No history yet' text-xl bold white. 'Start voting to see your choices here' text-sm text-gray-500. 'Play Now' button LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl navigating to home.\n4. Loading: Three skeleton placeholder cards using Animated opacity pulse (Reanimated withRepeat + withTiming). Skeleton cards: #1A1A2E rounded-2xl with lighter #2A2A4A animated bars.\n5. Pull-to-refresh: Already implemented, update tintColor to '#FF6B9D'.\n6. Add FlatList item separator: View h-2 for spacing instead of mb-4 on items.",
       "status": "in_progress",
       "priority": 7,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T15:53:32Z"
-    },
-    {
-      "id": "enhance_010",
-      "title": "Enhance history screen with trend indicators and filtering",
-      "description": "The current history screen works but needs visual polish per SPEC: trend indicators, category filtering, and better empty/loading states.\n\nFile to modify: mobile/app/(protected)/history.tsx\n\nChanges:\n1. Header: Replace bg-orange-600 with LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24. Keep 'History' title and total votes badge.\n2. Each history item card (#1A1A2E rounded-2xl p-5 border border-white/10):\n- Add trend indicator: If user voted with majority (their percent \u003e 50%), show green up-arrow (Ionicons trending-up, #00D4AA). If minority, show #FF6B9D trending-down. Display as small badge top-right of card.\n- Category badge: Colored pill matching category (life=#FF6B9D, deep=#C44DFF, superpower=#FFE66D, funny=#00D4AA, love=#FF6B9D, tech=#0EA5E9).\n- User's choice highlighted with checkmark in matching choice color (#FF6B9D for A, #00D4AA for B).\n- Vote bars: Option A bar LinearGradient ['#FF6B9D','#C44DFF'], Option B bar LinearGradient ['#00D4AA','#00B894'].\n- Date shown as relative time ('2h ago', 'Yesterday', 'Feb 12').\n- Share button per item (share-outline icon).\n3. Empty state: Large Ionicons 'time-outline' 80px in #1A1A2E. 'No history yet' text-xl bold white. 'Start voting to see your choices here' text-sm text-gray-500. 'Play Now' button LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl navigating to home.\n4. Loading: Three skeleton placeholder cards using Animated opacity pulse (Reanimated withRepeat + withTiming). Skeleton cards: #1A1A2E rounded-2xl with lighter #2A2A4A animated bars.\n5. Pull-to-refresh: Already implemented, update tintColor to '#FF6B9D'.\n6. Add FlatList item separator: View h-2 for spacing instead of mb-4 on items.",
-      "status": "pending",
-      "priority": 7,
-      "depends_on": [],
-      "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
-      "auto_commit": true,
-      "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T16:08:13Z"
     },
     {
       "id": "enhance_011",
