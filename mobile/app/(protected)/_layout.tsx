@@ -33,7 +33,7 @@ export default function ProtectedLayout() {
   }
 
   // Check if we're on a screen that shouldn't show tabs (explore, paywall)
-  const isSubScreen = pathname.includes('paywall') || pathname.includes('gameplay');
+  const isSubScreen = pathname.includes('paywall') || pathname.includes('gameplay') || pathname.includes('round-summary');
 
   return (
     <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>

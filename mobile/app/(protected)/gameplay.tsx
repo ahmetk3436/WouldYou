@@ -15,7 +15,7 @@ import Animated, {
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../../lib/api';
-import { hapticVote, hapticSuccess, hapticError, hapticMedium, hapticLight } from '../../lib/haptics';
+import { hapticVote, hapticSuccess, hapticError, hapticMedium, hapticLight, hapticStreakMilestone } from '../../lib/haptics';
 import ResultsOverlay, { ChallengeResult as OverlayChallengeResult } from '../../components/ui/ResultsOverlay';
 
 interface Challenge {
@@ -48,6 +48,9 @@ export default function GameplayScreen() {
   const [showResult, setShowResult] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayResult, setOverlayResult] = useState<OverlayChallengeResult | null>(null);
+  const [majorityCount, setMajorityCount] = useState(0);
+  const [boldestQuestion, setBoldestQuestion] = useState<{ text: string; percent: number } | null>(null);
+  const [lowestAgreementPercent, setLowestAgreementPercent] = useState(100);
 
   const translateX = useSharedValue(0);
   const cardScale = useSharedValue(1);
@@ -82,6 +85,20 @@ export default function GameplayScreen() {
     fetchChallenges();
   }, [fetchChallenges]);
 
+  const navigateToRoundSummary = useCallback(() => {
+    hapticStreakMilestone();
+    router.replace({
+      pathname: '/(protected)/round-summary',
+      params: {
+        majorityCount: String(majorityCount),
+        totalQuestions: String(questions.length),
+        boldestQuestion: JSON.stringify(boldestQuestion || { text: 'You made bold choices!', percent: 50 }),
+        boldestPercent: String(boldestQuestion?.percent ?? 50),
+        streakCount: '0',
+      },
+    });
+  }, [majorityCount, questions.length, boldestQuestion]);
+
   const advanceToNext = useCallback(() => {
     resultOpacity.value = withTiming(0, { duration: 200 }, () => {
       runOnJS(setShowResult)(false);
@@ -92,10 +109,10 @@ export default function GameplayScreen() {
         translateX.value = 0;
         runOnJS(setIsAnimating)(false);
       } else {
-        runOnJS(router.back)();
+        runOnJS(navigateToRoundSummary)();
       }
     });
-  }, [currentIndex, questions.length]);
+  }, [currentIndex, questions.length, navigateToRoundSummary]);
 
   const handleVote = useCallback(async (choice: 'A' | 'B') => {
     if (isAnimating || showResult || showOverlay) return;
@@ -125,13 +142,32 @@ export default function GameplayScreen() {
       setOverlayResult(overlayData);
       setShowOverlay(true);
       hapticSuccess();
+
+      // Track majority agreement
+      const percentA = overlayData.percent_a;
+      const percentB = overlayData.percent_b;
+      const userAgreementPercent = choice === 'A' ? percentA : percentB;
+      const isMajority = userAgreementPercent >= 50;
+
+      if (isMajority) {
+        setMajorityCount(prev => prev + 1);
+      }
+
+      // Track boldest take (lowest agreement with user's choice)
+      if (userAgreementPercent < lowestAgreementPercent) {
+        setLowestAgreementPercent(userAgreementPercent);
+        setBoldestQuestion({
+          text: `${currentQuestion.option_a} vs ${currentQuestion.option_b}`,
+          percent: Math.round(userAgreementPercent),
+        });
+      }
     } catch (error) {
       hapticError();
       console.error('Failed to vote:', error);
       setIsAnimating(false);
       translateX.value = withSpring(0);
     }
-  }, [questions, currentIndex, isAnimating, showResult, showOverlay]);
+  }, [questions, currentIndex, isAnimating, showResult, showOverlay, lowestAgreementPercent]);
 
   const handleNextQuestion = useCallback(() => {
     setShowOverlay(false);
@@ -142,9 +178,20 @@ export default function GameplayScreen() {
       setCurrentIndex(currentIndex + 1);
       setIsAnimating(false);
     } else {
-      router.back();
+      // Last question answered - navigate to round summary
+      hapticStreakMilestone();
+      router.replace({
+        pathname: '/(protected)/round-summary',
+        params: {
+          majorityCount: String(majorityCount),
+          totalQuestions: String(questions.length),
+          boldestQuestion: JSON.stringify(boldestQuestion || { text: 'You made bold choices!', percent: 50 }),
+          boldestPercent: String(boldestQuestion?.percent ?? 50),
+          streakCount: '0',
+        },
+      });
     }
-  }, [currentIndex, questions.length]);
+  }, [currentIndex, questions.length, majorityCount, boldestQuestion]);
 
   const handleShareResult = useCallback(async () => {
     if (!overlayResult) return;
