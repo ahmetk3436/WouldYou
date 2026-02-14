@@ -8,11 +8,13 @@ import {
   Share,
   RefreshControl,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Haptics from 'expo-haptics';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../lib/api';
 import {
@@ -24,6 +26,7 @@ import {
   hapticMedium,
 } from '../../lib/haptics';
 import type { Challenge, ChallengeResult, ChallengeStats } from '../../types/challenge';
+import ShareableResult from '../../components/ui/ShareableResult';
 
 const CATEGORIES = [
   { id: 'all', label: 'All', emoji: '' },
@@ -45,6 +48,7 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const fetchDaily = useCallback(async () => {
     try {
@@ -123,14 +127,23 @@ export default function HomeScreen() {
   const handleShare = async () => {
     if (!result) return;
     hapticShare();
+    setShowShareModal(true);
+  };
+
+  const handleQuickShare = async () => {
+    if (!result) return;
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const myChoice = result.user_choice === 'A' ? result.challenge.option_a : result.challenge.option_b;
     const myPercent = result.user_choice === 'A' ? result.percent_a : result.percent_b;
-    const streakText = stats && stats.current_streak > 0 ? `\nStreak: ${stats.current_streak} days` : '';
+    const streakVal = stats ? stats.current_streak : 0;
+    const checkA = result.user_choice === 'A' ? '✓' : ' ';
+    const checkB = result.user_choice === 'B' ? '✓' : ' ';
+    const majorityText = myPercent > 50 ? "I'm with the majority!" : "I'm in the minority!";
     try {
       await Share.share({
-        message: `Would You Rather...\n\nA: ${result.challenge.option_a}\nB: ${result.challenge.option_b}\n\nI chose "${myChoice}"! (${myPercent}% agree with me)${streakText}\n\nPlay now: https://wouldyou.app`,
+        message: `Would You Rather...\n\n${checkA} A: ${result.challenge.option_a} (${result.percent_a}%)\n${checkB} B: ${result.challenge.option_b} (${result.percent_b}%)\n\nI picked "${myChoice}"! ${majorityText}\n\n🔥 ${streakVal}-day streak\n\nPlay: https://wouldyou.app`,
+        title: 'Would You Rather',
       });
-      hapticSuccess();
     } catch (err) {
       // User cancelled share
     }
@@ -206,10 +219,20 @@ export default function HomeScreen() {
           <Text className="text-white text-xl font-bold ml-3">Would You Rather</Text>
         </View>
 
-        {/* Settings Button */}
-        <Pressable onPress={() => { hapticSelection(); router.push('/settings'); }}>
-          <Ionicons name="settings-outline" size={24} color="white" />
-        </Pressable>
+        {/* Header Actions */}
+        <View className="flex-row items-center gap-3">
+          {result && (
+            <TouchableOpacity
+              onPress={handleQuickShare}
+              className="w-10 h-10 rounded-full bg-white/10 items-center justify-center"
+            >
+              <Ionicons name="share-outline" size={20} color="white" />
+            </TouchableOpacity>
+          )}
+          <Pressable onPress={() => { hapticSelection(); router.push('/settings'); }}>
+            <Ionicons name="settings-outline" size={24} color="white" />
+          </Pressable>
+        </View>
       </LinearGradient>
 
       <ScrollView
@@ -390,13 +413,21 @@ export default function HomeScreen() {
                   </View>
 
                   {/* Share Button */}
-                  <Pressable
+                  <TouchableOpacity
                     onPress={handleShare}
-                    className="bg-[#2A2A3E] rounded-xl py-3 flex-row items-center justify-center mt-4"
+                    activeOpacity={0.8}
+                    className="rounded-2xl overflow-hidden mt-4"
                   >
-                    <Ionicons name="share-outline" size={18} color="white" />
-                    <Text className="text-white font-semibold ml-2">Share Result</Text>
-                  </Pressable>
+                    <LinearGradient
+                      colors={['#FF6B9D', '#C44DFF']}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 0 }}
+                      style={{ paddingVertical: 16, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                      <Ionicons name="share-social" size={20} color="white" />
+                      <Text className="text-white font-semibold text-base ml-2">Share My Choice</Text>
+                    </LinearGradient>
+                  </TouchableOpacity>
                 </View>
               </LinearGradient>
             </View>
@@ -518,6 +549,21 @@ export default function HomeScreen() {
           </Pressable>
         </View>
       </ScrollView>
+
+      {/* Shareable Result Modal */}
+      {result && (
+        <ShareableResult
+          visible={showShareModal}
+          onClose={() => setShowShareModal(false)}
+          question={result.challenge.option_a + ' vs ' + result.challenge.option_b}
+          optionA={result.challenge.option_a}
+          optionB={result.challenge.option_b}
+          percentA={result.percent_a}
+          percentB={result.percent_b}
+          userChoice={result.user_choice as 'A' | 'B' | null}
+          streak={stats ? stats.current_streak : 0}
+        />
+      )}
     </SafeAreaView>
   );
 }

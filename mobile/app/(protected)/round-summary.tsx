@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { View, Text, Pressable, Share, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Pressable, Share, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Haptics from 'expo-haptics';
 import Animated, {
   FadeIn,
   SlideInUp,
@@ -15,6 +16,7 @@ import Animated, {
   withSpring
 } from 'react-native-reanimated';
 import { hapticSuccess, hapticStreakMilestone, hapticShare } from '../../lib/haptics';
+import ShareableResult from '../../components/ui/ShareableResult';
 
 interface PersonalityResult {
   name: string;
@@ -69,6 +71,7 @@ export default function RoundSummaryScreen() {
   }
 
   const personality = getPersonality(majorityCount, totalQuestions);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   // Flame pulse animation
   const flameScale = useSharedValue(1);
@@ -229,27 +232,41 @@ Think you can beat that? Download now!`;
             </View>
           </Animated.View>
 
-          {/* Share Button */}
+          {/* Share Buttons */}
           <Animated.View
             entering={FadeIn.delay(1000)}
             className="mb-4"
           >
-            <Pressable
-              onPress={handleShare}
-              className="active:opacity-80"
-            >
-              <LinearGradient
-                colors={['#FF6B9D', '#C44DFF']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                className="rounded-2xl py-4 flex-row items-center justify-center"
+            <View className="flex-row gap-3">
+              <TouchableOpacity
+                onPress={handleShare}
+                activeOpacity={0.8}
+                className="flex-1 rounded-2xl overflow-hidden"
               >
-                <Ionicons name="share-outline" size={22} color="white" />
-                <Text className="text-lg font-semibold text-white ml-2">
-                  Share Your Results
-                </Text>
-              </LinearGradient>
-            </Pressable>
+                <LinearGradient
+                  colors={['#FF6B9D', '#C44DFF']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={{ paddingVertical: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  <Ionicons name="share-social" size={18} color="white" />
+                  <Text className="text-white font-semibold text-sm ml-2">Share All</Text>
+                </LinearGradient>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setShowShareModal(true);
+                }}
+                activeOpacity={0.8}
+                className="flex-1 flex-row items-center justify-center rounded-2xl py-3.5"
+                style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+              >
+                <Ionicons name="eye" size={18} color="white" />
+                <Text className="text-white font-semibold text-sm ml-2">Preview Card</Text>
+              </TouchableOpacity>
+            </View>
           </Animated.View>
 
           {/* Bottom Buttons */}
@@ -287,6 +304,19 @@ Think you can beat that? Download now!`;
 
         </View>
       </ScrollView>
+
+      {/* Shareable Result Preview Modal */}
+      <ShareableResult
+        visible={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        question={boldestQuestionText}
+        optionA={boldestQuestionText}
+        optionB={`${personality.name} - ${majorityCount}/${totalQuestions} majority`}
+        percentA={boldestPercent}
+        percentB={100 - boldestPercent}
+        userChoice="A"
+        streak={streakCount}
+      />
     </SafeAreaView>
   );
 }

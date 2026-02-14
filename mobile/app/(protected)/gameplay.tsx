@@ -14,9 +14,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Haptics from 'expo-haptics';
 import api from '../../lib/api';
 import { hapticVote, hapticSuccess, hapticError, hapticMedium, hapticLight, hapticStreakMilestone } from '../../lib/haptics';
 import ResultsOverlay, { ChallengeResult as OverlayChallengeResult } from '../../components/ui/ResultsOverlay';
+import ShareableResult from '../../components/ui/ShareableResult';
 
 interface Challenge {
   id: string;
@@ -51,6 +53,7 @@ export default function GameplayScreen() {
   const [majorityCount, setMajorityCount] = useState(0);
   const [boldestQuestion, setBoldestQuestion] = useState<{ text: string; percent: number } | null>(null);
   const [lowestAgreementPercent, setLowestAgreementPercent] = useState(100);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const translateX = useSharedValue(0);
   const cardScale = useSharedValue(1);
@@ -193,27 +196,10 @@ export default function GameplayScreen() {
     }
   }, [currentIndex, questions.length, majorityCount, boldestQuestion]);
 
-  const handleShareResult = useCallback(async () => {
+  const handleShareResult = useCallback(() => {
     if (!overlayResult) return;
-
-    const userChoice = overlayResult.user_choice === 'A'
-      ? overlayResult.option_a
-      : overlayResult.option_b;
-    const percentage = overlayResult.user_choice === 'A'
-      ? Math.round(overlayResult.percent_a)
-      : Math.round(overlayResult.percent_b);
-
-    const shareMessage = `\u{1F914} Would You Rather?\n\nI chose "${userChoice}"\n${percentage}% of people agree with me!\n\nPlay now and see what others chose!`;
-
-    try {
-      await Share.share({
-        message: shareMessage,
-        title: 'Would You Rather - My Choice',
-      });
-      hapticSuccess();
-    } catch (error) {
-      console.error('Share error:', error);
-    }
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setShowShareModal(true);
   }, [overlayResult]);
 
   const skipQuestion = useCallback(() => {
@@ -462,6 +448,21 @@ export default function GameplayScreen() {
             totalQuestions={questions.length}
           />
         </View>
+      )}
+
+      {/* Shareable Result Modal */}
+      {overlayResult && (
+        <ShareableResult
+          visible={showShareModal}
+          onClose={() => setShowShareModal(false)}
+          question={overlayResult.option_a + ' vs ' + overlayResult.option_b}
+          optionA={overlayResult.option_a}
+          optionB={overlayResult.option_b}
+          percentA={Math.round(overlayResult.percent_a)}
+          percentB={Math.round(overlayResult.percent_b)}
+          userChoice={overlayResult.user_choice}
+          streak={0}
+        />
       )}
     </SafeAreaView>
   );

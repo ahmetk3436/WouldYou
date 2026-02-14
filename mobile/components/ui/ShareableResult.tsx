@@ -1,151 +1,206 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Modal, Pressable, Share, Dimensions, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 
 interface ShareableResultProps {
-  title: string;
-  subtitle?: string;
-  resultText: string;
-  appName?: string;
-  colors?: readonly [string, string, ...string[]];
-  username?: string;
+  visible: boolean;
+  onClose: () => void;
+  question: string;
+  optionA: string;
+  optionB: string;
+  percentA: number;
+  percentB: number;
+  userChoice: 'A' | 'B' | null;
+  streak: number;
+  gradientColors?: string[];
 }
 
-/**
- * ShareableResult - Viral Card Component (2025-2026 Trend)
- * Instagram Stories format (9:16 aspect ratio compatible)
- * Features: bold gradients, large typography, holographic effects
- * Use ViewShot to capture and share results
- */
 export default function ShareableResult({
-  title,
-  subtitle,
-  resultText,
-  appName = 'WouldYou',
-  colors = ['#6366F1', '#EC4899', '#A855F7'],
-  username,
+  visible,
+  onClose,
+  question,
+  optionA,
+  optionB,
+  percentA,
+  percentB,
+  userChoice,
+  streak,
+  gradientColors = ['#FF6B9D', '#C44DFF', '#00D4AA'],
 }: ShareableResultProps) {
-  const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const [copied, setCopied] = useState(false);
+  const screenWidth = Dimensions.get('window').width;
+  const cardWidth = screenWidth - 48;
+  const cardHeight = Math.min(cardWidth * (16 / 9), 500);
+
+  const constructShareMessage = (): string => {
+    const choiceText = userChoice === 'A' ? optionA : optionB;
+    const majorityPercent = userChoice === 'A' ? percentA : percentB;
+    const majorityText = majorityPercent > 50 ? "I'm with the majority!" : "I'm in the minority!";
+    const checkA = userChoice === 'A' ? '✓' : ' ';
+    const checkB = userChoice === 'B' ? '✓' : ' ';
+
+    return `Would You Rather...
+
+${checkA} A: ${optionA} (${percentA}%)
+${checkB} B: ${optionB} (${percentB}%)
+
+I picked "${choiceText}"! ${majorityText}
+
+🔥 ${streak}-day streak
+
+Play: https://wouldyou.app`;
+  };
+
+  const handleShare = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    const message = constructShareMessage();
+    try {
+      await Share.share({
+        message: message,
+        title: 'Would You Rather',
+      });
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  };
+
+  const handleCopyToClipboard = async () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    const message = constructShareMessage();
+    try {
+      await Share.share({
+        message: message,
+        title: 'Would You Rather',
+      });
+    } catch (error) {
+      console.error('Copy/share error:', error);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleInstagramShare = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    handleShare();
+  };
+
+  const handleTiktokShare = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    handleShare();
+  };
 
   return (
-    <View
-      style={{
-        width: '100%',
-        aspectRatio: 9 / 16,
-        borderRadius: 24,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.2,
-        shadowRadius: 24,
-        elevation: 12,
-      }}
-    >
-      <LinearGradient
-        colors={colors}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{
-          borderRadius: 24,
-          padding: 32,
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Decorative holographic circles */}
-        <View
-          style={{
-            position: 'absolute',
-            top: -20,
-            right: -20,
-            width: 100,
-            height: 100,
-            borderRadius: 50,
-            backgroundColor: 'rgba(255,255,255,0.15)',
-          }}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: -30,
-            left: -30,
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            backgroundColor: 'rgba(255,255,255,0.1)',
-          }}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: 150,
-            height: 150,
-            borderRadius: 75,
-            backgroundColor: 'rgba(255,255,255,0.05)',
-            transform: [{ translateX: -75 }, { translateY: -75 }],
-          }}
-        />
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+      <Pressable className="flex-1 bg-black/60" onPress={onClose}>
+        <View className="flex-1 justify-center items-center p-6">
+          <Pressable onPress={(e) => e.stopPropagation()} className="bg-gray-900 rounded-3xl p-4" style={{ width: cardWidth + 32 }}>
 
-        {/* App Logo Watermark */}
-        <View style={{ position: 'absolute', top: 24, left: 24 }}>
-          <View className="flex-row items-center">
-            <Ionicons name="sparkles" size={16} color="rgba(255,255,255,0.6)" />
-            <Text style={{ marginLeft: 6, fontSize: 12, color: 'rgba(255,255,255,0.6)', fontWeight: '600' }}>
-              {appName}
-            </Text>
-          </View>
-        </View>
+            {/* Header */}
+            <Text className="text-white text-lg font-bold text-center mb-4">Share Your Choice</Text>
 
-        {/* Result Icon */}
-        <View className="mb-6 h-20 w-20 items-center justify-center rounded-full bg-white/20">
-          <Ionicons name="help-circle" size={40} color="#ffffff" />
-        </View>
+            {/* Preview Card */}
+            <View className="rounded-3xl overflow-hidden" style={{ width: cardWidth, height: cardHeight }}>
+              <LinearGradient
+                colors={gradientColors as any}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={{ flex: 1, padding: 16 }}
+              >
+                {/* Top Branding */}
+                <View className="flex-row justify-between items-start">
+                  <View>
+                    <Text className="text-white text-lg font-bold">WouldYou</Text>
+                    <Text className="text-white/50 text-xs">wouldyou.app</Text>
+                  </View>
+                  <Ionicons name="help-circle" size={24} color="white" />
+                </View>
 
-        {/* Title */}
-        <Text className="mb-2 text-center text-xl font-semibold text-white/80 uppercase tracking-wider">
-          {title}
-        </Text>
+                {/* Content */}
+                <View className="flex-1 justify-center px-2">
+                  <Text className="text-white/70 text-sm mb-4 text-center">Would You Rather...</Text>
 
-        {subtitle ? (
-          <Text className="mb-8 text-center text-sm text-white/60">
-            {subtitle}
-          </Text>
-        ) : null}
+                  {/* Option A */}
+                  <View
+                    className="rounded-xl p-3 mb-3"
+                    style={userChoice === 'A'
+                      ? { borderWidth: 2, borderColor: '#FF6B9D', backgroundColor: 'rgba(255,255,255,0.1)' }
+                      : { backgroundColor: 'rgba(255,255,255,0.1)' }
+                    }
+                  >
+                    <View className="flex-row items-center">
+                      <Text className="text-white text-lg font-bold mr-2">A</Text>
+                      <Text className="text-white text-base flex-1" numberOfLines={2}>{optionA}</Text>
+                    </View>
+                    <View className="bg-white/20 rounded-full h-2 mt-2 overflow-hidden">
+                      <View className="rounded-full h-2" style={{ width: `${percentA}%`, backgroundColor: '#FF6B9D' }} />
+                    </View>
+                    <Text className="text-white/70 text-sm mt-1">{percentA}%</Text>
+                    {userChoice === 'A' && (
+                      <View className="mt-2">
+                        <Text className="text-xs font-bold" style={{ color: '#FF6B9D' }}>MY PICK ▸</Text>
+                      </View>
+                    )}
+                  </View>
 
-        {/* Result Text */}
-        <View className="w-full rounded-2xl bg-white/15 px-6 py-6">
-          <Text className="text-center text-2xl font-bold leading-8 text-white">
-            {resultText}
-          </Text>
-        </View>
+                  {/* Option B */}
+                  <View
+                    className="rounded-xl p-3"
+                    style={userChoice === 'B'
+                      ? { borderWidth: 2, borderColor: '#00D4AA', backgroundColor: 'rgba(255,255,255,0.1)' }
+                      : { backgroundColor: 'rgba(255,255,255,0.1)' }
+                    }
+                  >
+                    <View className="flex-row items-center">
+                      <Text className="text-white text-lg font-bold mr-2">B</Text>
+                      <Text className="text-white text-base flex-1" numberOfLines={2}>{optionB}</Text>
+                    </View>
+                    <View className="bg-white/20 rounded-full h-2 mt-2 overflow-hidden">
+                      <View className="rounded-full h-2" style={{ width: `${percentB}%`, backgroundColor: '#00D4AA' }} />
+                    </View>
+                    <Text className="text-white/70 text-sm mt-1">{percentB}%</Text>
+                    {userChoice === 'B' && (
+                      <View className="mt-2">
+                        <Text className="text-xs font-bold" style={{ color: '#00D4AA' }}>MY PICK ▸</Text>
+                      </View>
+                    )}
+                  </View>
+                </View>
 
-        {/* User Info */}
-        {username && (
-          <View className="mt-8 flex-row items-center">
-            <View className="h-8 w-8 items-center justify-center rounded-full bg-white/20">
-              <Text className="text-sm font-bold text-white">
-                {username.charAt(0).toUpperCase()}
-              </Text>
+                {/* Bottom CTA */}
+                <View className="pt-4 border-t border-white/10">
+                  <Text className="text-white/50 text-xs text-center">Play now — Download WouldYou</Text>
+                </View>
+              </LinearGradient>
             </View>
-            <Text className="ml-2 text-sm text-white/70">@{username}</Text>
-          </View>
-        )}
 
-        {/* Date Stamp */}
-        <Text style={{ marginTop: 24, fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
-          {dateStr}
-        </Text>
+            {/* Share Buttons */}
+            <View className="flex-row justify-center gap-4 mt-4">
+              <TouchableOpacity onPress={handleInstagramShare} className="w-14 h-14 rounded-full items-center justify-center" style={{ backgroundColor: '#DD2A7B' }}>
+                <Ionicons name="logo-instagram" size={24} color="white" />
+              </TouchableOpacity>
 
-        {/* CTA Footer */}
-        <View style={{ position: 'absolute', bottom: 24, left: 24, right: 24 }}>
-          <Text className="text-center text-sm text-white/60">
-            Download {appName} - Play Now
-          </Text>
+              <TouchableOpacity onPress={handleTiktokShare} className="w-14 h-14 rounded-full items-center justify-center bg-black">
+                <Ionicons name="logo-tiktok" size={24} color="white" />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={handleCopyToClipboard} className="w-14 h-14 rounded-full items-center justify-center bg-gray-700">
+                <Ionicons name={copied ? "checkmark" : "copy-outline"} size={24} color="white" />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={handleShare} className="w-14 h-14 rounded-full items-center justify-center bg-gray-700">
+                <Ionicons name="share-outline" size={24} color="white" />
+              </TouchableOpacity>
+            </View>
+
+            {/* Close Button */}
+            <TouchableOpacity onPress={onClose} className="mt-4 py-3">
+              <Text className="text-white/70 text-base text-center">Close</Text>
+            </TouchableOpacity>
+          </Pressable>
         </View>
-      </LinearGradient>
-    </View>
+      </Pressable>
+    </Modal>
   );
 }
