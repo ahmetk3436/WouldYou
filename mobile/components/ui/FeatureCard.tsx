@@ -1,77 +1,114 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable, ViewStyle, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { cn } from '../../lib/cn';
+import { hapticSelection } from '../../lib/haptics';
 
 interface FeatureCardProps {
-  icon: keyof typeof Ionicons.glyphMap;
   title: string;
   description: string;
-  locked?: boolean;
-  badge?: string;
-  colors?: readonly [string, string, ...string[]];
+  icon: keyof typeof Ionicons.glyphMap;
+  isLocked?: boolean;
+  isNew?: boolean;
+  onPress: () => void;
+  className?: string;
+  style?: ViewStyle;
 }
 
-/**
- * FeatureCard - Modular Bento Box Component (2025-2026 Trend)
- * Bento Box Grids: modular layouts for feature displays
- * Use for paywall features, onboarding, and feature highlights
- */
 export default function FeatureCard({
-  icon,
   title,
   description,
-  locked = false,
-  badge,
-  colors = ['#6366F1', '#8B5CF6'],
+  icon,
+  isLocked = false,
+  isNew = false,
+  onPress,
+  className = '',
+  style,
 }: FeatureCardProps) {
-  return (
-    <View
-      className="overflow-hidden rounded-2xl"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 3,
-      }}
-    >
-      <LinearGradient
-        colors={locked ? ['#374151', '#1F2937'] : colors}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{
-          padding: 20,
-          borderRadius: 16,
-        }}
-      >
-        {/* Badge */}
-        {badge && (
-          <View className="mb-2 self-start rounded-full px-3 py-1" style={{ backgroundColor: '#FF6B9D' }}>
-            <Text className="text-xs font-bold text-white uppercase tracking-wider">{badge}</Text>
-          </View>
-        )}
+  const handlePress = () => {
+    hapticSelection();
+    onPress();
+  };
 
-        {/* Icon */}
-        <View className="mb-3 h-12 w-12 items-center justify-center rounded-xl bg-white/20">
-          <Ionicons
-            name={icon}
-            size={24}
-            color={locked ? '#9CA3AF' : 'white'}
-          />
+  return (
+    <Pressable
+      onPress={handlePress}
+      style={[style]}
+      className={cn(
+        'bg-white/8 border border-white/12 rounded-3xl p-5 mb-4 active:opacity-80',
+        isLocked && 'opacity-70',
+        className
+      )}
+    >
+      <View className="flex-row items-start gap-4">
+        {/* Icon container */}
+        <View className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FF6B9D] to-[#C44DFF] items-center justify-center">
+          <Ionicons name={icon} size={24} color="#FFFFFF" />
         </View>
 
         {/* Content */}
-        <Text className="mb-1 text-lg font-bold text-white">{title}</Text>
-        <Text className="text-sm text-white/80">{description}</Text>
-
-        {/* Lock indicator */}
-        {locked && (
-          <View className="absolute right-4 top-4">
-            <Ionicons name="lock-closed" size={16} color="#9CA3AF" />
+        <View className="flex-1">
+          <View className="flex-row items-center gap-2 mb-1">
+            <Text className="text-lg font-semibold text-white">
+              {title}
+            </Text>
+            {isNew && (
+              <LinearGradient
+                colors={['#FFE66D', '#FF9F43']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                className="rounded-full px-2 py-0.5"
+              >
+                <Text className="text-xs font-bold text-[#0A0A12]">
+                  NEW
+                </Text>
+              </LinearGradient>
+            )}
           </View>
-        )}
-      </LinearGradient>
-    </View>
+          <Text className="text-sm text-white/60">
+            {description}
+          </Text>
+        </View>
+
+        {/* Arrow or Lock */}
+        <View className="items-center justify-center">
+          {isLocked ? (
+            <Ionicons name="lock-closed" size={20} color="#6B6B8A" />
+          ) : (
+            <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
+          )}
+        </View>
+      </View>
+
+      {/* Locked overlay */}
+      {isLocked && (
+        <View
+          style={styles.lockedOverlay}
+          pointerEvents="none"
+        >
+          <View className="items-center justify-center">
+            <Ionicons name="lock-closed" size={32} color="#6B6B8A" />
+            <Text className="text-sm text-[#6B6B8A] mt-2 font-medium">
+              Premium Feature
+            </Text>
+          </View>
+        </View>
+      )}
+    </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  lockedOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(10, 10, 18, 0.8)',
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

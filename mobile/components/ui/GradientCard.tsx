@@ -1,54 +1,52 @@
 import React from 'react';
-import { View, type ViewProps } from 'react-native';
+import { View, Text, ViewStyle, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { cn } from '../../lib/cn';
 
-interface GradientCardProps extends ViewProps {
-  colors?: readonly [string, string, ...string[]];
+interface GradientCardProps {
+  children: React.ReactNode;
+  colors?: string[];
   start?: { x: number; y: number };
   end?: { x: number; y: number };
-  children: React.ReactNode;
+  className?: string;
+  style?: ViewStyle;
+  noPadding?: boolean;
 }
 
-/**
- * GradientCard - 2025-2026 Trend Component
- * Rich gradients are dominant in modern mobile UI (purple-to-pink, blue-to-teal, orange-to-red)
- * Use for elevated surfaces, CTAs, and highlight cards
- */
 export default function GradientCard({
-  colors = ['#6366F1', '#EC4899'],
+  children,
+  colors = ['#FF6B9D', '#C44DFF', '#00D4AA'],
   start = { x: 0, y: 0 },
   end = { x: 1, y: 1 },
-  children,
+  className = '',
   style,
-  ...props
+  noPadding = false,
 }: GradientCardProps) {
   return (
-    <View
+    <LinearGradient
+      colors={colors}
+      start={start}
+      end={end}
       style={[
-        {
-          borderRadius: 20,
-          shadowColor: colors[0],
-          shadowOffset: { width: 0, height: 8 },
-          shadowOpacity: 0.25,
-          shadowRadius: 16,
-          elevation: 8,
-        },
+        styles.baseCard,
+        noPadding ? styles.noPadding : styles.withPadding,
         style,
       ]}
-      {...props}
+      className={cn('rounded-3xl shadow-xl', className)}
     >
-      <LinearGradient
-        colors={colors}
-        start={start}
-        end={end}
-        style={{
-          borderRadius: 20,
-          padding: 24,
-          overflow: 'hidden',
-        }}
-      >
-        {children}
-      </LinearGradient>
-    </View>
+      {children}
+    </LinearGradient>
   );
 }
+
+const styles = StyleSheet.create({
+  baseCard: {
+    overflow: 'hidden',
+  },
+  withPadding: {
+    padding: 24,
+  },
+  noPadding: {
+    padding: 0,
+  },
+});

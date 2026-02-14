@@ -170,26 +170,26 @@
       "id": "enhance_013",
       "title": "Fix app.json config and add Explore tab to tab bar",
       "description": "Fix app.json configuration issues and add Explore as a tab in the custom tab bar for better discoverability.\n\nFiles to modify:\n1. mobile/app.json:\n- Change userInterfaceStyle from 'light' to 'dark' (app is dark-themed, this affects native UI elements like alerts, keyboards).\n- Change splash.backgroundColor from '#ffffff' to '#0A0A12' (SPEC background color).\n- Add 'expo-haptics' to plugins array (needed for haptic feedback on physical devices).\n- Add 'expo-apple-authentication' to plugins array (needed for Apple Sign In).\n- Change extra.eas.projectId from 'FILL_IN' to a note or keep as-is (handled at build time).\n\n2. mobile/app/(protected)/_layout.tsx:\n- Add Explore tab to the tabs array between Play and History: { name: 'explore', title: 'Explore', iconDefault: 'compass-outline' as const, iconActive: 'compass' as const, href: '/(protected)/explore' }.\n- Update tab bar order: Play, Explore, History, Settings (4 tabs matching SPEC closer: Play, Daily, Friends, Profile → adapted to current features).\n- Remove 'explore' from isSubScreen check since it's now a tab.\n- Update active colors: Replace '#ea580c' with '#FF6B9D'. Replace 'bg-orange-600' indicator with style={{backgroundColor:'#FF6B9D'}}. Replace 'text-orange-500' with style={{color:'#FF6B9D'}}.\n- Tab bar background: style={{backgroundColor:'#0A0A12'}} with border-t border color '#1A1A2E'.\n\n3. mobile/app/(protected)/explore.tsx:\n- Remove the back button from header since it's now accessible via tab bar.\n- Update header to not need back navigation — just show 'Explore' title with LinearGradient ['#FF6B9D','#C44DFF'] header matching other screens.",
-      "status": "in_progress",
+      "status": "completed",
       "priority": 9,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T14:25:37Z",
+      "updated_at": "2026-02-14T14:32:53Z",
       "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (dummy): failed after 2 retries: API call failed: Post \"dummy\": unsupported protocol scheme \"\""
     },
     {
       "id": "enhance_014",
       "title": "Add glassmorphism card component and UI polish utilities",
       "description": "Create a reusable GlassmorphismCard component and update existing GradientCard to match SPEC's glassmorphism design pattern (bg-white/10, border border-white/20, backdrop blur effect).\n\nFiles to modify:\n1. mobile/components/ui/GradientCard.tsx: Update default gradient colors from whatever is current to ['#FF6B9D','#C44DFF','#00D4AA']. Ensure rounded-3xl and shadow-xl are applied.\n\n2. Create mobile/components/ui/GlassCard.tsx:\nImports: React from 'react'; View, ViewProps from 'react-native'.\nProps: children, className (string), style (ViewStyle), noPadding (bool).\nComponent: View with combined styles: backgroundColor 'rgba(255,255,255,0.08)', borderWidth 1, borderColor 'rgba(255,255,255,0.12)', borderRadius 24 (rounded-3xl equivalent), padding: noPadding ? 0 : 24, plus any passed style. Apply className for NativeWind overrides.\nExport default GlassCard.\n\n3. mobile/components/ui/CTABanner.tsx: Update default gradient colors to ['#FF6B9D','#C44DFF']. Update text colors.\n\n4. mobile/components/ui/UsageBadge.tsx: Update gradient colors from orange to ['#FF6B9D','#C44DFF']. Progress bar color #FF6B9D.\n\n5. mobile/components/ui/FeatureCard.tsx: Update default colors. Locked state overlay uses #0A0A12/80 with lock-closed icon in #6B6B8A. Badge uses LinearGradient ['#FFE66D','#FF9F43'] for 'NEW' badges.\n\n6. mobile/lib/cn.ts (or wherever cn utility is): Verify clsx + tailwind-merge utility exists and works. If not, ensure: export function cn(...inputs: ClassValue[]) { return twMerge(clsx(inputs)); }\n\nThis task creates the design foundation components that other screens will use, ensuring consistent SPEC-compliant styling across the app.",
-      "status": "pending",
+      "status": "in_progress",
       "priority": 9,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T14:00:42Z",
+      "updated_at": "2026-02-14T14:32:53Z",
       "error": "planning failed: engine: all 1 providers failed:\n  provider GLM-Planner (dummy): failed after 2 retries: API call failed: Post \"dummy\": unsupported protocol scheme \"\""
     }
   ]
