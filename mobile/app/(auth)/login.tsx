@@ -1,39 +1,61 @@
 import React, { useState } from 'react';
-import { View, Text, KeyboardAvoidingView, Platform, Pressable, ScrollView, ActivityIndicator } from 'react-native';
-import { Link, router } from 'expo-router';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useAuth } from '../../contexts/AuthContext';
-import Input from '../../components/ui/Input';
 import AppleSignInButton from '../../components/ui/AppleSignInButton';
-import { hapticSelection } from '../../lib/haptics';
+import { useAuth } from '../../contexts/AuthContext';
+import { hapticSuccess, hapticError, hapticSelection } from '../../lib/haptics';
 
 export default function LoginScreen() {
+  const router = useRouter();
   const { login, continueAsGuest } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [emailFocused, setEmailFocused] = useState<boolean>(false);
+  const [passwordFocused, setPasswordFocused] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+
+  const handleLogin = async (): Promise<void> => {
     setError('');
-    if (!email || !password) {
-      setError('Please fill in all fields');
+
+    if (!email.trim()) {
+      setError('Please enter your email');
+      hapticError();
+      return;
+    }
+    if (!password) {
+      setError('Please enter your password');
+      hapticError();
       return;
     }
 
     setIsLoading(true);
     try {
-      await login(email, password);
+      await login(email.trim(), password);
+      hapticSuccess();
+      router.replace('/(protected)/home');
     } catch (err: any) {
-      setError(
-        err.response?.data?.message || 'Login failed. Please try again.'
-      );
+      hapticError();
+      setError(err.response?.data?.message || err.message || 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleGuestMode = async () => {
+  const handleSkip = async (): Promise<void> => {
     hapticSelection();
     await continueAsGuest();
     router.replace('/(protected)/home');
@@ -45,95 +67,204 @@ export default function LoginScreen() {
       style={{ backgroundColor: '#0A0A12' }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
-        <View className="px-8">
-          {/* Branding */}
-          <View className="mb-8 items-center">
-            <View className="mb-6 h-24 w-24 items-center justify-center rounded-3xl" style={{ backgroundColor: 'rgba(255, 107, 157, 0.15)' }}>
-              <Ionicons name="help-circle" size={48} color="#FF6B9D" />
-            </View>
-            <Text className="text-3xl font-bold text-white">Welcome back</Text>
-            <Text className="mt-2 text-base text-gray-400">Sign in to continue playing</Text>
-          </View>
+      <View className="flex-1" style={{ backgroundColor: '#0A0A12' }}>
+        {/* Gradient Orb */}
+        <LinearGradient
+          colors={['#FF6B9D', '#C44DFF']}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '-50%',
+            width: '200%',
+            height: 300,
+            opacity: 0.15,
+            borderBottomLeftRadius: 999,
+            borderBottomRightRadius: 999,
+          }}
+        />
 
-          {/* Error */}
-          {error ? (
-            <View className="mb-4 flex-row items-center rounded-2xl border border-red-800 bg-red-900/30 p-4">
-              <Ionicons name="alert-circle" size={20} color="#ef4444" />
-              <Text className="ml-3 flex-1 text-sm text-red-400">{error}</Text>
-            </View>
-          ) : null}
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingTop: 80 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Header */}
+          <View style={{ marginBottom: 48 }}>
+            <Text className="text-3xl font-bold text-white">Welcome Back</Text>
+            <Text className="text-sm mt-2" style={{ color: '#9CA3AF' }}>
+              Log in to continue your streak 🔥
+            </Text>
+          </View>
 
           {/* Form */}
-          <View className="mb-4">
-            <Input
-              label="Email address"
-              placeholder="you@example.com"
-              value={email}
-              onChangeText={setEmail}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              className="bg-gray-900 border-gray-700 text-white"
-              placeholderTextColor="#6b7280"
-            />
+          <View style={{ gap: 16 }}>
+            {/* Email Input */}
+            <View
+              style={{
+                backgroundColor: '#1A1A2E',
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: emailFocused ? '#FF6B9D' : 'rgba(255,255,255,0.1)',
+              }}
+              className="flex-row items-center"
+            >
+              <Ionicons
+                name="mail-outline"
+                size={20}
+                color={emailFocused ? '#FF6B9D' : '#6B6B8A'}
+                style={{ marginLeft: 16 }}
+              />
+              <TextInput
+                className="flex-1 text-white"
+                style={{ paddingVertical: 16, paddingHorizontal: 12 }}
+                placeholder="Email address"
+                placeholderTextColor="#6B6B8A"
+                value={email}
+                onChangeText={setEmail}
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                textContentType="emailAddress"
+              />
+            </View>
+
+            {/* Password Input */}
+            <View
+              style={{
+                backgroundColor: '#1A1A2E',
+                borderRadius: 16,
+                borderWidth: 1,
+                borderColor: passwordFocused ? '#FF6B9D' : 'rgba(255,255,255,0.1)',
+              }}
+              className="flex-row items-center"
+            >
+              <Ionicons
+                name="lock-closed-outline"
+                size={20}
+                color={passwordFocused ? '#FF6B9D' : '#6B6B8A'}
+                style={{ marginLeft: 16 }}
+              />
+              <TextInput
+                className="flex-1 text-white"
+                style={{ paddingVertical: 16, paddingHorizontal: 12 }}
+                placeholder="Password"
+                placeholderTextColor="#6B6B8A"
+                value={password}
+                onChangeText={setPassword}
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
+                secureTextEntry={!showPassword}
+                textContentType="password"
+              />
+              <Pressable
+                onPress={() => {
+                  hapticSelection();
+                  setShowPassword(!showPassword);
+                }}
+                style={{ paddingRight: 16 }}
+              >
+                <Ionicons
+                  name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                  size={20}
+                  color="#6B6B8A"
+                />
+              </Pressable>
+            </View>
+
+            {/* Forgot Password */}
+            <Pressable style={{ alignSelf: 'flex-end' }}>
+              <Text className="text-sm" style={{ color: '#6B6B8A' }}>
+                Forgot password?
+              </Text>
+            </Pressable>
+
+            {/* Login Button */}
+            <Pressable
+              onPress={handleLogin}
+              disabled={isLoading}
+              style={{ marginTop: 8, opacity: isLoading ? 0.7 : 1 }}
+            >
+              <LinearGradient
+                colors={['#FF6B9D', '#C44DFF']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={{ borderRadius: 16 }}
+                className="py-4"
+              >
+                {isLoading ? (
+                  <ActivityIndicator color="white" />
+                ) : (
+                  <Text className="text-white font-semibold text-center text-base">
+                    Log In
+                  </Text>
+                )}
+              </LinearGradient>
+            </Pressable>
+
+            {/* Divider */}
+            <View className="flex-row items-center my-6">
+              <View className="flex-1 h-px" style={{ backgroundColor: '#1A1A2E' }} />
+              <Text className="text-sm mx-4" style={{ color: '#6B6B8A' }}>
+                or
+              </Text>
+              <View className="flex-1 h-px" style={{ backgroundColor: '#1A1A2E' }} />
+            </View>
+
+            {/* Apple Sign In */}
+            <AppleSignInButton onError={(msg: string) => setError(msg)} />
+
+            {/* Skip for now */}
+            <Pressable onPress={handleSkip} className="mt-4">
+              <Text className="text-center text-sm" style={{ color: '#6B6B8A' }}>
+                Skip for now
+              </Text>
+            </Pressable>
+
+            {/* Sign Up Link */}
+            <View className="mt-6 mb-8">
+              <Pressable
+                className="flex-row justify-center"
+                onPress={() => {
+                  hapticSelection();
+                  router.push('/(auth)/register');
+                }}
+              >
+                <Text style={{ color: '#6B6B8A' }}>Don't have an account? </Text>
+                <Text className="font-semibold" style={{ color: '#FF6B9D' }}>
+                  Sign up
+                </Text>
+              </Pressable>
+            </View>
           </View>
 
-          <View className="mb-6">
-            <Input
-              label="Password"
-              placeholder="Your password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              textContentType="password"
-              className="bg-gray-900 border-gray-700 text-white"
-              placeholderTextColor="#6b7280"
-            />
-          </View>
+          {/* Error Message */}
+          {error ? (
+            <View style={{ marginTop: 16 }}>
+              <Text className="text-center text-sm" style={{ color: '#FF5757' }}>
+                {error}
+              </Text>
+            </View>
+          ) : null}
+        </ScrollView>
 
-          {/* Sign In Button */}
-          <Pressable
-            className="w-full items-center rounded-2xl py-4"
-            style={{ backgroundColor: '#FF6B9D' }}
-            onPress={handleLogin}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <ActivityIndicator color="white" />
-            ) : (
-              <Text className="text-lg font-bold text-white">Sign In</Text>
-            )}
-          </Pressable>
-
-          {/* Divider */}
-          <View className="my-6 flex-row items-center">
-            <View className="h-px flex-1 bg-gray-700" />
-            <Text className="mx-4 text-sm text-gray-500">or</Text>
-            <View className="h-px flex-1 bg-gray-700" />
-          </View>
-
-          {/* Apple Sign In */}
-          <AppleSignInButton onError={(msg) => setError(msg)} />
-
-          {/* Skip Option */}
-          <Pressable
-            className="mt-5 items-center py-4"
-            onPress={handleGuestMode}
-          >
-            <Text className="text-base font-semibold" style={{ color: '#FF6B9D' }}>Skip for now</Text>
-            <Text className="mt-1 text-xs text-gray-500">Play 3 free rounds without an account</Text>
-          </Pressable>
-
-          {/* Footer */}
-          <View className="mt-4 mb-8 flex-row items-center justify-center">
-            <Text className="text-gray-400">Don't have an account? </Text>
-            <Link href="/(auth)/register" asChild>
-              <Text className="font-semibold" style={{ color: '#FF6B9D' }}>Sign Up</Text>
-            </Link>
-          </View>
-        </View>
-      </ScrollView>
+        {/* Loading Overlay */}
+        {isLoading && (
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(10, 10, 18, 0.5)',
+            }}
+            pointerEvents="none"
+          />
+        )}
+      </View>
     </KeyboardAvoidingView>
   );
 }
