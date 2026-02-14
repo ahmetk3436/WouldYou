@@ -30,13 +30,13 @@
       "id": "enhance_003",
       "title": "Build swipe-based gameplay screen with gesture handler",
       "description": "The SPEC describes a full-screen swipe-based gameplay experience (swipe left=Option A, swipe right=Option B) but the current app only has tap-to-vote buttons. Add a dedicated gameplay screen with PanGestureHandler swipe mechanics.\n\nFile to create: mobile/app/(protected)/gameplay.tsx\n\nImports: React, useState, useEffect, useCallback from 'react'; View, Text, Pressable, ActivityIndicator, Dimensions from 'react-native'; Ionicons from '@expo/vector-icons'; useLocalSearchParams, router from 'expo-router'; Gesture, GestureDetector from 'react-native-gesture-handler'; Animated, useSharedValue, useAnimatedStyle, withSpring, withTiming, runOnJS, interpolate from 'react-native-reanimated'; LinearGradient from 'expo-linear-gradient'; api from '../../lib/api'; hapticVote, hapticSuccess, hapticError, hapticMedium from '../../lib/haptics'.\n\nState: questions (Challenge[]), currentIndex (number), result (ChallengeResult|null), loading (bool). Params: category (string), mode ('solo'|'daily').\n\nSwipe Logic: const translateX = useSharedValue(0); const SWIPE_THRESHOLD = 120; Pan gesture: onUpdate sets translateX.value, onEnd checks if |translateX| \u003e SWIPE_THRESHOLD. If left (negative) → vote A with runOnJS. If right (positive) → vote B with runOnJS. Animated card style: transform [{translateX}, {rotate: interpolate(translateX, [-200,0,200], ['-15deg','0deg','15deg'])}], opacity interpolated. Left edge overlay: LinearGradient ['#FF6B9D','transparent'] opacity based on negative translateX. Right edge overlay: LinearGradient ['transparent','#00D4AA'] opacity based on positive translateX.\n\nFetch: GET /challenges/category/{category}?limit=10 or /challenges/daily. On vote: POST /challenges/vote, then show result overlay with animated percentage bars for 2s, then advance to next card.\n\nUI Layout: Full screen dark bg #0A0A12. Top bar: back button, category badge (rounded-full, #1A1A2E bg), question counter 'X/10'. Center: large card (90% width, ~55% height, rounded-3xl, #1A1A2E bg, border border-white/10). Card content: 'Would You Rather...' label in #FF6B9D 14px, Option A text 18px bold white top half, divider with 'OR' circle badge (#FF6B9D bg), Option B text bottom half. Bottom: skip button text-gray-500.\n\nModify: mobile/app/(protected)/home.tsx - Add 'Quick Play' button that navigates to /(protected)/gameplay?category=all\u0026mode=solo. mobile/app/(protected)/_layout.tsx - Add 'gameplay' to isSubScreen check so tab bar hides.",
-      "status": "in_progress",
+      "status": "completed",
       "priority": 8,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T15:10:00Z"
+      "updated_at": "2026-02-14T15:17:07Z"
     },
     {
       "id": "enhance_004",
@@ -66,13 +66,13 @@
       "id": "enhance_006",
       "title": "Redesign onboarding with SPEC gradient haze and animations",
       "description": "Current onboarding uses basic orange/gray styling. SPEC calls for AI Gradient Haze (#FF6B9D→#C44DFF→#00D4AA), glassmorphism cards, and polished animations.\n\nFile to modify: mobile/app/onboarding.tsx\n\nChanges:\n1. Replace the page backgrounds: Step 1 uses LinearGradient colors={['#FF6B9D','#C44DFF','#00D4AA']} start={{x:0,y:0}} end={{x:1,y:1}} as full-screen background. Step 2 uses bg #0A0A12 with subtle gradient orb. Step 3 uses bg #0A0A12.\n2. Step 1: Replace Ionicons help-circle with larger animated card illustration. Add app name 'WouldYou' text-4xl bold white. Tagline 'The party game that never runs out of questions' text-base text-white/70. 'Get Started' button: white bg, #FF6B9D text, rounded-full py-4 px-8.\n3. Step 2: Feature cards use glassmorphism style: bg-white/10, border border-white/20, rounded-2xl p-4. Icons in #C44DFF. Three features: (1) infinite-outline + 'Endless AI Questions' + 'Never play the same question twice', (2) people-outline + 'Free Friend Lobbies' + 'No subscription, just a room code', (3) share-social-outline + 'Share Your Takes' + 'Viral-ready cards for Stories \u0026 TikTok'. Add Reanimated FadeInDown stagger animation to each card with 200ms delay.\n4. Step 3: Large '🎉' emoji 64px. 'Ready to Play?' text-3xl bold white. '3 free rounds — no account needed' text-sm text-gray-400. 'Play as Guest' button: border-2 border-#C44DFF, text-#C44DFF, rounded-full. 'Create Account' button: LinearGradient ['#FF6B9D','#C44DFF'], white text, rounded-full. 'Already have an account? Log in' link in text-gray-500.\n5. Dot indicators: Active dot uses #FF6B9D bg, inactive #1A1A2E.\n6. Add Animated.ScrollView with pagingEnabled instead of manual step state for smoother horizontal transitions.\n7. Wrap entire screen in a Reanimated FadeIn entering animation.",
-      "status": "pending",
+      "status": "in_progress",
       "priority": 8,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T15:17:07Z"
     },
     {
       "id": "enhance_007",
