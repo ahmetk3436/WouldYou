@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"strconv"
+
 	"github.com/ahmetcoskunkizilkaya/wouldyou/backend/internal/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
@@ -8,11 +10,15 @@ import (
 )
 
 type ChallengeHandler struct {
-	service *services.ChallengeService
+	service           *services.ChallengeService
+	questionGenerator *services.QuestionGeneratorService
 }
 
-func NewChallengeHandler(service *services.ChallengeService) *ChallengeHandler {
-	return &ChallengeHandler{service: service}
+func NewChallengeHandler(service *services.ChallengeService, qg *services.QuestionGeneratorService) *ChallengeHandler {
+	return &ChallengeHandler{
+		service:           service,
+		questionGenerator: qg,
+	}
 }
 
 // GetDailyChallenge supports both authenticated and guest/anonymous access via OptionalAuth
@@ -171,6 +177,102 @@ func (h *ChallengeHandler) GetByCategory(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{"data": challenges, "total": len(challenges)})
+}
+
+// GenerateQuestions handles POST /api/admin/challenges/generate
+// Admin-only endpoint to generate questions via GLM-5
+func (h *ChallengeHandler) GenerateQuestions(c *fiber.Ctx) error {
+	var req struct {
+		Category string `json:"category"`
+		Count    int    `json:"count"`
+	}
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error":   true,
+			"message": "Invalid request body",
+		})
+	}
+
+	if req.Category == "" {
+		req.Category = "general"
+	}
+	if req.Count <= 0 {
+		req.Count = 10
+	}
+	if req.Count > 50 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error":   true,
+			"message": "Count cannot exceed 50",
+		})
+	}
+
+	if !h.questionGenerator.IsAvailable() {
+		return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{
+			"error":   true,
+			"message": "AI question generation is not configured",
+			"hint":    "Set GLM_API_KEY environment variable",
+		})
+	}
+
+	challenges, err := h.questionGenerator.GenerateBatch(req.Category, req.Count)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error":   true,
+			"message": "Failed to generate questions",
+			"details": err.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
+		"message": "Questions generated successfully",
+		"count":   len(challenges),
+		"data":    challenges,
+	})
+}
+
+// GenerateAllCategories handles POST /api/admin/challenges/generate-all
+// Generates questions for all categories at once
+func (h *ChallengeHandler) GenerateAllCategories(c *fiber.Ctx) error {
+	countStr := c.Query("count", "10")
+	count, err := strconv.Atoi(countStr)
+	if err != nil || count <= 0 {
+		count = 10
+	}
+	if count > 20 {
+		count = 20
+	}
+
+	if !h.questionGenerator.IsAvailable() {
+		return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{
+			"error":   true,
+			"message": "AI question generation is not configured",
+		})
+	}
+
+	results, err := h.questionGenerator.GenerateForAllCategories(count)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error":   true,
+			"message": "Failed to generate questions",
+			"details": err.Error(),
+		})
+	}
+
+	totalCount := 0
+	categoryCounts := make(map[string]int)
+	for cat, challenges := range results {
+		cnt := len(challenges)
+		categoryCounts[cat] = cnt
+		totalCount += cnt
+	}
+
+	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
+		"message":         "Questions generated for all categories",
+		"total_count":     totalCount,
+		"category_counts": categoryCounts,
+		"data":            results,
+	})
 }
 
 // extractIdentity gets userID and guestID from OptionalAuth middleware locals

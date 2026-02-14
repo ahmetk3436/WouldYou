@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"log"
 	"math/rand"
 	"time"
 
@@ -11,11 +12,12 @@ import (
 )
 
 type ChallengeService struct {
-	db *gorm.DB
+	db                *gorm.DB
+	questionGenerator *QuestionGeneratorService
 }
 
-func NewChallengeService(db *gorm.DB) *ChallengeService {
-	return &ChallengeService{db: db}
+func NewChallengeService(db *gorm.DB, qg *QuestionGeneratorService) *ChallengeService {
+	return &ChallengeService{db: db, questionGenerator: qg}
 }
 
 // GetDailyChallenge returns today's challenge, creating one with rotation if needed
@@ -84,6 +86,23 @@ func (s *ChallengeService) GetChallengesByCategory(category string, userID uuid.
 	}
 	query.Find(&challenges)
 
+	// If fewer than 5 challenges and generator is available, generate more
+	if len(challenges) < 5 && s.questionGenerator != nil && s.questionGenerator.IsAvailable() {
+		log.Printf("Low challenge count for category %s (%d), generating more...", category, len(challenges))
+		_, genErr := s.questionGenerator.GenerateBatch(category, 10)
+		if genErr != nil {
+			log.Printf("Failed to generate challenges for category %s: %v", category, genErr)
+		} else {
+			// Re-query with the new challenges included
+			challenges = nil
+			query = s.db.Where("category = ?", category).Order("created_at DESC")
+			if limit > 0 {
+				query = query.Limit(limit)
+			}
+			query.Find(&challenges)
+		}
+	}
+
 	result := make([]map[string]interface{}, 0)
 	for _, ch := range challenges {
 		total := ch.VotesA + ch.VotesB
@@ -149,12 +168,38 @@ func (s *ChallengeService) GetRandomChallenge(userID uuid.UUID) (*models.Challen
 		Order("RANDOM()").
 		First(&challenge).Error
 
-	if err != nil {
-		// If all voted, just return a random one
-		err = s.db.Where("is_daily = ?", false).Order("RANDOM()").First(&challenge).Error
-		if err != nil {
-			return nil, errors.New("no challenges available")
+	if err == nil {
+		return &challenge, nil
+	}
+
+	// Check total non-daily challenge count
+	var totalCount int64
+	s.db.Model(&models.Challenge{}).Where("is_daily = ?", false).Count(&totalCount)
+
+	if totalCount == 0 {
+		// No challenges at all - try to generate some
+		if s.questionGenerator != nil && s.questionGenerator.IsAvailable() {
+			log.Println("No challenges found, generating via GLM-5...")
+			_, genErr := s.questionGenerator.GenerateBatch("general", 10)
+			if genErr != nil {
+				log.Printf("Failed to generate challenges: %v", genErr)
+				return nil, errors.New("no challenges available and generation failed")
+			}
+			// Try again after generation
+			err = s.db.Where("is_daily = ? AND id NOT IN (?)", false, subQuery).
+				Order("RANDOM()").
+				First(&challenge).Error
+			if err == nil {
+				return &challenge, nil
+			}
 		}
+		return nil, errors.New("no challenges available")
+	}
+
+	// User has voted on all challenges - return any random one
+	err = s.db.Where("is_daily = ?", false).Order("RANDOM()").First(&challenge).Error
+	if err != nil {
+		return nil, errors.New("no challenges available")
 	}
 
 	return &challenge, nil
@@ -319,4 +364,50 @@ func (s *ChallengeService) GetChallengeHistory(userID uuid.UUID, limit int) ([]m
 	}
 
 	return result, nil
+}
+
+// GetCategories returns all available categories
+func (s *ChallengeService) GetCategories() ([]string, error) {
+	var categories []string
+
+	err := s.db.Model(&models.Challenge{}).
+		Distinct("category").
+		Pluck("category", &categories).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	if len(categories) == 0 {
+		categories = []string{"life", "deep", "superpower", "funny", "love", "tech"}
+	}
+
+	return categories, nil
+}
+
+// EnsureMinimumChallenges checks and generates challenges if below minimum
+func (s *ChallengeService) EnsureMinimumChallenges() error {
+	if s.questionGenerator == nil || !s.questionGenerator.IsAvailable() {
+		return nil
+	}
+
+	categories := []string{"life", "deep", "superpower", "funny", "love", "tech"}
+	minPerCategory := 10
+
+	for _, category := range categories {
+		var count int64
+		s.db.Model(&models.Challenge{}).Where("category = ?", category).Count(&count)
+
+		if count < int64(minPerCategory) {
+			needed := minPerCategory - int(count)
+			log.Printf("Category %s has %d challenges, generating %d more", category, count, needed)
+
+			_, err := s.questionGenerator.GenerateBatch(category, needed)
+			if err != nil {
+				log.Printf("Failed to generate for %s: %v", category, err)
+			}
+		}
+	}
+
+	return nil
 }

@@ -57,10 +57,14 @@ func Setup(
 	protectedChallenges.Get("/stats", challengeHandler.GetStats)
 	protectedChallenges.Get("/history", challengeHandler.GetHistory)
 
-	// Admin moderation panel (protected + admin role check)
+	// Admin panel (protected + admin role check)
 	admin := api.Group("/admin", middleware.JWTProtected(cfg), middleware.AdminOnly(db))
 	admin.Get("/moderation/reports", moderationHandler.ListReports)
 	admin.Put("/moderation/reports/:id", moderationHandler.ActionReport)
+
+	// AI Question Generation endpoints
+	admin.Post("/challenges/generate", challengeHandler.GenerateQuestions)
+	admin.Post("/challenges/generate-all", challengeHandler.GenerateAllCategories)
 
 	// Webhooks (verified by auth header, not JWT)
 	webhooks := api.Group("/webhooks")

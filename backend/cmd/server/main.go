@@ -29,6 +29,9 @@ func main() {
 	if cfg.DBPassword == "" {
 		log.Fatal("DB_PASSWORD environment variable is required")
 	}
+	if err := cfg.Validate(); err != nil {
+		log.Fatalf("Configuration error: %v", err)
+	}
 
 	// Database
 	if err := database.Connect(cfg); err != nil {
@@ -39,17 +42,18 @@ func main() {
 	}
 
 	// Services
+	questionGenerator := services.NewQuestionGeneratorService(database.DB, cfg)
 	authService := services.NewAuthService(database.DB, cfg)
 	subscriptionService := services.NewSubscriptionService(database.DB)
 	moderationService := services.NewModerationService(database.DB)
-	challengeService := services.NewChallengeService(database.DB)
+	challengeService := services.NewChallengeService(database.DB, questionGenerator)
 
 	// Handlers
 	authHandler := handlers.NewAuthHandler(authService)
 	healthHandler := handlers.NewHealthHandler()
 	webhookHandler := handlers.NewWebhookHandler(subscriptionService, cfg)
 	moderationHandler := handlers.NewModerationHandler(moderationService)
-	challengeHandler := handlers.NewChallengeHandler(challengeService)
+	challengeHandler := handlers.NewChallengeHandler(challengeService, questionGenerator)
 	legalHandler := handlers.NewLegalHandler()
 
 	// Fiber app
@@ -88,6 +92,7 @@ func main() {
 	}()
 
 	log.Printf("Server running on port %s", cfg.Port)
+	log.Printf("AI Generation: %v", questionGenerator.IsAvailable())
 
 	<-quit
 	log.Println("Shutting down server...")
