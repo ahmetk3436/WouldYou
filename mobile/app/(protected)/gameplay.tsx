@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Pressable, ActivityIndicator, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator, Dimensions, StyleSheet, Share } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, router } from 'expo-router';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -16,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../../lib/api';
 import { hapticVote, hapticSuccess, hapticError, hapticMedium, hapticLight } from '../../lib/haptics';
+import ResultsOverlay, { ChallengeResult as OverlayChallengeResult } from '../../components/ui/ResultsOverlay';
 
 interface Challenge {
   id: string;
@@ -45,6 +46,8 @@ export default function GameplayScreen() {
   const [loading, setLoading] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [overlayResult, setOverlayResult] = useState<OverlayChallengeResult | null>(null);
 
   const translateX = useSharedValue(0);
   const cardScale = useSharedValue(1);
@@ -95,7 +98,7 @@ export default function GameplayScreen() {
   }, [currentIndex, questions.length]);
 
   const handleVote = useCallback(async (choice: 'A' | 'B') => {
-    if (isAnimating || showResult) return;
+    if (isAnimating || showResult || showOverlay) return;
 
     const currentQuestion = questions[currentIndex];
     if (!currentQuestion) return;
@@ -109,21 +112,62 @@ export default function GameplayScreen() {
         choice: choice,
       });
 
-      setResult(response.data);
-      setShowResult(true);
-      resultOpacity.value = withTiming(1, { duration: 300 });
-      hapticSuccess();
+      // Build overlay result with option text included
+      const overlayData: OverlayChallengeResult = {
+        option_a: currentQuestion.option_a,
+        option_b: currentQuestion.option_b,
+        percent_a: response.data.percent_a ?? response.data.option_a_percentage ?? 50,
+        percent_b: response.data.percent_b ?? response.data.option_b_percentage ?? 50,
+        total_votes: response.data.total_votes ?? 0,
+        user_choice: choice,
+      };
 
-      setTimeout(() => {
-        advanceToNext();
-      }, 2000);
+      setOverlayResult(overlayData);
+      setShowOverlay(true);
+      hapticSuccess();
     } catch (error) {
       hapticError();
       console.error('Failed to vote:', error);
       setIsAnimating(false);
       translateX.value = withSpring(0);
     }
-  }, [questions, currentIndex, isAnimating, showResult, advanceToNext]);
+  }, [questions, currentIndex, isAnimating, showResult, showOverlay]);
+
+  const handleNextQuestion = useCallback(() => {
+    setShowOverlay(false);
+    setOverlayResult(null);
+    translateX.value = 0;
+
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setIsAnimating(false);
+    } else {
+      router.back();
+    }
+  }, [currentIndex, questions.length]);
+
+  const handleShareResult = useCallback(async () => {
+    if (!overlayResult) return;
+
+    const userChoice = overlayResult.user_choice === 'A'
+      ? overlayResult.option_a
+      : overlayResult.option_b;
+    const percentage = overlayResult.user_choice === 'A'
+      ? Math.round(overlayResult.percent_a)
+      : Math.round(overlayResult.percent_b);
+
+    const shareMessage = `\u{1F914} Would You Rather?\n\nI chose "${userChoice}"\n${percentage}% of people agree with me!\n\nPlay now and see what others chose!`;
+
+    try {
+      await Share.share({
+        message: shareMessage,
+        title: 'Would You Rather - My Choice',
+      });
+      hapticSuccess();
+    } catch (error) {
+      console.error('Share error:', error);
+    }
+  }, [overlayResult]);
 
   const skipQuestion = useCallback(() => {
     if (isAnimating) return;
@@ -137,7 +181,7 @@ export default function GameplayScreen() {
   }, []);
 
   const panGesture = Gesture.Pan()
-    .enabled(!isAnimating && !showResult)
+    .enabled(!isAnimating && !showResult && !showOverlay)
     .onUpdate((event) => {
       translateX.value = event.translationX;
       if (Math.abs(event.translationX) > SWIPE_THRESHOLD && Math.abs(event.translationX) < SWIPE_THRESHOLD + 10) {
@@ -343,56 +387,12 @@ export default function GameplayScreen() {
               </Animated.View>
             </GestureDetector>
 
-            {/* Result Overlay */}
-            {showResult && result && (
-              <Animated.View
-                style={[resultOverlayStyle, StyleSheet.absoluteFillObject, { borderRadius: 24, backgroundColor: 'rgba(10,10,18,0.95)', overflow: 'hidden' }]}
-              >
-                <View className="flex-1 p-6 justify-center">
-                  <Text className="text-white text-lg font-semibold text-center mb-6">
-                    You chose {result.user_choice === 'A' ? 'Option A' : 'Option B'}!
-                  </Text>
-
-                  {/* Option A Result Bar */}
-                  <View className="mb-4">
-                    <View className="flex-row justify-between mb-2">
-                      <Text className="text-white font-medium">Option A</Text>
-                      <Text className="font-bold" style={{ color: '#FF6B9D' }}>{result.option_a_percentage}%</Text>
-                    </View>
-                    <View className="h-3 rounded-full overflow-hidden" style={{ backgroundColor: '#1A1A2E' }}>
-                      <View
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#FF6B9D', width: `${result.option_a_percentage}%` }}
-                      />
-                    </View>
-                  </View>
-
-                  {/* Option B Result Bar */}
-                  <View className="mb-6">
-                    <View className="flex-row justify-between mb-2">
-                      <Text className="text-white font-medium">Option B</Text>
-                      <Text className="font-bold" style={{ color: '#00D4AA' }}>{result.option_b_percentage}%</Text>
-                    </View>
-                    <View className="h-3 rounded-full overflow-hidden" style={{ backgroundColor: '#1A1A2E' }}>
-                      <View
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: '#00D4AA', width: `${result.option_b_percentage}%` }}
-                      />
-                    </View>
-                  </View>
-
-                  <Text className="text-sm text-center" style={{ color: '#9CA3AF' }}>
-                    {result.total_votes.toLocaleString()} total votes
-                  </Text>
-                </View>
-              </Animated.View>
-            )}
           </View>
         )}
       </View>
 
       {/* Bottom Skip Button */}
-      {!loading && questions.length > 0 && (
+      {!loading && questions.length > 0 && !showOverlay && (
         <View className="px-6 pb-6">
           <Pressable
             onPress={skipQuestion}
@@ -401,6 +401,19 @@ export default function GameplayScreen() {
           >
             <Text className="text-sm font-medium" style={{ color: '#6B7280' }}>Skip this question</Text>
           </Pressable>
+        </View>
+      )}
+
+      {/* Results Overlay */}
+      {showOverlay && overlayResult && (
+        <View style={StyleSheet.absoluteFillObject}>
+          <ResultsOverlay
+            result={overlayResult}
+            onNext={handleNextQuestion}
+            onShare={handleShareResult}
+            questionNumber={currentIndex + 1}
+            totalQuestions={questions.length}
+          />
         </View>
       )}
     </SafeAreaView>

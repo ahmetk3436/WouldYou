@@ -42,13 +42,13 @@
       "id": "enhance_004",
       "title": "Add results overlay with animated percentage bars",
       "description": "After voting in gameplay, show an animated results overlay with spring-animated percentage bars, majority badge, and share prompt. Currently home.tsx shows static bars — this adds proper Reanimated animations.\n\nFile to create: mobile/components/ui/ResultsOverlay.tsx\n\nProps: result (ChallengeResult), onNext () =\u003e void, onShare () =\u003e void, questionNumber (number), totalQuestions (number).\n\nImports: React, useEffect from 'react'; View, Text, Pressable from 'react-native'; Ionicons from '@expo/vector-icons'; Animated, useSharedValue, useAnimatedStyle, withTiming, withDelay, withSpring, Easing from 'react-native-reanimated'; LinearGradient from 'expo-linear-gradient'; hapticSuccess from '../../lib/haptics'.\n\nAnimation: const barAWidth = useSharedValue(0); const barBWidth = useSharedValue(0); const fadeIn = useSharedValue(0). useEffect on mount: fadeIn.value = withTiming(1, {duration:300}), barAWidth.value = withDelay(200, withSpring(result.percent_a, {damping:15, stiffness:90})), barBWidth.value = withDelay(400, withSpring(result.percent_b, {damping:15, stiffness:90})).\n\nAnimated styles: barAStyle uses width: interpolate(barAWidth, [0,100], ['0%','100%']). Same for B.\n\nUI: Full overlay with bg #0A0A12/95 opacity. Center card rounded-3xl #1A1A2E p-6. 'You chose...' text-sm text-gray-400. User's choice highlighted: if A, show option_a in #FF6B9D bold, if B show option_b in #00D4AA bold. Animated bars: Option A bar with LinearGradient ['#FF6B9D','#C44DFF'], Option B bar with LinearGradient ['#00D4AA','#00B894']. Percentage labels at right of each bar. Total votes count with people-outline icon. Majority badge: if user picked majority (percent \u003e 50), show 'You're with the majority!' in green card, else 'Bold choice! Only X% agree' in #FF6B9D card. Two buttons at bottom: 'Share This' (LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-4), 'Next Question' (border border-gray-700 rounded-2xl py-4). If questionNumber === totalQuestions, show 'See Results' instead of 'Next'.\n\nIntegrate into gameplay.tsx: Show ResultsOverlay after vote, pass onNext to advance currentIndex, onShare to call Share.share().",
-      "status": "pending",
+      "status": "in_progress",
       "priority": 7,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T15:36:56Z"
     },
     {
       "id": "enhance_005",
@@ -90,13 +90,13 @@
       "id": "enhance_008",
       "title": "Enhance home screen with SPEC daily card and quick play",
       "description": "Redesign home screen to match SPEC: featured daily challenge card with gradient border, quick play button, category chips horizontal scroll, streak fire badge, and stats row.\n\nFile to modify: mobile/app/(protected)/home.tsx\n\nChanges:\n1. Header: Replace solid bg-orange-600 header with a LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24. Add left: streak flame badge (Ionicons 'flame' in #FF9F43 + streak count). Add right: gear icon Pressable navigating to settings.\n2. Daily Challenge Card (before voting): Wrap in LinearGradient ['#FF6B9D','#C44DFF'] p-[1px] rounded-3xl (gradient border effect). Inner View #1A1A2E rounded-3xl p-6. Add 'DAILY CHALLENGE' badge: LinearGradient ['#FF6B9D','#C44DFF'] rounded-full px-3 py-1 with text-xs bold white. Show challenge category. Option A button: style={{backgroundColor:'#FF6B9D'}} rounded-2xl py-5. Option B button: style={{backgroundColor:'#00D4AA'}} rounded-2xl py-5. VS divider circle: LinearGradient ['#FF6B9D','#C44DFF'].\n3. Quick Play Section (after voting or always visible below): 'Quick Play' large button with LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-5, Ionicons play-outline, navigates to gameplay?category=all\u0026mode=solo.\n4. Category chips: Horizontal ScrollView below quick play. 6 chips: All, Funny 😂, Deep 🧠, Superpowers ⚡, Love ❤️, Tech 💻. Selected chip: LinearGradient ['#FF6B9D','#C44DFF'], unselected: #1A1A2E border border-white/10. Tapping a category navigates to gameplay?category={cat}\u0026mode=solo.\n5. Results section: Keep existing but update Option A bar to LinearGradient ['#FF6B9D','#C44DFF'] and Option B bar to LinearGradient ['#00D4AA','#00B894']. Checkmark badges use matching colors.\n6. Stats footer: Three stat items with #FF6B9D text for numbers instead of orange-400.\n7. Explore button: Border-2 border-#C44DFF, text-#C44DFF.",
-      "status": "in_progress",
+      "status": "completed",
       "priority": 8,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T15:29:49Z"
+      "updated_at": "2026-02-14T15:36:56Z"
     },
     {
       "id": "enhance_009",
