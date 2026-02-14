@@ -78,25 +78,25 @@
       "id": "enhance_007",
       "title": "Redesign login and register screens with SPEC branding",
       "description": "Current auth screens use generic orange styling. Update to match SPEC's dark theme with #FF6B9D primary and glassmorphism input fields.\n\nFiles to modify:\n1. mobile/app/(auth)/login.tsx:\n- Background: #0A0A12 (not gray-950).\n- Top gradient orb: Position a LinearGradient ['#FF6B9D','#C44DFF'] absolute top-0, width 200%, height 300, opacity 0.15, borderBottomLeftRadius 999, borderBottomRightRadius 999 for atmospheric glow.\n- 'Welcome Back' text-3xl bold white. 'Log in to continue your streak 🔥' text-sm text-gray-500.\n- Input fields: Replace bg-gray-800 with style={{backgroundColor:'#1A1A2E'}}, border border-white/10. Focus state: border-#FF6B9D. Icon color #6B6B8A, focus icon color #FF6B9D.\n- 'Log In' button: LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-4. Replace current bg-orange-600.\n- Divider: '— or —' in #6B6B8A.\n- Apple Sign In button styling update: keep existing component but ensure it matches dark theme.\n- 'Skip for now' guest button: text-gray-500, not orange.\n- 'Don't have an account? Sign up' link: 'Sign up' portion in #FF6B9D.\n- Error text: use #FF5757 (SPEC error color).\n\n2. mobile/app/(auth)/register.tsx:\n- Same background treatment as login (gradient orb).\n- 'Create Account' text-3xl bold white. 'Join 50K+ players worldwide' text-sm text-gray-500.\n- Same input field styling as login.\n- Add password strength indicator: 3-segment bar below password field. Red (#FF5757) for weak (\u003c8 chars), yellow (#FFE66D) for medium (8+ with mixed case), green (#00D4AA) for strong (8+ with mixed case + number + special).\n- 'Create Account' button: LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-4.\n- Same divider and Apple Sign In.\n- 'Already have an account? Log in' with 'Log in' in #FF6B9D.\n- On success: hapticSuccess() is already called — add confetti-like animated dots using Reanimated (6 small circles that burst outward with random trajectories).",
+      "status": "completed",
+      "priority": 8,
+      "depends_on": [],
+      "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
+      "auto_commit": true,
+      "created_at": "",
+      "updated_at": "2026-02-14T15:29:49Z"
+    },
+    {
+      "id": "enhance_008",
+      "title": "Enhance home screen with SPEC daily card and quick play",
+      "description": "Redesign home screen to match SPEC: featured daily challenge card with gradient border, quick play button, category chips horizontal scroll, streak fire badge, and stats row.\n\nFile to modify: mobile/app/(protected)/home.tsx\n\nChanges:\n1. Header: Replace solid bg-orange-600 header with a LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24. Add left: streak flame badge (Ionicons 'flame' in #FF9F43 + streak count). Add right: gear icon Pressable navigating to settings.\n2. Daily Challenge Card (before voting): Wrap in LinearGradient ['#FF6B9D','#C44DFF'] p-[1px] rounded-3xl (gradient border effect). Inner View #1A1A2E rounded-3xl p-6. Add 'DAILY CHALLENGE' badge: LinearGradient ['#FF6B9D','#C44DFF'] rounded-full px-3 py-1 with text-xs bold white. Show challenge category. Option A button: style={{backgroundColor:'#FF6B9D'}} rounded-2xl py-5. Option B button: style={{backgroundColor:'#00D4AA'}} rounded-2xl py-5. VS divider circle: LinearGradient ['#FF6B9D','#C44DFF'].\n3. Quick Play Section (after voting or always visible below): 'Quick Play' large button with LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-5, Ionicons play-outline, navigates to gameplay?category=all\u0026mode=solo.\n4. Category chips: Horizontal ScrollView below quick play. 6 chips: All, Funny 😂, Deep 🧠, Superpowers ⚡, Love ❤️, Tech 💻. Selected chip: LinearGradient ['#FF6B9D','#C44DFF'], unselected: #1A1A2E border border-white/10. Tapping a category navigates to gameplay?category={cat}\u0026mode=solo.\n5. Results section: Keep existing but update Option A bar to LinearGradient ['#FF6B9D','#C44DFF'] and Option B bar to LinearGradient ['#00D4AA','#00B894']. Checkmark badges use matching colors.\n6. Stats footer: Three stat items with #FF6B9D text for numbers instead of orange-400.\n7. Explore button: Border-2 border-#C44DFF, text-#C44DFF.",
       "status": "in_progress",
       "priority": 8,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T15:22:09Z"
-    },
-    {
-      "id": "enhance_008",
-      "title": "Enhance home screen with SPEC daily card and quick play",
-      "description": "Redesign home screen to match SPEC: featured daily challenge card with gradient border, quick play button, category chips horizontal scroll, streak fire badge, and stats row.\n\nFile to modify: mobile/app/(protected)/home.tsx\n\nChanges:\n1. Header: Replace solid bg-orange-600 header with a LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24. Add left: streak flame badge (Ionicons 'flame' in #FF9F43 + streak count). Add right: gear icon Pressable navigating to settings.\n2. Daily Challenge Card (before voting): Wrap in LinearGradient ['#FF6B9D','#C44DFF'] p-[1px] rounded-3xl (gradient border effect). Inner View #1A1A2E rounded-3xl p-6. Add 'DAILY CHALLENGE' badge: LinearGradient ['#FF6B9D','#C44DFF'] rounded-full px-3 py-1 with text-xs bold white. Show challenge category. Option A button: style={{backgroundColor:'#FF6B9D'}} rounded-2xl py-5. Option B button: style={{backgroundColor:'#00D4AA'}} rounded-2xl py-5. VS divider circle: LinearGradient ['#FF6B9D','#C44DFF'].\n3. Quick Play Section (after voting or always visible below): 'Quick Play' large button with LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-5, Ionicons play-outline, navigates to gameplay?category=all\u0026mode=solo.\n4. Category chips: Horizontal ScrollView below quick play. 6 chips: All, Funny 😂, Deep 🧠, Superpowers ⚡, Love ❤️, Tech 💻. Selected chip: LinearGradient ['#FF6B9D','#C44DFF'], unselected: #1A1A2E border border-white/10. Tapping a category navigates to gameplay?category={cat}\u0026mode=solo.\n5. Results section: Keep existing but update Option A bar to LinearGradient ['#FF6B9D','#C44DFF'] and Option B bar to LinearGradient ['#00D4AA','#00B894']. Checkmark badges use matching colors.\n6. Stats footer: Three stat items with #FF6B9D text for numbers instead of orange-400.\n7. Explore button: Border-2 border-#C44DFF, text-#C44DFF.",
-      "status": "pending",
-      "priority": 8,
-      "depends_on": [],
-      "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
-      "auto_commit": true,
-      "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T15:29:49Z"
     },
     {
       "id": "enhance_009",
