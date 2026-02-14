@@ -126,25 +126,25 @@
       "id": "enhance_011",
       "title": "Redesign settings screen with grouped sections and SPEC colors",
       "description": "Update settings to use SPEC color scheme with properly grouped sections, glassmorphism cards, and improved layout.\n\nFile to modify: mobile/app/(protected)/settings.tsx\n\nChanges:\n1. Header: LinearGradient ['#FF6B9D','#C44DFF'] with borderBottomLeftRadius:24, borderBottomRightRadius:24.\n2. Background: #0A0A12 instead of gray-950.\n3. Group cards: Each section (Account, Subscription, Security, About, Danger Zone) wrapped in View #1A1A2E rounded-2xl border border-white/10 overflow-hidden. Section headers: text-xs font-bold uppercase tracking-wider text-gray-500 px-4 pt-4 pb-2.\n4. Account section: User email with person-circle icon. If authenticated (not guest), show email. If guest, show 'Guest User' with 'Create Account' CTA button in #FF6B9D.\n5. Subscription section: If subscribed, show green badge 'Premium Active' with crown icon. If not, show 'Upgrade to Pro' with LinearGradient ['#FF6B9D','#C44DFF'] button navigating to paywall. Restore Purchases row with refresh-outline icon.\n6. Security section: Biometric toggle with Face ID/Touch ID label (already exists). Keep biometric logic.\n7. About section: Privacy Policy, Terms of Service (already exist). Add 'Rate WouldYou' row with star-outline icon. Add 'Share with Friends' row with share-outline icon that calls Share.share({message:'Check out WouldYou...'}). App version from Constants.expoConfig?.version at bottom in text-xs text-gray-600.\n8. Danger Zone section: Red tinted border: border-#FF5757/20. 'Delete Account' in #FF5757 with trash-outline icon. Confirmation modal: bg #1A1A2E, 'Are you sure?' text, password input (for authenticated users), two buttons: 'Cancel' (border gray-700) and 'Delete' (bg #FF5757).\n9. Sign Out button: Full width at bottom, border-2 border-#FF5757, text-#FF5757, rounded-2xl py-4.\n10. Replace all orange references with #FF6B9D or appropriate SPEC color.",
-      "status": "in_progress",
+      "status": "completed",
       "priority": 7,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": "2026-02-14T16:17:08Z"
+      "updated_at": "2026-02-14T16:26:37Z"
     },
     {
       "id": "enhance_012",
       "title": "Redesign paywall with SPEC pricing cards and feature list",
       "description": "Update paywall screen to match SPEC: crown emoji, gradient background, horizontal pricing card scroll with POPULAR/BEST VALUE badges, and enhanced feature checklist.\n\nFile to modify: mobile/app/(protected)/paywall.tsx\n\nChanges:\n1. Background: LinearGradient ['#0A0A12','#1A1A2E'] full screen.\n2. Top atmospheric glow: Absolute positioned LinearGradient ['#FF6B9D','#C44DFF'] height:300 opacity:0.1 with borderBottomLeftRadius:999.\n3. Close button: Top-right, Ionicons close size=28 color='#6B6B8A'. Pressable with hapticSelection.\n4. Header: '👑 WouldYou Pro' text-3xl bold white. 'Unlock the full experience' text-base text-gray-400.\n5. Feature checklist: 6 items with Ionicons checkmark-circle in #FF6B9D. Items: 'Unlimited plays — no daily limits', 'Exclusive question categories', 'Ad-free experience', 'Custom share card themes', 'Priority access to new packs', 'Profile badge \u0026 frame'. Each item: View flex-row items-center gap-3 py-2. Icon 22px. Text text-base text-white.\n6. Pricing cards: Horizontal ScrollView with snap (snapToInterval, decelerationRate='fast'). Three cards width=screenWidth*0.7, each #1A1A2E rounded-3xl p-6 border border-white/10. Selected card: border-2 border-#FF6B9D with subtle shadow. Card content: period (Weekly/Monthly/Annual) text-lg bold white, price text-3xl bold white, per-period text-sm text-gray-400. Monthly card: 'POPULAR' badge LinearGradient ['#FF9F43','#FFE66D'] rounded-full px-3 py-1 absolute top-right. Annual card: 'BEST VALUE' badge LinearGradient ['#00D4AA','#00B894'] + '$0.77/week' calculation text.\n7. Continue button: LinearGradient ['#FF6B9D','#C44DFF'] rounded-2xl py-5. Text: 'Continue with {selectedPlan}' text-lg bold white.\n8. Fine print: 'Cancel anytime' text-xs text-gray-500. 'Restore Purchases' underlined text-xs text-#FF6B9D.\n9. State: selectedPlan (string, default 'monthly'). On card press, update selectedPlan + hapticSelection.",
-      "status": "pending",
+      "status": "in_progress",
       "priority": 6,
       "depends_on": [],
       "test_command": "cd mobile \u0026\u0026 npx tsc --noEmit",
       "auto_commit": true,
       "created_at": "",
-      "updated_at": ""
+      "updated_at": "2026-02-14T16:26:37Z"
     },
     {
       "id": "enhance_013",
