@@ -102,12 +102,12 @@ export default function Modal({
             {Platform.OS === 'ios' ? (
               <GestureDetector gesture={gesture}>
                 <Animated.View
-                  className={`w-full ${sizeStyles[size]} rounded-3xl bg-gray-900 p-6 shadow-xl`}
-                  style={animatedStyle}
+                  className={`w-full ${sizeStyles[size]} rounded-3xl p-6 shadow-xl`}
+                  style={[{ backgroundColor: '#1A1A2E' }, animatedStyle]}
                 >
                   {/* Drag indicator */}
                   <View className="mb-4 flex-row justify-center">
-                    <View className="h-1 w-12 rounded-full bg-gray-700" />
+                    <View className="h-1 w-12 rounded-full" style={{ backgroundColor: '#2A2A4A' }} />
                   </View>
 
                   {title && (
@@ -119,7 +119,7 @@ export default function Modal({
                 </Animated.View>
               </GestureDetector>
             ) : (
-              <View className={`w-full ${sizeStyles[size]} rounded-3xl bg-gray-900 p-6 shadow-xl`}>
+              <View className={`w-full ${sizeStyles[size]} rounded-3xl p-6 shadow-xl`} style={{ backgroundColor: '#1A1A2E' }}>
                 {title && (
                   <Text className="mb-4 text-2xl font-bold text-white">
                     {title}

@@ -58,9 +58,9 @@ export default function AppleSignInButton({ onError, isLoading = false }: AppleS
     return (
       <View className="mt-4">
         <View className="mb-4 flex-row items-center">
-          <View className="h-px flex-1 bg-gray-700" />
-          <Text className="mx-4 text-sm text-gray-500">or continue with</Text>
-          <View className="h-px flex-1 bg-gray-700" />
+          <View className="h-px flex-1" style={{ backgroundColor: '#2A2A4A' }} />
+          <Text className="mx-4 text-sm" style={{ color: '#6B6B8A' }}>or continue with</Text>
+          <View className="h-px flex-1" style={{ backgroundColor: '#2A2A4A' }} />
         </View>
 
         <Pressable
@@ -90,16 +90,16 @@ export default function AppleSignInButton({ onError, isLoading = false }: AppleS
   return (
     <View className="mt-4">
       <View className="mb-4 flex-row items-center">
-        <View className="h-px flex-1 bg-gray-700" />
-        <Text className="mx-4 text-sm text-gray-500">or continue with</Text>
-        <View className="h-px flex-1 bg-gray-700" />
+        <View className="h-px flex-1" style={{ backgroundColor: '#2A2A4A' }} />
+        <Text className="mx-4 text-sm" style={{ color: '#6B6B8A' }}>or continue with</Text>
+        <View className="h-px flex-1" style={{ backgroundColor: '#2A2A4A' }} />
       </View>
 
       <Pressable
-        className="flex-row items-center justify-center rounded-xl border border-gray-700 bg-gray-900 py-3.5"
+        className="flex-row items-center justify-center rounded-xl py-3.5"
         onPress={() => {/* TODO: Add Google Sign In */}}
         disabled={isLoading}
-        style={({ pressed }) => ({ opacity: pressed || isLoading ? 0.6 : 1 })}
+        style={({ pressed }) => ({ opacity: pressed || isLoading ? 0.6 : 1, backgroundColor: '#1A1A2E', borderWidth: 1, borderColor: '#2A2A4A' })}
       >
         {isLoading ? (
           <ActivityIndicator size="small" color="#fff" />

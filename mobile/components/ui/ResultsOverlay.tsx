@@ -151,10 +151,10 @@ const ResultsOverlay: React.FC<ResultsOverlayProps> = ({
         <View className="rounded-3xl p-6" style={{ backgroundColor: '#1A1A2E', shadowColor: '#000', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.5, shadowRadius: 24, elevation: 16 }}>
           {/* Header */}
           <View className="items-center mb-4">
-            <Text className="text-xs uppercase tracking-wider mb-1" style={{ color: '#6B7280' }}>
+            <Text className="text-xs uppercase tracking-wider mb-1" style={{ color: '#6B6B8A' }}>
               Question {questionNumber} of {totalQuestions}
             </Text>
-            <Text className="text-sm" style={{ color: '#9CA3AF' }}>You chose...</Text>
+            <Text className="text-sm" style={{ color: '#B8B8D0' }}>You chose...</Text>
           </View>
 
           {/* User Choice Display */}
@@ -167,13 +167,13 @@ const ResultsOverlay: React.FC<ResultsOverlayProps> = ({
           {/* Option A Bar */}
           <View className="mb-4">
             <View className="flex-row justify-between items-center mb-2">
-              <Text className="text-sm flex-1" style={{ color: '#D1D5DB' }} numberOfLines={1}>
+              <Text className="text-sm flex-1" style={{ color: '#B8B8D0' }} numberOfLines={1}>
                 {result.option_a}
               </Text>
             </View>
             <View
               className="h-10 rounded-xl overflow-hidden relative"
-              style={{ backgroundColor: 'rgba(31,41,55,0.5)' }}
+              style={{ backgroundColor: 'rgba(42,42,74,0.5)' }}
               onLayout={onBarLayout}
             >
               <Animated.View style={barAStyle} className="h-full rounded-xl overflow-hidden">
@@ -196,13 +196,13 @@ const ResultsOverlay: React.FC<ResultsOverlayProps> = ({
           {/* Option B Bar */}
           <View className="mb-4">
             <View className="flex-row justify-between items-center mb-2">
-              <Text className="text-sm flex-1" style={{ color: '#D1D5DB' }} numberOfLines={1}>
+              <Text className="text-sm flex-1" style={{ color: '#B8B8D0' }} numberOfLines={1}>
                 {result.option_b}
               </Text>
             </View>
             <View
               className="h-10 rounded-xl overflow-hidden relative"
-              style={{ backgroundColor: 'rgba(31,41,55,0.5)' }}
+              style={{ backgroundColor: 'rgba(42,42,74,0.5)' }}
             >
               <Animated.View style={barBStyle} className="h-full rounded-xl overflow-hidden">
                 <LinearGradient
@@ -224,8 +224,8 @@ const ResultsOverlay: React.FC<ResultsOverlayProps> = ({
           {/* Stats Section */}
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center gap-2">
-              <Ionicons name="people-outline" size={16} color="#9CA3AF" />
-              <Text className="text-sm" style={{ color: '#9CA3AF' }}>
+              <Ionicons name="people-outline" size={16} color="#B8B8D0" />
+              <Text className="text-sm" style={{ color: '#B8B8D0' }}>
                 {result.total_votes.toLocaleString()} total votes
               </Text>
             </View>
@@ -266,9 +266,9 @@ const ResultsOverlay: React.FC<ResultsOverlayProps> = ({
             <Pressable
               onPress={handleNextPress}
               className="flex-1 rounded-2xl py-4"
-              style={{ borderWidth: 1, borderColor: '#374151' }}
+              style={{ borderWidth: 1, borderColor: '#2A2A4A' }}
             >
-              <Text className="font-medium text-center" style={{ color: '#D1D5DB' }}>
+              <Text className="font-medium text-center" style={{ color: '#B8B8D0' }}>
                 {isLastQuestion ? 'See Results' : 'Next Question'}
               </Text>
             </Pressable>

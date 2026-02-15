@@ -80,7 +80,7 @@ export default function ExploreScreen() {
                 <Text className="flex-1 text-sm text-gray-200">{item.challenge.option_a}</Text>
                 <Text className="ml-2 font-bold" style={{ color: '#FF6B9D' }}>{item.percent_a}%</Text>
               </View>
-              <View className="mt-1 h-2 overflow-hidden rounded-full bg-gray-800">
+              <View className="mt-1 h-2 overflow-hidden rounded-full bg-[#2A2A4A]">
                 <View className="h-full rounded-full" style={{ backgroundColor: '#FF6B9D', width: `${item.percent_a}%` }} />
               </View>
             </View>
@@ -89,7 +89,7 @@ export default function ExploreScreen() {
                 <Text className="flex-1 text-sm text-gray-200">{item.challenge.option_b}</Text>
                 <Text className="ml-2 font-bold" style={{ color: '#00D4AA' }}>{item.percent_b}%</Text>
               </View>
-              <View className="mt-1 h-2 overflow-hidden rounded-full bg-gray-800">
+              <View className="mt-1 h-2 overflow-hidden rounded-full bg-[#2A2A4A]">
                 <View className="h-full rounded-full" style={{ backgroundColor: '#00D4AA', width: `${item.percent_b}%` }} />
               </View>
             </View>
@@ -167,7 +167,7 @@ export default function ExploreScreen() {
               <Ionicons
                 name={cat.icon}
                 size={16}
-                color={isSelected ? 'white' : '#9ca3af'}
+                color={isSelected ? 'white' : '#B8B8D0'}
               />
               <Text className={`text-sm font-medium ${isSelected ? 'text-white' : 'text-gray-400'}`}>
                 {cat.label}
@@ -198,7 +198,7 @@ export default function ExploreScreen() {
 
       {selectedCategory && !loading && challenges.length === 0 && (
         <View className="flex-1 items-center justify-center px-8">
-          <Ionicons name="search-outline" size={64} color="#4b5563" />
+          <Ionicons name="search-outline" size={64} color="#6B6B8A" />
           <Text className="mt-4 text-center text-lg font-semibold text-gray-300">
             No challenges in this category yet
           </Text>

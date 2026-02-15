@@ -95,7 +95,7 @@ Play: https://wouldyou.app`;
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
       <Pressable className="flex-1 bg-black/60" onPress={onClose}>
         <View className="flex-1 justify-center items-center p-6">
-          <Pressable onPress={(e) => e.stopPropagation()} className="bg-gray-900 rounded-3xl p-4" style={{ width: cardWidth + 32 }}>
+          <Pressable onPress={(e) => e.stopPropagation()} className="rounded-3xl p-4" style={{ width: cardWidth + 32, backgroundColor: '#1A1A2E' }}>
 
             {/* Header */}
             <Text className="text-white text-lg font-bold text-center mb-4">Share Your Choice</Text>
@@ -185,11 +185,11 @@ Play: https://wouldyou.app`;
                 <Ionicons name="logo-tiktok" size={24} color="white" />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={handleCopyToClipboard} className="w-14 h-14 rounded-full items-center justify-center bg-gray-700">
+              <TouchableOpacity onPress={handleCopyToClipboard} className="w-14 h-14 rounded-full items-center justify-center bg-[#2A2A4A]">
                 <Ionicons name={copied ? "checkmark" : "copy-outline"} size={24} color="white" />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={handleShare} className="w-14 h-14 rounded-full items-center justify-center bg-gray-700">
+              <TouchableOpacity onPress={handleShare} className="w-14 h-14 rounded-full items-center justify-center bg-[#2A2A4A]">
                 <Ionicons name="share-outline" size={24} color="white" />
               </TouchableOpacity>
             </View>

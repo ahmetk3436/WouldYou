@@ -91,7 +91,7 @@ export default function LoginScreen() {
           {/* Header */}
           <View style={{ marginBottom: 48 }}>
             <Text className="text-3xl font-bold text-white">Welcome Back</Text>
-            <Text className="text-sm mt-2" style={{ color: '#9CA3AF' }}>
+            <Text className="text-sm mt-2" style={{ color: '#B8B8D0' }}>
               Log in to continue your streak 🔥
             </Text>
           </View>

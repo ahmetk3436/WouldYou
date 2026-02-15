@@ -321,7 +321,7 @@ export default function GameplayScreen() {
           <Ionicons name="arrow-back" size={16} color="#FF6B9D" />
           <Text className="text-xs font-medium" style={{ color: '#FF6B9D' }}>Option A</Text>
         </View>
-        <Text className="text-xs mx-4" style={{ color: '#6B7280' }}>|</Text>
+        <Text className="text-xs mx-4" style={{ color: '#6B6B8A' }}>|</Text>
         <View className="flex-row items-center gap-2">
           <Text className="text-xs font-medium" style={{ color: '#00D4AA' }}>Option B</Text>
           <Ionicons name="arrow-forward" size={16} color="#00D4AA" />
@@ -333,13 +333,13 @@ export default function GameplayScreen() {
         {loading ? (
           <View className="items-center gap-4">
             <ActivityIndicator size="large" color="#FF6B9D" />
-            <Text className="text-base" style={{ color: '#9CA3AF' }}>Loading questions...</Text>
+            <Text className="text-base" style={{ color: '#B8B8D0' }}>Loading questions...</Text>
           </View>
         ) : questions.length === 0 ? (
           <View className="items-center gap-4 px-6">
-            <Ionicons name="sad-outline" size={48} color="#6B7280" />
+            <Ionicons name="sad-outline" size={48} color="#6B6B8A" />
             <Text className="text-lg font-semibold text-white">No questions available</Text>
-            <Text className="text-center" style={{ color: '#9CA3AF' }}>Check back later for new questions!</Text>
+            <Text className="text-center" style={{ color: '#B8B8D0' }}>Check back later for new questions!</Text>
             <Pressable
               onPress={goBack}
               className="mt-4 px-6 py-3 rounded-full"
@@ -432,7 +432,7 @@ export default function GameplayScreen() {
             disabled={isAnimating}
             className="py-3 items-center"
           >
-            <Text className="text-sm font-medium" style={{ color: '#6B7280' }}>Skip this question</Text>
+            <Text className="text-sm font-medium" style={{ color: '#6B6B8A' }}>Skip this question</Text>
           </Pressable>
         </View>
       )}

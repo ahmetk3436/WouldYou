@@ -178,7 +178,7 @@ export default function HomeScreen() {
   if (error) {
     return (
       <SafeAreaView className="flex-1 items-center justify-center px-8" style={{ backgroundColor: '#0D0D1A' }}>
-        <Ionicons name="cloud-offline-outline" size={64} color="#4b5563" />
+        <Ionicons name="cloud-offline-outline" size={64} color="#6B6B8A" />
         <Text className="mt-4 text-center text-lg font-semibold text-gray-300">{error}</Text>
         <Pressable
           className="mt-6 rounded-2xl px-8 py-3"
@@ -407,8 +407,8 @@ export default function HomeScreen() {
                   </View>
 
                   {/* Total votes */}
-                  <View className="mt-2 flex-row items-center justify-center border-t border-gray-800 pt-4">
-                    <Ionicons name="people-outline" size={18} color="#9ca3af" />
+                  <View className="mt-2 flex-row items-center justify-center pt-4" style={{ borderTopWidth: 1, borderTopColor: '#2A2A4A' }}>
+                    <Ionicons name="people-outline" size={18} color="#B8B8D0" />
                     <Text className="ml-2 text-sm text-gray-400">{result.total_votes.toLocaleString()} people voted</Text>
                   </View>
 

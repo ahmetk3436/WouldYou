@@ -70,11 +70,11 @@ export default function ProtectedLayout() {
                 <Ionicons
                   name={isActive ? tab.iconActive : tab.iconDefault}
                   size={24}
-                  color={isActive ? '#FF6B9D' : '#6b7280'}
+                  color={isActive ? '#FF6B9D' : '#6B6B8A'}
                 />
                 <Text
                   className="mt-1 text-xs font-medium"
-                  style={{ color: isActive ? '#FF6B9D' : '#6b7280' }}
+                  style={{ color: isActive ? '#FF6B9D' : '#6B6B8A' }}
                 >
                   {tab.title}
                 </Text>

@@ -75,7 +75,7 @@ export default function ReportButton({
         onPress={() => { hapticSelection(); setShowModal(true); }}
         style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
       >
-        <Ionicons name="flag-outline" size={16} color="#ef4444" />
+        <Ionicons name="flag-outline" size={16} color="#FF5757" />
         <Text className="text-sm text-red-500">Report</Text>
       </Pressable>
 
@@ -100,13 +100,13 @@ export default function ReportButton({
                 <Pressable
                   key={cat.id}
                   className="flex-row items-center gap-1.5 rounded-full px-3 py-2"
-                  style={isSelected ? { backgroundColor: '#FF6B9D' } : { borderWidth: 1, borderColor: '#374151', backgroundColor: '#1A1A2E' }}
+                  style={isSelected ? { backgroundColor: '#FF6B9D' } : { borderWidth: 1, borderColor: '#2A2A4A', backgroundColor: '#1A1A2E' }}
                   onPress={() => { hapticSelection(); setCategory(cat.id); }}
                 >
                   <Ionicons
                     name={cat.icon as keyof typeof Ionicons.glyphMap}
                     size={14}
-                    color={isSelected ? 'white' : '#9ca3af'}
+                    color={isSelected ? 'white' : '#B8B8D0'}
                   />
                   <Text
                     className={`text-xs font-medium ${

@@ -294,7 +294,7 @@ Think you can beat that? Download now!`;
               onPress={handleGoHome}
               className="flex-1 active:opacity-80"
             >
-              <View className="border border-gray-700 rounded-2xl py-4 items-center bg-transparent">
+              <View className="rounded-2xl py-4 items-center bg-transparent" style={{ borderWidth: 1, borderColor: '#2A2A4A' }}>
                 <Text className="text-base font-semibold text-white">
                   Home
                 </Text>

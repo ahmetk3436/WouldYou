@@ -252,7 +252,7 @@ export default function RegisterScreen() {
           {/* Header */}
           <View style={{ marginBottom: 48 }}>
             <Text className="text-3xl font-bold text-white">Create Account</Text>
-            <Text className="text-sm mt-2" style={{ color: '#9CA3AF' }}>
+            <Text className="text-sm mt-2" style={{ color: '#B8B8D0' }}>
               Join 50K+ players worldwide 🎮
             </Text>
           </View>

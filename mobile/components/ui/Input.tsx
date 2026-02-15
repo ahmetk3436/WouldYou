@@ -47,14 +47,15 @@ export default function Input({
       <View className="relative">
         <TextInput
           className={cn(
-            'w-full rounded-xl border bg-gray-900 px-4 py-3 text-base text-white pr-12',
+            'w-full rounded-xl border px-4 py-3 text-base text-white pr-12',
             isFocused
-              ? 'border-pink-500'
-              : 'border-gray-700',
+              ? 'border-[#FF6B9D]'
+              : 'border-[#2A2A4A]',
             error && 'border-red-500',
             className
           )}
-          placeholderTextColor="#6b7280"
+          style={{ backgroundColor: '#1A1A2E' }}
+          placeholderTextColor="#6B6B8A"
           onFocus={(e) => {
             setIsFocused(true);
             props.onFocus?.(e);
@@ -76,7 +77,7 @@ export default function Input({
               <Ionicons
                 name={showPassword ? 'eye-off-outline' : 'eye-outline'}
                 size={20}
-                color="#9ca3af"
+                color="#B8B8D0"
               />
             </Pressable>
           )}

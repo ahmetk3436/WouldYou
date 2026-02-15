@@ -265,7 +265,7 @@ export default function SettingsScreen() {
               </Text>
             </View>
             {!isAuthenticated && (
-              <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+              <Ionicons name="chevron-forward" size={20} color="#6B6B8A" />
             )}
           </Pressable>
         </View>
@@ -281,7 +281,7 @@ export default function SettingsScreen() {
             <Ionicons
               name={isSubscribed ? "diamond" : "diamond-outline"}
               size={24}
-              color={isSubscribed ? "#FF6B9D" : "#9CA3AF"}
+              color={isSubscribed ? "#FF6B9D" : "#B8B8D0"}
             />
             <View className="flex-1 ml-3">
               <Text className="text-base text-white">
@@ -316,12 +316,12 @@ export default function SettingsScreen() {
             disabled={isRestoring}
           >
             {isRestoring ? (
-              <ActivityIndicator size="small" color="#9CA3AF" />
+              <ActivityIndicator size="small" color="#B8B8D0" />
             ) : (
-              <Ionicons name="refresh-outline" size={22} color="#9CA3AF" />
+              <Ionicons name="refresh-outline" size={22} color="#B8B8D0" />
             )}
             <Text className="flex-1 ml-3 text-base text-white">Restore Purchases</Text>
-            <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+            <Ionicons name="chevron-forward" size={20} color="#6B6B8A" />
           </Pressable>
         </View>
 
@@ -342,7 +342,7 @@ export default function SettingsScreen() {
                 </View>
                 <View
                   className="w-12 h-7 rounded-full justify-center"
-                  style={{ backgroundColor: biometricEnabled ? '#FF6B9D' : '#374151' }}
+                  style={{ backgroundColor: biometricEnabled ? '#FF6B9D' : '#2A2A4A' }}
                 >
                   <View
                     className="w-5 h-5 rounded-full bg-white absolute"
@@ -362,9 +362,9 @@ export default function SettingsScreen() {
             style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
             onPress={navigateToPrivacyPolicy}
           >
-            <Ionicons name="shield-checkmark-outline" size={22} color="#9CA3AF" />
+            <Ionicons name="shield-checkmark-outline" size={22} color="#B8B8D0" />
             <Text className="flex-1 ml-3 text-base text-white">Privacy Policy</Text>
-            <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+            <Ionicons name="chevron-forward" size={20} color="#6B6B8A" />
           </Pressable>
 
           {renderDivider()}
@@ -374,9 +374,9 @@ export default function SettingsScreen() {
             style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
             onPress={navigateToTerms}
           >
-            <Ionicons name="document-text-outline" size={22} color="#9CA3AF" />
+            <Ionicons name="document-text-outline" size={22} color="#B8B8D0" />
             <Text className="flex-1 ml-3 text-base text-white">Terms of Service</Text>
-            <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+            <Ionicons name="chevron-forward" size={20} color="#6B6B8A" />
           </Pressable>
 
           {renderDivider()}
@@ -388,7 +388,7 @@ export default function SettingsScreen() {
           >
             <Ionicons name="star-outline" size={22} color="#FBBF24" />
             <Text className="flex-1 ml-3 text-base text-white">Rate WouldYou</Text>
-            <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+            <Ionicons name="chevron-forward" size={20} color="#6B6B8A" />
           </Pressable>
 
           {renderDivider()}
@@ -400,7 +400,7 @@ export default function SettingsScreen() {
           >
             <Ionicons name="share-outline" size={22} color="#FF6B9D" />
             <Text className="flex-1 ml-3 text-base text-white">Share with Friends</Text>
-            <Ionicons name="chevron-forward" size={20} color="#6B7280" />
+            <Ionicons name="chevron-forward" size={20} color="#6B6B8A" />
           </Pressable>
         </View>
 
@@ -472,7 +472,7 @@ export default function SettingsScreen() {
                   borderColor: 'rgba(255,255,255,0.1)'
                 }}
                 placeholder="Enter password to confirm"
-                placeholderTextColor="#6B7280"
+                placeholderTextColor="#6B6B8A"
                 secureTextEntry
                 value={deletePassword}
                 onChangeText={setDeletePassword}
@@ -485,7 +485,7 @@ export default function SettingsScreen() {
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.7 : 1,
                   borderWidth: 1,
-                  borderColor: '#374151',
+                  borderColor: '#2A2A4A',
                 })}
                 onPress={() => {
                   hapticSelection();

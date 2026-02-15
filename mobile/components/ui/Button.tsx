@@ -20,9 +20,9 @@ interface ButtonProps extends Omit<PressableProps, 'style'> {
 
 const variantStyles = {
   primary: '',
-  secondary: 'bg-gray-700 active:bg-gray-600',
+  secondary: '', // Uses style for #2A2A4A
   outline: 'bg-transparent active:bg-pink-900/30',
-  destructive: 'bg-red-600 active:bg-red-700',
+  destructive: '', // Uses style for #FF5757
   gradient: '', // Handled separately with LinearGradient
 };
 
@@ -132,6 +132,8 @@ export default function Button({
         transform: [{ scale: pressed ? 0.97 : 1 }],
         ...(variant === 'primary' ? { backgroundColor: '#FF6B9D' } : {}),
         ...(variant === 'outline' ? { borderWidth: 2, borderColor: '#FF6B9D' } : {}),
+        ...(variant === 'secondary' ? { backgroundColor: '#2A2A4A' } : {}),
+        ...(variant === 'destructive' ? { backgroundColor: '#FF5757' } : {}),
         ...(style as object),
       })}
       {...(props as PressableProps)}

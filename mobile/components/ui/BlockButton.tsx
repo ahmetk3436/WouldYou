@@ -55,7 +55,7 @@ export default function BlockButton({
         onPress={() => { hapticWarning(); setShowModal(true); }}
         style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
       >
-        <Ionicons name="ban-outline" size={16} color="#ef4444" />
+        <Ionicons name="ban-outline" size={16} color="#FF5757" />
         <Text className="text-sm text-red-500">Block</Text>
       </Pressable>
 
@@ -68,7 +68,7 @@ export default function BlockButton({
         <View className="items-center py-4">
           {/* Warning Icon */}
           <View className="mb-4 h-16 w-16 items-center justify-center rounded-full bg-red-900/30">
-            <Ionicons name="shield-checkmark" size={32} color="#ef4444" />
+            <Ionicons name="shield-checkmark" size={32} color="#FF5757" />
           </View>
 
           <Text className="mb-2 text-lg font-semibold text-white">
@@ -80,7 +80,7 @@ export default function BlockButton({
           </Text>
 
           {/* What happens when blocked */}
-          <View className="mb-6 w-full rounded-xl bg-gray-800 p-4">
+          <View className="mb-6 w-full rounded-xl p-4" style={{ backgroundColor: '#2A2A4A' }}>
             <Text className="mb-2 text-sm font-semibold text-white">What happens:</Text>
             <View className="flex-row items-center gap-2 py-1">
               <Ionicons name="checkmark-circle" size={16} color="#10B981" />
